@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">F1 Live Timing</string>
+    <string name="tab_text_1">Session Status</string>
+    <string name="tab_text_2">Live Timing</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
