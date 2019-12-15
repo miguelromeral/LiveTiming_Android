@@ -4,9 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
+import es.miguelromeral.f1.codemasters.livetiming.classes.Player
 import kotlinx.coroutines.*
+import timber.log.Timber
 
-class LiveTimingViewModel (var session: Game) : ViewModel() {
+class LiveTimingViewModel (var session: Game, val uiHandler: LiveTimingFragment.UiHandler) : ViewModel() {
 
 
     private var _items = MutableLiveData<List<ItemLiveTiming>>()
@@ -19,13 +21,42 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
         get() = _modifiedItems
 
     private var viewModelJob = Job()
-    private var uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private var uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
+    private var uiScopeRepeat = CoroutineScope(Dispatchers.Default + viewModelJob)
+
+    private lateinit var myHandlerThread: MyHandlerThread
+
+    // ONLY DEBUG
+    /*init{
+        _items.postValue(listOf(
+            ItemLiveTiming(name = "Miguel", position = 12.toUByte(), team = 1.toUByte(), time = 79.123f),
+            ItemLiveTiming(name = "Chechu", position = 19.toUByte(), team = 1.toUByte(), time = 19.123f),
+            ItemLiveTiming(name = "Romeral", position = 4.toUByte(), team = 1.toUByte(), time = 69.123f),
+            ItemLiveTiming(name = "Javi", position = 9.toUByte(), team = 1.toUByte(), time = 49.123f)))
+
+    }*/
+
+
 
     fun startRefreshing(){
         viewModelJob = Job()
-        uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+        uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
         uiScope.launch {
             refreshing()
+        }
+        initHandlerThread()
+    }
+
+    fun initHandlerThread(){
+        myHandlerThread = MyHandlerThread(uiHandler)
+        myHandlerThread.start()
+    }
+
+    fun sortItemList(lista: List<ItemLiveTiming>? = null){
+        synchronized(_items){
+            val tosort = lista ?: _items.value
+
+            _items.postValue(tosort?.sortedWith(compareBy(nullsLast<UByte>()){ it.position}))
         }
     }
 
@@ -38,33 +69,42 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                     if(mySize == null || mySize != sessionItems.size){
                             var newList: MutableList<ItemLiveTiming> = mutableListOf()
                             var count = 0
-                            for(p in sessionItems){
-                                newList.add(ItemLiveTiming(
-                                    p.currentLap.value?.carPosition?.value,
-                                    p.participant.value?.name?.value,
-                                    p.participant.value?.teamId?.value,
-                                    p.currentLap.value?.currentLapTime?.value))
+                            for (p in sessionItems) {
+                                newList.add(
+                                    ItemLiveTiming(
+                                        p.currentLap.value?.carPosition?.value,
+                                        p.participant.value?.name?.value,
+                                        p.participant.value?.teamId?.value,
+                                        p.currentLap.value?.currentLapTime?.value
+                                    )
+                                )
+                                Timber.i("Añadido: ${p.participant.value?.name?.value?.substring(3,12)} con carPosition a: ${p.currentLap.value?.carPosition?.value}")
                             }
-                            _items.postValue(newList)
+                            sortItemList(newList)
                         }else{
-                            var count = 0
-                            for(item in _items.value!!){
-                                item.time = session.players.value?.get(count)?.currentLap?.value?.currentLapTime?.value
-                                count++
+
+                            _items.value?.let{ myItems ->
+                                sortItemList()
+
+                                var c = 0
+                                for(p in sessionItems){
+                                    var tmp = myItems?.get(c)
+                                    tmp.let{ item ->
+                                        MyRunnable(myHandlerThread, item, session).run()
+                                    }
+                                    c++
+                                }
+
                             }
 
-                            // Comprobar si esto lo reordena
-                            _items.postValue(items.value?.sortedBy { it -> it.position })
 
-                            _modifiedItems.postValue(true)
-
+                        //_modifiedItems.postValue(true)
                     }
                 }
                 delay(DELAY_TIME)
             }
         }
     }
-
 
     fun endUpdate(){
         _modifiedItems.postValue(false)
@@ -75,12 +115,15 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
         stopRefreshing()
     }
 
+    fun stopHandlerThread(){
+        myHandlerThread.quit()
+    }
 
     fun stopRefreshing(){
         viewModelJob.cancel()
     }
 
     companion object{
-        const val DELAY_TIME = 50L
+        const val DELAY_TIME = 100L
     }
 }

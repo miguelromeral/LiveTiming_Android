@@ -21,7 +21,7 @@ fun TextView.setTimeFormatted(player: Player) {
 fun ImageView.setColorByTeam(teamId: UByte?){
     teamId?.let{
         setBackgroundColor(when(it){
-            else -> R.color.fullWhite
+            else -> R.color.colorAccent
         })
     }
 }
@@ -35,5 +35,7 @@ fun floatToTimeFormatted(inf : Float, long: Boolean = false): String {
     var string = ""
     if(mins.toInt() != 0)
         string += "$mins:"
+    if(secs < 10)
+        string += "0"
     return string + "${secs}.$tent"
 }

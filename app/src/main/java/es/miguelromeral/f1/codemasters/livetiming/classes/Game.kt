@@ -41,6 +41,24 @@ class Game {
     }*/
 
 
+    fun getPlayerByPosition(position: Int?): Player?{
+        position?.let {
+            synchronized(players) {
+                players.value?.let { list ->
+
+
+
+
+                    return list.filter {
+                        it.currentLap.value?.carPosition?.value == position.toUByte()
+                    }.firstOrNull()
+                }
+            }
+        }
+        return null
+    }
+
+
     @Synchronized
     fun newSessionData2018(session: SessionData){
         if(sessionData != null) {
@@ -53,11 +71,10 @@ class Game {
         players.value?.let {
             if (it.size != 0) {
                 for ((count, p) in players.value!!.withIndex()) {
-                    _players.value
-
-                    p.newLap2018(lapdata.lapData[count], lapdata.header.frameIdentifier)
+                    synchronized(p) {
+                        p.newLap2018(lapdata.lapData[count], lapdata.header.frameIdentifier)
+                    }
                 }
-                //_players.postValue(_players.value)
             }
         }
     }

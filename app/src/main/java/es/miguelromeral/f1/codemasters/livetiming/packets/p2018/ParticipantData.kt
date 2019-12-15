@@ -58,6 +58,10 @@ class ParticipantData private constructor(content: ByteArray){
             else -> "Unknown"
         }
 
+        fun getTeam(teamId: UByte) = when(teamId.toInt()){
+            else -> "Unknown"
+        }
+
         fun getDriver(driverId: UByte) = when(driverId.toInt()){
             0 -> "Carlos Sainz"
             2 -> "Daniel Ricciardo"

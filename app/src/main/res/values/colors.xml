@@ -5,8 +5,20 @@
     <color name="colorAccent">#222222</color>
 
 
-    <color name="liveTimingListOdd">#111111</color>
-    <color name="liveTimingListEven">#1A1A1A</color>
+    <color name="liveTimingListOdd">#111</color>
+    <color name="liveTimingListEven">#2a2a2a</color>
     <color name="fullWhite">#FFF</color>
+
+    <!-- Teams -->
+    <color name="teamFerrari">#dc0000</color>
+    <color name="teamMercedes">#00d2be</color>
+    <color name="teamRedBull">#1414dc</color>
+    <color name="teamMcLaren">#ff8700</color>
+    <color name="teamRenault">#fff500</color>
+    <color name="teamHaas">#5a5a5a</color>
+    <color name="teamAlfaRomeo">#950303</color>
+    <color name="teamRacingPoint">#f596c8</color>
+    <color name="teamToroRosso">#2864dc</color>
+    <color name="teamWilliams">#ffffff</color>
 
 </resources>

@@ -1,10 +1,13 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.main.livetiming
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -14,11 +17,12 @@ import androidx.recyclerview.widget.SimpleItemAnimator
 import es.miguelromeral.f1.codemasters.livetiming.MainActivity
 
 import es.miguelromeral.f1.codemasters.livetiming.R
-import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentLiveTimingBinding
 import es.miguelromeral.f1.codemasters.livetiming.ui.main.shared.GameViewModel
 import timber.log.Timber
 import androidx.recyclerview.widget.RecyclerView
-
+import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentLiveTimingBinding
+import java.lang.ref.WeakReference
+import java.text.ParsePosition
 
 
 class LiveTimingFragment : Fragment() {
@@ -26,6 +30,7 @@ class LiveTimingFragment : Fragment() {
     private lateinit var binding: FragmentLiveTimingBinding
     private lateinit var viewModel: LiveTimingViewModel
     private lateinit var sharedViewModel: GameViewModel
+    private lateinit var uiHandler: UiHandler
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,16 +40,19 @@ class LiveTimingFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, es.miguelromeral.f1.codemasters.livetiming.R.layout.fragment_live_timing, container, false)
         sharedViewModel = (activity as MainActivity).viewModel
 
-        viewModel = ViewModelProviders.of(this, LiveTimingViewModelFactory(sharedViewModel.currentSession)).get(LiveTimingViewModel::class.java)
+        val adapter =
+            LiveTimingAdapter()
+        binding.rvLiveTiming.adapter = adapter
+
+        uiHandler = UiHandler(adapter, binding.rvLiveTiming)
+
+        viewModel = ViewModelProviders.of(this, LiveTimingViewModelFactory(sharedViewModel.currentSession, uiHandler)).get(LiveTimingViewModel::class.java)
         binding.viewModel = viewModel
 
         val lifecycleOwner = this
         binding.lifecycleOwner = lifecycleOwner
 
 
-        val adapter =
-            LiveTimingAdapter()
-        binding.rvLiveTiming.adapter = adapter
 
         (binding.rvLiveTiming.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
@@ -64,8 +72,10 @@ class LiveTimingFragment : Fragment() {
 
         viewModel.items.observe(this, Observer {
             it?.let{
-                Timber.i("Submitting the new list.")
-                adapter.submitList(it)
+                    Timber.i("Submitting the new list.")
+                    viewModel.endUpdate()
+                    adapter.submitList(it)
+                    //done = true
             }
         })
         viewModel.modifiedItems.observe(this, Observer {
@@ -86,6 +96,7 @@ class LiveTimingFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onStart() {
         super.onStart()
         viewModel.startRefreshing()
@@ -96,6 +107,11 @@ class LiveTimingFragment : Fragment() {
         viewModel.stopRefreshing()
     }
 
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.stopHandlerThread()
+    }
 
 
     companion object {
@@ -108,6 +124,29 @@ class LiveTimingFragment : Fragment() {
                     //putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }
             }
+        }
+    }
+
+    class UiHandler(listAdapter: LiveTimingAdapter, recyclerView: RecyclerView) : Handler(){
+
+        private var wrListAdapter = WeakReference(listAdapter)
+        private var wrRecyclerView = WeakReference(recyclerView)
+
+        private fun notifyAdapter(item: ItemLiveTiming){
+            //wrListAdapter.get()?.get
+            wrRecyclerView.get()?.adapter?.let{
+
+                Timber.i("Actualizado: ${item.position} -> ${item.time}")
+                it.notifyDataSetChanged()
+            }
+        }
+
+        override fun handleMessage(msg: Message?){
+            super.handleMessage(msg)
+
+            val item = (msg?.obj as ItemLiveTiming)
+
+            notifyAdapter(item)
         }
     }
 }

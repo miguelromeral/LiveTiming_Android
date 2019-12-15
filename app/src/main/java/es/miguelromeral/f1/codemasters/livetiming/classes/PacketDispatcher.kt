@@ -11,7 +11,7 @@ import timber.log.Timber
 class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
 
     override fun run() {
-
+        android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND)
         try {
         when(shortFromPacket(content.sliceArray(0..1)).toInt()){
                 Controller.FORMAT_2018 -> {

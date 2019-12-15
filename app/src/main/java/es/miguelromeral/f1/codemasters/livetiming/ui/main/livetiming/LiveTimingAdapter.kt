@@ -1,8 +1,10 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.main.livetiming
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DiffUtil
@@ -36,13 +38,22 @@ class LiveTimingAdapter :
     class ViewHolder private constructor(val binding: ItemLiveTimingBinding) :
         RecyclerView.ViewHolder(binding.root){
 
-        @SuppressLint("ResourceAsColor")
         fun bind(item: ItemLiveTiming, position: Int){
-            if(position % 2 == 0){
-                binding.rootItemLiveTiming.setBackgroundColor(R.color.liveTimingListEven)
-            }else{
-                binding.rootItemLiveTiming.setBackgroundColor(R.color.liveTimingListOdd)
+            binding.rootItemLiveTiming.let {
+                it.setBackgroundColor(
+                    ContextCompat.getColor(
+                        it.context,
+                        if (position % 2 == 0)
+                            /*if(position == 0)
+                                R.color.colorPrimary
+                            else*/
+                                R.color.liveTimingListOdd
+                        else
+                            R.color.liveTimingListEven
+                    )
+                )
             }
+            binding.ivColor.setColorFilter(ContextCompat.getColor(binding.ivColor.context, R.color.colorPrimary))
             binding.item = item
             binding.tvName.text = item.name
             item.position?.let{
@@ -51,7 +62,16 @@ class LiveTimingAdapter :
             item.time?.let{
                 binding.tvCurrentTime.text = floatToTimeFormatted(it)
             }
+            item.team?.let{
+                //binding.ivColor.setBackgroundColor(R.color.colorAccent)
+            }
         }
+
+        /*fun getColorByTeamId(teamId: UByte){
+            when(teamId.toInt()){
+                0 ->
+            }
+        }*/
 
 
 

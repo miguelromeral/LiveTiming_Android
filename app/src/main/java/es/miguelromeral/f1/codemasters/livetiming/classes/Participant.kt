@@ -38,4 +38,9 @@ class Participant {
         Format.F1_2018 -> ParticipantData.getDriver(driverId.value!!)
         else -> "Unknown"
     }
+
+    fun team() = when(format){
+        Format.F1_2018 -> ParticipantData.getTeam(teamId.value!!)
+        else -> "Unknown"
+    }
 }

@@ -40,11 +40,13 @@
         app:layout_constraintStart_toEndOf="@+id/tvPos"
         app:layout_constraintTop_toTopOf="parent"
 
-        app:teamColor="@{item.team}"
         app:srcCompat="@drawable/color_icon"
         android:layout_height="14sp"
         android:layout_width="8sp"
         tools:tint="#f00"/>
+
+    <!--
+        app:teamColor="@{item.team}" -->
 
     <TextView
         android:id="@+id/tvName"
