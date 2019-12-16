@@ -43,4 +43,9 @@ class Participant {
         Format.F1_2018 -> ParticipantData.getTeam(teamId.value!!)
         else -> "Unknown"
     }
+
+    fun nationality() = when(format){
+        Format.F1_2018 -> ParticipantData.getNationality(nationality.value!!)
+        else -> "Unknown"
+    }
 }

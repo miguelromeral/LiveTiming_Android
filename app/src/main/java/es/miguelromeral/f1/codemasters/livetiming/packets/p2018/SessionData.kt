@@ -1,10 +1,10 @@
 package es.miguelromeral.f1.codemasters.livetiming.packets
 
-import android.os.Build.VERSION_CODES.P
+import android.content.res.Resources
+import es.miguelromeral.f1.codemasters.livetiming.R
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.Packet
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
-import java.nio.ByteOrder.BIG_ENDIAN
-import java.nio.ByteOrder.LITTLE_ENDIAN
 
 
 @kotlin.ExperimentalUnsignedTypes
@@ -77,79 +77,80 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
         const val PACKET_ID = 1
         const val MAX_MARSHAL_ZONES = 21
 
-        fun getTrack(trackId: Byte) = when (trackId.toInt()) {
-            0 -> "Melbourne"
-            1 -> "Paul Ricard"
-            2 -> "Shanghai"
-            3 -> "Sakhir (Bahrain)"
-            4 -> "Catalunya"
-            5 -> "Monaco"
-            6 -> "Montreal"
-            7 -> "Silverstone"
-            8 -> "Hockenheim"
-            9 -> "Hungaroring"
-            10 -> "Spa"
-            11 -> "Monza"
-            12 -> "Singapore"
-            13 -> "Suzuka"
-            14 -> "Abu Dhabi"
-            15 -> "Texas"
-            16 -> "Brazil"
-            17 -> "Austria"
-            18 -> "Sochi"
-            19 -> "Mexico"
-            20 -> "Baku (Azerbaijan)"
-            21 -> "Sakhir Short"
-            22 -> "Silverstone Short"
-            23 -> "Texas Short"
-            24 -> "Suzuka Short"
-            else -> "Unknown"
-        }
+        fun getTrack(trackId: Byte) = Resources.getSystem().getString(when (trackId.toInt()) {
+            0 -> R.string.track_melbourne
+            1 -> R.string.track_paul_ricard
+            2 -> R.string.track_shangai
+            3 -> R.string.track_sakhir
+            4 -> R.string.track_catalunya
+            5 -> R.string.track_monaco
+            6 -> R.string.track_montreal
+            7 -> R.string.track_silverstone
+            8 -> R.string.track_hockenheim
+            9 -> R.string.track_hungaroring
+            10 -> R.string.track_spa
+            11 -> R.string.track_monza
+            12 -> R.string.track_singapore
+            13 -> R.string.track_suzuka
+            14 -> R.string.track_abu_dhabi
+            15 -> R.string.track_texas
+            16 -> R.string.track_brazil
+            17 -> R.string.track_austria
+            18 -> R.string.track_sochi
+            19 -> R.string.track_mexico
+            20 -> R.string.track_baku
+            21 -> R.string.track_sakhir_short
+            22 -> R.string.track_silverstone_short
+            23 -> R.string.track_texas_short
+            24 -> R.string.track_suzuka_short
+            else -> R.string.unknown
+        })
 
-        fun getNateworkGame(networkGame: UByte) = when(networkGame){
-            0.toUByte() -> "Offline"
-            1.toUByte() -> "Online"
-            else -> "Unknown"
-        }
+        fun getNateworkGame(networkGame: UByte) = Resources.getSystem().getString(when(networkGame.toInt()){
+            0 -> R.string.game_mode_offline
+            1 -> R.string.game_mode_online
+            else -> R.string.unknown
+        })
 
-        fun getSafetyCarStatus(safetyCarStatus: UByte) = when(safetyCarStatus){
-            0.toUByte() -> "No Safety Car"
-            1.toUByte() -> "SC"
-            2.toUByte() -> "VSC"
-            else -> "Unkown"
-        }
+        fun getSafetyCarStatus(safetyCarStatus: UByte) = Resources.getSystem().getString(
+            when(safetyCarStatus.toInt()){
+            0 -> R.string.safety_car_no
+            1 -> R.string.safety_car_sc
+            2 -> R.string.safety_car_vsc
+            else -> R.string.unknown
+        })
 
-        fun getEra(era: UByte) = when(era){
-            0.toUByte() -> "Modern"
-            1.toUByte() -> "Classic"
-            else -> "Unknown"
-        }
+        fun getEra(era: UByte) = Resources.getSystem().getString(when(era.toInt()){
+            0 -> R.string.era_modern
+            1 -> R.string.era_classic
+            else -> R.string.unknown
+        })
 
-        fun getWeather(weather: UByte) = when(weather){
-            0.toUByte() -> "Clear"
-            1.toUByte() -> "Light Cloud"
-            2.toUByte() -> "Overcast"
-            3.toUByte() -> "Light Rain"
-            4.toUByte() -> "Heavy Rain"
-            5.toUByte() -> "Storm"
-            else -> "Unknown"
-        }
+        fun getWeather(weather: UByte) = Resources.getSystem().getString(when(weather.toInt()){
+            0 -> R.string.weather_clear
+            1 -> R.string.weather_light_cloud
+            2 -> R.string.weather_overcast
+            3 -> R.string.weather_light_rain
+            4 -> R.string.weather_heavy_rain
+            5 -> R.string.weather_storm
+            else -> R.string.unknown
+        })
 
-        fun getSessionType(session: UByte)  = when(session){
-            1.toUByte() -> "P1"
-            2.toUByte() -> "P2"
-            3.toUByte() -> "P3"
-            4.toUByte() -> "Sh. P" // Short Practice
-            5.toUByte() -> "Q1"
-            6.toUByte() -> "Q2"
-            7.toUByte() -> "Q3"
-            8.toUByte() -> "Sh. Q" // Short Qualy
-            9.toUByte() -> "OSQ"
-            10.toUByte() -> "R"
-            11.toUByte() -> "R2"
-            12.toUByte() -> "Time Trial"
-            else -> "Unknown"
-        }
+        fun getSessionType(session: UByte) = Resources.getSystem().getString(when(session.toInt()){
+            1 -> R.string.session_p1
+            2 -> R.string.session_p2
+            3 -> R.string.session_p3
+            4 -> R.string.session_short_p
+            5 -> R.string.session_q1
+            6 -> R.string.session_q2
+            7 -> R.string.session_q3
+            8 -> R.string.session_short_q
+            9 -> R.string.session_out_q
+            10 -> R.string.session_r
+            11 -> R.string.session_r2
+            12 -> R.string.session_time_trial
+            else -> R.string.unknown
+        })
 
         fun create(header: PacketHeader, content: ByteArray): SessionData{
             return SessionData(header, content.sliceArray(PacketHeader.HEADER_SIZE until content.size))

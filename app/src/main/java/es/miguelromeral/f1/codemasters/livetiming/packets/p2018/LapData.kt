@@ -1,7 +1,6 @@
 package es.miguelromeral.f1.codemasters.livetiming.packets
 
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.Packet
 
 @kotlin.ExperimentalUnsignedTypes
 class PacketLapData private constructor(header: PacketHeader, content: ByteArray) : Packet(header) {

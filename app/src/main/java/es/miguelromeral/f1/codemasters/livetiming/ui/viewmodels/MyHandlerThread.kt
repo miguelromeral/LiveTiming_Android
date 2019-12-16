@@ -1,11 +1,11 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.main.livetiming
+package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels
 
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
 import android.os.Message
-import es.miguelromeral.f1.codemasters.livetiming.MainActivity
-import timber.log.Timber
+import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
+import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 
 class MyHandlerThread(private var uiHandler: LiveTimingFragment.UiHandler) : HandlerThread("MyHandlerThread") {
 

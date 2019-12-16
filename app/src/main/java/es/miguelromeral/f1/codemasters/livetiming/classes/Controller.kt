@@ -25,22 +25,45 @@ class Controller(val port: Int = 20777) {
 
     private lateinit var session : Game
 
-    private lateinit var p: Player
+    private val DEBUG_count = 3
+
+
+    fun DEBUG_addItems(){
+        var ml = mutableListOf<Player>()
+
+        var i = 0
+        while(i < DEBUG_count){
+            var p = Player()
+            p._participant.postValue(Participant().apply {
+                name.postValue("F. LASTNAME $i")
+                teamId.postValue(i.toUByte())
+            })
+            p._currentLap.postValue(Lap().apply {
+                carPosition.postValue(i.plus(1).toUByte())
+                currentLapTime.postValue(0f)
+            })
+            ml.add(p)
+            i++
+        }
+        session._players.postValue(ml)
+    }
+
+    fun DEBUG_updateItems(){
+        var i = 0
+        while(i < DEBUG_count){
+            session._players.value?.get(i)?.let{
+
+                val tmp = it._currentLap.value?.currentLapTime?.value?.plus(0.1f)
+                it._currentLap.value?.currentLapTime?.postValue(tmp)
+            }
+
+            i++
+        }
+    }
 
     fun addCurrentSession(session: Game){
         this.session = session
-
-        p = Player()
-        p._participant.postValue(Participant().apply {
-            name.postValue("Testing")
-            teamId.postValue(1u)
-        })
-        var cl = Lap().apply {
-            carPosition.postValue(1u)
-            currentLapTime.postValue(0f)
-        }
-        p._currentLap.postValue(cl)
-        session._players.postValue(mutableListOf(p))
+        DEBUG_addItems()
     }
 
     @ExperimentalUnsignedTypes
@@ -63,7 +86,7 @@ class Controller(val port: Int = 20777) {
 
                     delay(100L)
 
-                    p._currentLap.value?.currentLapTime?.postValue(p._currentLap.value?.currentLapTime?.value?.plus(0.1f))
+                    DEBUG_updateItems()
 
                     // END OF TESTING
 

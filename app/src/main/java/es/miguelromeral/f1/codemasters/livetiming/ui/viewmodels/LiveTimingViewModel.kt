@@ -1,10 +1,13 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.main.livetiming
+package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
-import es.miguelromeral.f1.codemasters.livetiming.classes.Player
+import es.miguelromeral.f1.codemasters.livetiming.packets.Format
+import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
+import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
+import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.runnables.MyRunnable
 import kotlinx.coroutines.*
 import timber.log.Timber
 
@@ -17,26 +20,10 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
     val items : LiveData<List<ItemLiveTiming>>
         get() = _items
 
-
-    private var _modifiedItems = MutableLiveData<Boolean>(false)
-    val modifiedItems : LiveData<Boolean>
-        get() = _modifiedItems
-
     private var viewModelJob = Job()
     private var uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
-    private var uiScopeRepeat = CoroutineScope(Dispatchers.Default + viewModelJob)
 
     private lateinit var myHandlerThread: MyHandlerThread
-
-    // ONLY DEBUG
-    /*init{
-        _items.postValue(listOf(
-            ItemLiveTiming(name = "Miguel", position = 12.toUByte(), team = 1.toUByte(), time = 79.123f),
-            ItemLiveTiming(name = "Chechu", position = 19.toUByte(), team = 1.toUByte(), time = 19.123f),
-            ItemLiveTiming(name = "Romeral", position = 4.toUByte(), team = 1.toUByte(), time = 69.123f),
-            ItemLiveTiming(name = "Javi", position = 9.toUByte(), team = 1.toUByte(), time = 49.123f)))
-
-    }*/
 
 
 
@@ -52,7 +39,8 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
 
     fun initHandlerThread(){
         uiHandler?.let {
-            myHandlerThread = MyHandlerThread(it)
+            myHandlerThread =
+                MyHandlerThread(it)
             myHandlerThread.start()
         }
     }
@@ -80,7 +68,8 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                         p.currentLap.value?.carPosition?.value,
                                         p.participant.value?.name?.value,
                                         p.participant.value?.teamId?.value,
-                                        p.currentLap.value?.currentLapTime?.value
+                                        p.currentLap.value?.currentLapTime?.value,
+                                        p.participant.value?.format ?: Format.UNKNOWN
                                     )
                                 )
                             }
@@ -90,29 +79,23 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                             _items.value?.let{ myItems ->
                                 sortItemList()
 
-                                var c = 0
-                                for(p in sessionItems){
-                                    var tmp = myItems?.get(c)
-                                    tmp.let{ item ->
-                                        MyRunnable(myHandlerThread, item, session).run()
-                                    }
-                                    c++
+                                for(c in sessionItems.indices){
+                                    MyRunnable(
+                                        myHandlerThread,
+                                        myItems,
+                                        session,
+                                        c
+                                    ).run()
                                 }
 
                             }
 
-
-                        //_modifiedItems.postValue(true)
                     }
                 }
                 Timber.i("Testing - Escuchando...!")
                 delay(DELAY_TIME)
             }
         }
-    }
-
-    fun endUpdate(){
-        _modifiedItems.postValue(false)
     }
 
     override fun onCleared() {

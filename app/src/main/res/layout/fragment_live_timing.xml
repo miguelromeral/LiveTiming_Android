@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="es.miguelromeral.f1.codemasters.livetiming.ui.main.livetiming.LiveTimingViewModel" />
+            type="es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel" />
     </data>
 
 
@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main.livetiming.LiveTimingFragment">
+    tools:context=".ui.fragments.LiveTimingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLiveTiming"

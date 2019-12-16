@@ -1,21 +1,15 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.main.livetiming
+package es.miguelromeral.f1.codemasters.livetiming.ui.adapters
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.R
-import es.miguelromeral.f1.codemasters.livetiming.classes.Player
 import es.miguelromeral.f1.codemasters.livetiming.databinding.ItemLiveTimingBinding
-import es.miguelromeral.f1.codemasters.livetiming.ui.main.floatToTimeFormatted
-import es.miguelromeral.f1.codemasters.livetiming.ui.main.shared.GameViewModel
-import kotlinx.coroutines.newFixedThreadPoolContext
+import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
+import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 
 
 class LiveTimingAdapter :
@@ -29,7 +23,9 @@ class LiveTimingAdapter :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+        return ViewHolder.from(
+            parent
+        )
     }
 
 
@@ -59,7 +55,8 @@ class LiveTimingAdapter :
                 binding.tvPos.text = it.toString()
             }
             item.time?.let{
-                binding.tvCurrentTime.text = floatToTimeFormatted(it)
+                binding.tvCurrentTime.text =
+                    floatToTimeFormatted(it)
             }
             item.team?.let{
                 binding.ivColor.setColorFilter(ContextCompat.getColor(binding.ivColor.context, getColorByTeamId(it)))
@@ -110,7 +107,9 @@ class LiveTimingAdapter :
 
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemLiveTimingBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding)
+                return ViewHolder(
+                    binding
+                )
 
             }
         }

@@ -9,4 +9,244 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+
+    <string name="unknown">TBD</string>
+
+    <!-- TRACKS -->
+    <string name="track_melbourne">Melbourne</string>
+    <string name="track_paul_ricard">Paul Ricard</string>
+    <string name="track_shangai">Shangai</string>
+    <string name="track_sakhir">Sakhir</string>
+    <string name="track_catalunya">Catalunya</string>
+    <string name="track_monaco">Monaco</string>
+    <string name="track_montreal">Montreal</string>
+    <string name="track_silverstone">Silverstone</string>
+    <string name="track_hockenheim">Hockenheim</string>
+    <string name="track_hungaroring">Hungaroring</string>
+    <string name="track_spa">Spa</string>
+    <string name="track_monza">Monza</string>
+    <string name="track_singapore">Singapore</string>
+    <string name="track_suzuka">Suzuka</string>
+    <string name="track_abu_dhabi">Abu Dhabi</string>
+    <string name="track_texas">Texas</string>
+    <string name="track_brazil">Brazil</string>
+    <string name="track_austria">Austria</string>
+    <string name="track_sochi">Sochi</string>
+    <string name="track_mexico">Mexico</string>
+    <string name="track_baku">Baku</string>
+    <string name="track_sakhir_short">Sakhir (Short)</string>
+    <string name="track_silverstone_short">Silverstone (Short)</string>
+    <string name="track_texas_short">Texas (Short)</string>
+    <string name="track_suzuka_short">Suzuka (Short)</string>
+
+    <!-- GAME MODES -->
+    <string name="game_mode_offline">Offline</string>
+    <string name="game_mode_online">Online</string>
+
+    <!-- SAFETY CAR STATUS -->
+    <string name="safety_car_no">Clear</string>
+    <string name="safety_car_sc">Safety Car</string>
+    <string name="safety_car_vsc">Virtual Safety Car</string>
+
+    <!-- ERAS -->
+    <string name="era_modern">Modern</string>
+    <string name="era_classic">Classic</string>
+
+    <!-- WEATHER -->
+    <string name="weather_clear">Clear</string>
+    <string name="weather_light_cloud">Light Cloud</string>
+    <string name="weather_overcast">Overcast</string>
+    <string name="weather_light_rain">Light Rain</string>
+    <string name="weather_heavy_rain">Heavy Rain</string>
+    <string name="weather_storm">Storm</string>
+
+    <!-- SESSION TYPES -->
+    <string name="session_p1">P1</string>
+    <string name="session_p2">P2</string>
+    <string name="session_p3">P3</string>
+    <string name="session_short_p">P</string>
+    <string name="session_q1">Q1</string>
+    <string name="session_q2">Q2</string>
+    <string name="session_q3">Q3</string>
+    <string name="session_short_q">Q</string>
+    <string name="session_out_q">OSQ</string>
+    <string name="session_r">R</string>
+    <string name="session_r2">R2</string>
+    <string name="session_time_trial">TT</string>
+
+    <!-- AI CONTROL MODES -->
+    <string name="ai_human">Human</string>
+    <string name="ai_npc">AI</string>
+
+    <!-- TEAMS -->
+    <string name="team_mercedes">Mercedes</string>
+    <string name="team_ferrari">Ferrari</string>
+    <string name="team_redbull">RedBull</string>
+    <string name="team_williams">Williams</string>
+    <string name="team_force_india">Force India</string>
+    <string name="team_renault">Renault</string>
+    <string name="team_toro_rosso">Toro Rosso</string>
+    <string name="team_haas">Haas</string>
+    <string name="team_mclaren">McLaren</string>
+    <string name="team_sauber">Sauber</string>
+    <string name="team_mclaren_1988">McLaren 1988</string>
+    <string name="team_mclaren_1991">McLaren 1991</string>
+    <string name="team_williams_1992">Williams 1992</string>
+    <string name="team_ferrari_1995">Ferrari 1995</string>
+    <string name="team_williams_1996">Williams 1996</string>
+    <string name="team_mclaren_1998">McLaren 1998</string>
+    <string name="team_ferrari_2002">Ferrari 2002</string>
+    <string name="team_ferrari_2004">Ferrari 2004</string>
+    <string name="team_renault_2006">Renault 2006</string>
+    <string name="team_ferrari_2007">Ferrari 2007</string>
+    <string name="team_mclaren_2008">McLaren 2008</string>
+    <string name="team_redbull_2010">RedBull 2010</string>
+    <string name="team_ferrari_1976">Ferrari 1976</string>
+    <string name="team_mclaren_1976">McLaren 1976</string>
+    <string name="team_lotus_1972">Lotus 1972</string>
+    <string name="team_ferrari_1979">Ferrari 1979</string>
+    <string name="team_mclaren_1982">McLaren 1982</string>
+    <string name="team_williams_2003">Williams 2003</string>
+    <string name="team_brawn_2009">Brawn 2009</string>
+    <string name="team_lotus_1978">Lotus 1978</string>
+
+    <!-- DRIVERS -->
+    <string name="driver_Carlos_Sainz">Carlos Sainz</string>
+    <string name="driver_Daniel_Ricciardo">Daniel Ricciardo</string>
+    <string name="driver_Fernando_Alonso">Fernando Alonso</string>
+    <string name="driver_Kimi_Raikkonen">Kimi Raikkonen</string>
+    <string name="driver_Lewis_Hamilton">Lewis Hamilton</string>
+    <string name="driver_Marcus_Ericcson">Marcus Ericcson</string>
+    <string name="driver_Max_Verstappen">Max Verstappen</string>
+    <string name="driver_Nico_Hulkenberg">Nico Hulkenberg</string>
+    <string name="driver_Kevin_Magnussen">Kevin Magnussen</string>
+    <string name="driver_Romain_Grosjean">Romain Grosjean</string>
+    <string name="driver_Sebastian_Vettel">Sebastian Vettel</string>
+    <string name="driver_Sergio_Perez">Sergio Perez</string>
+    <string name="driver_Valtteri_Bottas">Valtteri Bottas</string>
+    <string name="driver_Esteban_Ocon">Esteban Ocon</string>
+    <string name="driver_Stoffel_Vandoorne">Stoffel Vandoorne</string>
+    <string name="driver_Lance_Stroll">Lance Stroll</string>
+    <string name="driver_Arron_Barnes">Arron Barnes</string>
+    <string name="driver_Martin_Giles">Martin Giles</string>
+    <string name="driver_Alex_Murray">Alex Murray</string>
+    <string name="driver_Lucas_Roth">Lucas Roth</string>
+    <string name="driver_Igor_Correia">Igor Correia</string>
+    <string name="driver_Sophie_Levasseur">Sophie Levasseur</string>
+    <string name="driver_Jonas_Schiffer">Jonas Schiffer</string>
+    <string name="driver_Alain_Forest">Alain Forest</string>
+    <string name="driver_Jay_Letourneau">Jay Letourneau</string>
+    <string name="driver_Esto_Saari">Esto Saari</string>
+    <string name="driver_Yasar_Atiyeh">Yasar Atiyeh</string>
+    <string name="driver_Callisto_Calabresi">Callisto Calabresi</string>
+    <string name="driver_Naota_Izum">Naota Izum</string>
+    <string name="driver_Howard_Clarke">Howard Clarke</string>
+    <string name="driver_Wilheim_Kaufmann">Wilheim Kaufmann</string>
+    <string name="driver_Marie_Laursen">Marie Laursen</string>
+    <string name="driver_Flavio_Nieves">Flavio Nieves</string>
+    <string name="driver_Peter_Belousov">Peter Belousov</string>
+    <string name="driver_Klimek_Michalski">Klimek Michalski</string>
+    <string name="driver_Santiago_Moreno">Santiago Moreno</string>
+    <string name="driver_Benjamin_Coppens">Benjamin Coppens</string>
+    <string name="driver_Noah_Visser">Noah Visser</string>
+    <string name="driver_Gert_Waldmuller">Gert Waldmuller</string>
+    <string name="driver_Julian_Quesada">Julian Quesada</string>
+    <string name="driver_Daniel_Jones">Daniel Jones</string>
+    <string name="driver_Charles_Leclerc">Charles Leclerc</string>
+    <string name="driver_Pierre_Gasly">Pierre Gasly</string>
+    <string name="driver_Brendon_Hartley">Brendon Hartley</string>
+    <string name="driver_Sergey_Sirotkin">Sergey Sirotkin</string>
+    <string name="driver_Ruben_Meijer">Ruben Meijer</string>
+    <string name="driver_Rashid_Nair">Rashid Nair</string>
+    <string name="driver_Jack_Tremblay">Jack Tremblay</string>
+
+    <!-- NATIONALITIES -->
+    <string name="nat_american">American</string>
+    <string name="nat_argentinean">Argentinean</string>
+    <string name="nat_australian">Australian</string>
+    <string name="nat_austrian">Austrian</string>
+    <string name="nat_azerbaijani">Azerbaijani</string>
+    <string name="nat_bahraini">Baharaini</string>
+    <string name="nat_belgian">Belgian</string>
+    <string name="nat_bolivian">Bolivian</string>
+    <string name="nat_brazilian">Brazilian</string>
+    <string name="nat_british">British</string>
+    <string name="nat_bulgarian">Bulgarian</string>
+    <string name="nat_cameroonian">Cameroonian</string>
+    <string name="nat_canadian">Canadian</string>
+    <string name="nat_chilean">Chilean</string>
+    <string name="nat_chinese">Chinese</string>
+    <string name="nat_colombian">Colombian</string>
+    <string name="nat_costa_rican">Costa Rican</string>
+    <string name="nat_croatian">Croatian</string>
+    <string name="nat_cypriot">Cypriot</string>
+    <string name="nat_czech">Czech</string>
+    <string name="nat_danish">Danish</string>
+    <string name="nat_dutch">Dutch</string>
+    <string name="nat_ecuadorian">Ecuadorian</string>
+    <string name="nat_english">English</string>
+    <string name="nat_emirian">Emirian</string>
+    <string name="nat_estonian">Estonian</string>
+    <string name="nat_finnish">Finnish</string>
+    <string name="nat_french">French</string>
+    <string name="nat_german">German</string>
+    <string name="nat_ghanaian">Ghanaian</string>
+    <string name="nat_greek">Greek</string>
+    <string name="nat_guatemalan">Guatemalan</string>
+    <string name="nat_honduran">Honduran</string>
+    <string name="nat_hong_konger">Hong Konger</string>
+    <string name="nat_hungarian">Hungarian</string>
+    <string name="nat_icelander">Icelander</string>
+    <string name="nat_indian">Indian</string>
+    <string name="nat_indonesian">Indonesian</string>
+    <string name="nat_irish">Irish</string>
+    <string name="nat_israeli">Israeli</string>
+    <string name="nat_italian">Italian</string>
+    <string name="nat_jamaican">Jamaican</string>
+    <string name="nat_japanese">Japanese</string>
+    <string name="nat_jordanian">Jordanian</string>
+    <string name="nat_kuwaiti">Kuwaiti</string>
+    <string name="nat_latvian">Latvian</string>
+    <string name="nat_lebanese">Lebanese</string>
+    <string name="nat_lithuanian">Lithuanian</string>
+    <string name="nat_luxembourger">Luxembourger</string>
+    <string name="nat_malaysian">Malaysian</string>
+    <string name="nat_maltese">Maltese</string>
+    <string name="nat_mexican">Mexican</string>
+    <string name="nat_monegasque">Monegasque</string>
+    <string name="nat_new_zealander">New Zealander</string>
+    <string name="nat_nicaraguan">Nicaraguan</string>
+    <string name="nat_north_korean">North Korean</string>
+    <string name="nat_northem_irish">Northem Irish</string>
+    <string name="nat_norwegian">Norwegian</string>
+    <string name="nat_omani">Omani</string>
+    <string name="nat_pakistani">Pakistani</string>
+    <string name="nat_panamanian">Panamanian</string>
+    <string name="nat_paraguayan">Paraguayan</string>
+    <string name="nat_peruvian">Peruvian</string>
+    <string name="nat_polish">Polish</string>
+    <string name="nat_portuguese">Portuguese</string>
+    <string name="nat_qatari">Qatari</string>
+    <string name="nat_romanian">Romanian</string>
+    <string name="nat_russian">Russian</string>
+    <string name="nat_salvadoran">Salvadoran</string>
+    <string name="nat_saudi">Saudi</string>
+    <string name="nat_scottish">Scottish</string>
+    <string name="nat_serbian">Serbian</string>
+    <string name="nat_singaporean">Singaporean</string>
+    <string name="nat_slovakian">Slovakian</string>
+    <string name="nat_slovenian">Slovenian</string>
+    <string name="nat_south_korean">South Korean</string>
+    <string name="nat_south_african">South African</string>
+    <string name="nat_spanish">Spanish</string>
+    <string name="nat_swedish">Swedish</string>
+    <string name="nat_swiss">Swiss</string>
+    <string name="nat_taiwanese">Taiwanese</string>
+    <string name="nat_thai">Thai</string>
+    <string name="nat_turkish">Turkish</string>
+    <string name="nat_uruguayan">Uruguaran</string>
+    <string name="nat_ukrainian">Ukrainian</string>
+    <string name="nat_venezuelan">Venezuelan</string>
+    <string name="nat_welsh">Welsh</string>
 </resources>

@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.main.shared
+package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import es.miguelromeral.f1.codemasters.livetiming.classes.Controller

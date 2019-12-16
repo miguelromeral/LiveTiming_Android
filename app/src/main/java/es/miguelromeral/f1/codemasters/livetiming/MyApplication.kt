@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.main
+package es.miguelromeral.f1.codemasters.livetiming
 
 import android.app.Application
 import timber.log.Timber

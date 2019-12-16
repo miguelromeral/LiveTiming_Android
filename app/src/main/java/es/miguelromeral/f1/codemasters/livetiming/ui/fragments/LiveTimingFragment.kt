@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.main.livetiming
+package es.miguelromeral.f1.codemasters.livetiming.ui.fragments
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,22 +7,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.SimpleItemAnimator
-import es.miguelromeral.f1.codemasters.livetiming.MainActivity
+import es.miguelromeral.f1.codemasters.livetiming.ui.activities.MainActivity
 
-import es.miguelromeral.f1.codemasters.livetiming.R
-import es.miguelromeral.f1.codemasters.livetiming.ui.main.shared.GameViewModel
+import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import timber.log.Timber
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentLiveTimingBinding
+import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.LiveTimingAdapter
+import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
+import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.factories.LiveTimingViewModelFactory
+import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
 import java.lang.ref.WeakReference
-import java.text.ParsePosition
 
 
 class LiveTimingFragment : Fragment() {
@@ -44,7 +43,12 @@ class LiveTimingFragment : Fragment() {
         adapter = LiveTimingAdapter()
         binding.rvLiveTiming.adapter = adapter
 
-        viewModel = ViewModelProviders.of(this, LiveTimingViewModelFactory(sharedViewModel.currentSession)).get(LiveTimingViewModel::class.java)
+        viewModel = ViewModelProviders.of(this,
+            LiveTimingViewModelFactory(
+                sharedViewModel.currentSession
+            )
+        ).get(
+            LiveTimingViewModel::class.java)
         binding.viewModel = viewModel
 
         val lifecycleOwner = this
@@ -71,23 +75,7 @@ class LiveTimingFragment : Fragment() {
         viewModel.items.observe(this, Observer {
             it?.let{
                     Timber.i("Submitting the new list.")
-                    viewModel.endUpdate()
                     adapter.submitList(it)
-                    //done = true
-            }
-        })
-        viewModel.modifiedItems.observe(this, Observer {
-            if(it){
-                viewModel.items.value?.let{ list ->
-                    //adapter.notifyItemChanged(0)
-
-                    var count = 0
-                    while(count < list.size){
-                        adapter.notifyItemChanged(count)
-                        count++
-                    }
-                }
-                viewModel.endUpdate()
             }
         })
 
@@ -97,7 +85,11 @@ class LiveTimingFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        uiHandler = UiHandler(adapter, binding.rvLiveTiming)
+        uiHandler =
+            UiHandler(
+                adapter,
+                binding.rvLiveTiming
+            )
         viewModel.startRefreshing(uiHandler)
     }
 
