@@ -10,11 +10,11 @@ class Player {
 
     var frameId = MutableLiveData(0)
 
-    private var _currentLap = MutableLiveData<Lap>()
+    /*private*/ var _currentLap = MutableLiveData<Lap>()
     val currentLap : LiveData<Lap>
         get() = _currentLap
 
-    private var _participant = MutableLiveData<Participant>()
+    /*private*/ var _participant = MutableLiveData<Participant>()
     val participant : LiveData<Participant>
         get() = _participant
 

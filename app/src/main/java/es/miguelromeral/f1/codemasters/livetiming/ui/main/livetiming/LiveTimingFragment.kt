@@ -31,6 +31,7 @@ class LiveTimingFragment : Fragment() {
     private lateinit var viewModel: LiveTimingViewModel
     private lateinit var sharedViewModel: GameViewModel
     private lateinit var uiHandler: UiHandler
+    private lateinit var adapter: LiveTimingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +41,10 @@ class LiveTimingFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, es.miguelromeral.f1.codemasters.livetiming.R.layout.fragment_live_timing, container, false)
         sharedViewModel = (activity as MainActivity).viewModel
 
-        val adapter =
-            LiveTimingAdapter()
+        adapter = LiveTimingAdapter()
         binding.rvLiveTiming.adapter = adapter
 
-        uiHandler = UiHandler(adapter, binding.rvLiveTiming)
-
-        viewModel = ViewModelProviders.of(this, LiveTimingViewModelFactory(sharedViewModel.currentSession, uiHandler)).get(LiveTimingViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, LiveTimingViewModelFactory(sharedViewModel.currentSession)).get(LiveTimingViewModel::class.java)
         binding.viewModel = viewModel
 
         val lifecycleOwner = this
@@ -99,7 +97,8 @@ class LiveTimingFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.startRefreshing()
+        uiHandler = UiHandler(adapter, binding.rvLiveTiming)
+        viewModel.startRefreshing(uiHandler)
     }
 
     override fun onStop() {

@@ -23,7 +23,7 @@ class Game {
         get() = _sessionData
 
 
-    private var _players: MutableLiveData<MutableList<Player>>
+    /*private*/ var _players: MutableLiveData<MutableList<Player>>
             = MutableLiveData<MutableList<Player>>()
     val players : LiveData<MutableList<Player>>
         get() = _players

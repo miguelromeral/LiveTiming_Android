@@ -8,8 +8,10 @@ import es.miguelromeral.f1.codemasters.livetiming.classes.Player
 import kotlinx.coroutines.*
 import timber.log.Timber
 
-class LiveTimingViewModel (var session: Game, val uiHandler: LiveTimingFragment.UiHandler) : ViewModel() {
+class LiveTimingViewModel (var session: Game) : ViewModel() {
 
+
+    private var uiHandler: LiveTimingFragment.UiHandler? = null
 
     private var _items = MutableLiveData<List<ItemLiveTiming>>()
     val items : LiveData<List<ItemLiveTiming>>
@@ -38,7 +40,8 @@ class LiveTimingViewModel (var session: Game, val uiHandler: LiveTimingFragment.
 
 
 
-    fun startRefreshing(){
+    fun startRefreshing(handler: LiveTimingFragment.UiHandler){
+        uiHandler = handler
         viewModelJob = Job()
         uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
         uiScope.launch {
@@ -48,8 +51,10 @@ class LiveTimingViewModel (var session: Game, val uiHandler: LiveTimingFragment.
     }
 
     fun initHandlerThread(){
-        myHandlerThread = MyHandlerThread(uiHandler)
-        myHandlerThread.start()
+        uiHandler?.let {
+            myHandlerThread = MyHandlerThread(it)
+            myHandlerThread.start()
+        }
     }
 
     fun sortItemList(lista: List<ItemLiveTiming>? = null){
@@ -78,7 +83,6 @@ class LiveTimingViewModel (var session: Game, val uiHandler: LiveTimingFragment.
                                         p.currentLap.value?.currentLapTime?.value
                                     )
                                 )
-                                Timber.i("Añadido: ${p.participant.value?.name?.value?.substring(3,12)} con carPosition a: ${p.currentLap.value?.carPosition?.value}")
                             }
                             sortItemList(newList)
                         }else{
@@ -101,6 +105,7 @@ class LiveTimingViewModel (var session: Game, val uiHandler: LiveTimingFragment.
                         //_modifiedItems.postValue(true)
                     }
                 }
+                Timber.i("Testing - Escuchando...!")
                 delay(DELAY_TIME)
             }
         }
@@ -124,6 +129,6 @@ class LiveTimingViewModel (var session: Game, val uiHandler: LiveTimingFragment.
     }
 
     companion object{
-        const val DELAY_TIME = 100L
+        const val DELAY_TIME = 75L
     }
 }

@@ -8,8 +8,6 @@ class MyRunnable (private var myHandlerThread: MyHandlerThread,
 ) : Runnable {
 
     override fun run(){
-        //var count = 0
-        //while(count < 10){
 
         val player = session.players.value?.filter { it.participant.value?.name?.value == item?.name }?.firstOrNull()
 
@@ -27,12 +25,6 @@ class MyRunnable (private var myHandlerThread: MyHandlerThread,
                 myHandlerThread.sendOrder(item)
 
             }
-           /* try{
-                Thread.sleep(1000)
-            }catch(e: InterruptedException){
-                e.printStackTrace()
-            }*/
-        //}
     }
 
 }

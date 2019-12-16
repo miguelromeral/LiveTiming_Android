@@ -53,7 +53,6 @@ class LiveTimingAdapter :
                     )
                 )
             }
-            binding.ivColor.setColorFilter(ContextCompat.getColor(binding.ivColor.context, R.color.colorPrimary))
             binding.item = item
             binding.tvName.text = item.name
             item.position?.let{
@@ -63,15 +62,46 @@ class LiveTimingAdapter :
                 binding.tvCurrentTime.text = floatToTimeFormatted(it)
             }
             item.team?.let{
+                binding.ivColor.setColorFilter(ContextCompat.getColor(binding.ivColor.context, getColorByTeamId(it)))
                 //binding.ivColor.setBackgroundColor(R.color.colorAccent)
             }
         }
 
-        /*fun getColorByTeamId(teamId: UByte){
+        fun getColorByTeamId(teamId: UByte): Int =
             when(teamId.toInt()){
-                0 ->
-            }
-        }*/
+                0 -> R.color.teamMercedes
+                1 -> R.color.teamFerrari
+                2 -> R.color.teamRedBull
+                3 -> R.color.teamWilliams
+                4 -> R.color.teamRacingPoint
+                5 -> R.color.teamRenault
+                6 -> R.color.teamToroRosso
+                7 -> R.color.teamHaas
+                8 -> R.color.teamMcLaren
+                9 -> R.color.teamAlfaRomeo
+                /*
+                10 -> "McLaren 1988"
+                11 -> "McLaren 1991"
+                12 -> "Williams 1992"
+                13 -> "Ferrari 1995"
+                14 -> "Williams 1996"
+                15 -> "McLaren 1998"
+                16 -> "Ferrari 2002"
+                17 -> "Ferrari 2004"
+                18 -> "Renault 2006"
+                19 -> "Ferrari 2007"
+                20 -> "McLaren 2008"
+                21 -> "RedBull 2010"
+                22 -> "Ferrari 1976"
+                34 -> "McLaren 1976"
+                35 -> "Lotus 1972"
+                36 -> "Ferrari 1979"
+                37 -> "McLaren 1982"
+                38 -> "Williams 2003"
+                39 -> "Brawn 2009"
+                40 -> "Lotus 1978"*/
+                else -> R.color.teamUnknown
+        }
 
 
 

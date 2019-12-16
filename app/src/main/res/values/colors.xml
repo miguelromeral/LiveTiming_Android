@@ -10,6 +10,7 @@
     <color name="fullWhite">#FFF</color>
 
     <!-- Teams -->
+    <color name="teamUnknown">#aaa</color>
     <color name="teamFerrari">#dc0000</color>
     <color name="teamMercedes">#00d2be</color>
     <color name="teamRedBull">#1414dc</color>

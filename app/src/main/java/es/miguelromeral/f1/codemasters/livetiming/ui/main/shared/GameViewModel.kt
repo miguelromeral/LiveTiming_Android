@@ -13,7 +13,7 @@ class GameViewModel : ViewModel() {
     private var viewModelJob = Job()
     private var uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    private var _controller: Controller
+    private lateinit var _controller: Controller
 
     var currentSession : Game
 
@@ -28,11 +28,16 @@ class GameViewModel : ViewModel() {
 
     @kotlin.ExperimentalUnsignedTypes
     fun startListeningUDP(){
-        viewModelJob = Job()
-        uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-        uiScope.launch {
-            Timber.i("View Model - starting listening")
-            _controller.listen()
+        try {
+            viewModelJob = Job()
+            uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+            uiScope.launch {
+                Timber.i("View Model - starting listening")
+                _controller.listen()
+            }
+        }catch (e: Exception)
+        {
+            Timber.i("Exception while starting UDP: "+e.message)
         }
     }
 
