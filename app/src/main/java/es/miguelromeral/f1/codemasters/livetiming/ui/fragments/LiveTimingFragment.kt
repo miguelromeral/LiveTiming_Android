@@ -17,8 +17,8 @@ import timber.log.Timber
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentLiveTimingBinding
 import es.miguelromeral.f1.codemasters.livetiming.ui.activities.MainActivity
+import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItem
 import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.LiveTimingAdapter
-import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.factories.LiveTimingViewModelFactory
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
 import java.lang.ref.WeakReference
@@ -27,7 +27,7 @@ import java.lang.ref.WeakReference
 class LiveTimingFragment : Fragment() {
 
     private lateinit var binding: FragmentLiveTimingBinding
-    private lateinit var viewModel: LiveTimingViewModel
+    private var viewModel: LiveTimingViewModel? = null
     private lateinit var sharedViewModel: GameViewModel
     private lateinit var uiHandler: UiHandler
     private lateinit var adapter: LiveTimingAdapter
@@ -72,14 +72,16 @@ class LiveTimingFragment : Fragment() {
             }
         })*/
 
-        viewModel.items.observe(this, Observer {
-            it?.let{
+        viewModel?.let{ vm ->
+            vm.items.observe(this, Observer {
+                it?.let {
                     Timber.i("Submitting the new list.")
-                    adapter.submitList(it)
-            }
-        })
+                    adapter.addHeaderAndSubmitList(it)
+                }
+            })}
 
         return binding.root
+
     }
 
 
@@ -90,18 +92,18 @@ class LiveTimingFragment : Fragment() {
                 adapter,
                 binding.rvLiveTiming
             )
-        viewModel.startRefreshing(uiHandler)
+        viewModel?.startRefreshing(uiHandler)
     }
 
     override fun onStop() {
         super.onStop()
-        viewModel.stopRefreshing()
+        viewModel?.stopRefreshing()
     }
 
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.stopHandlerThread()
+        viewModel?.stopHandlerThread()
     }
 
 
@@ -123,7 +125,7 @@ class LiveTimingFragment : Fragment() {
         private var wrListAdapter = WeakReference(listAdapter)
         private var wrRecyclerView = WeakReference(recyclerView)
 
-        private fun notifyAdapter(item: ItemLiveTiming){
+        private fun notifyAdapter(item: DataItem.ItemLiveTiming){
             //wrListAdapter.get()?.get
             wrRecyclerView.get()?.adapter?.let{
 
@@ -135,7 +137,7 @@ class LiveTimingFragment : Fragment() {
         override fun handleMessage(msg: Message?){
             super.handleMessage(msg)
 
-            val item = (msg?.obj as ItemLiveTiming)
+            val item = (msg?.obj as DataItem.ItemLiveTiming)
 
             notifyAdapter(item)
         }

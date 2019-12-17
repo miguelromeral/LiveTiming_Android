@@ -1,6 +1,8 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.adapters
 
+import android.text.Layout
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
@@ -8,34 +10,69 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.databinding.ItemLiveTimingBinding
+import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
 import es.miguelromeral.f1.codemasters.livetiming.ui.getTyreIcon
-import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
+import java.lang.ClassCastException
 
 
 class LiveTimingAdapter :
-        ListAdapter<ItemLiveTiming, LiveTimingAdapter.ViewHolder>
+        ListAdapter<DataItem, RecyclerView.ViewHolder>
             (LiveTimingDiffCallback()) {
 
+    private val ITEM_VIEW_TYPE_HEADER = 0
+    private val ITEM_VIEW_TYPE_ITEM = 1
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item, position)
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItem.ItemLiveTiming -> ITEM_VIEW_TYPE_ITEM
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(
-            parent
-        )
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder){
+            is ViewHolder -> {
+                val item = getItem(position) as DataItem.ItemLiveTiming
+                holder.bind(item, position)
+            }
+        }
+
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType){
+            ITEM_VIEW_TYPE_HEADER -> TextViewHolder.from(parent)
+            ITEM_VIEW_TYPE_ITEM -> ViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType $viewType")
+        }
+    }
+
+    fun addHeaderAndSubmitList(list: List<DataItem.ItemLiveTiming>?){
+        val items = when(list) {
+            null -> listOf(DataItem.Header)
+            else -> listOf(DataItem.Header) + list
+        }
+        submitList(items)
     }
 
 
 
+    class TextViewHolder(view: View): RecyclerView.ViewHolder(view) {
+
+        companion object{
+            fun from(parent: ViewGroup): TextViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.header_live_timing, parent, false)
+                return TextViewHolder(view)
+            }
+        }
+    }
 
     class ViewHolder private constructor(val binding: ItemLiveTimingBinding) :
         RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: ItemLiveTiming, position: Int){
+        fun bind(item: DataItem.ItemLiveTiming, position: Int){
             binding.rootItemLiveTiming.let {
                 it.setBackgroundColor(
                     ContextCompat.getColor(
@@ -123,14 +160,53 @@ class LiveTimingAdapter :
 
 }
 
-class LiveTimingDiffCallback : DiffUtil.ItemCallback<ItemLiveTiming>(){
+class LiveTimingDiffCallback : DiffUtil.ItemCallback<DataItem>(){
 
-    override fun areItemsTheSame(oldItem: ItemLiveTiming, newItem: ItemLiveTiming): Boolean {
-        return oldItem.name == newItem.name && oldItem.time == newItem.time
+    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+        val oh = oldItem.id == DataItem.HEADER_NAME
+        val nh = newItem.id == DataItem.HEADER_NAME
+
+        if(oh && nh)
+            return true
+
+        if(oh || nh)
+            return false
+
+        val oi = oldItem as DataItem.ItemLiveTiming
+        val ni = newItem as DataItem.ItemLiveTiming
+
+        return oi.name == ni.name && oi.time == ni.time
     }
 
-    override fun areContentsTheSame(oldItem: ItemLiveTiming, newItem: ItemLiveTiming): Boolean{
+    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean{
         return oldItem.equals(newItem)
     }
 
+}
+
+
+sealed class DataItem {
+
+    abstract val id: String
+
+    data class ItemLiveTiming (
+        var position: UByte?,
+        var name: String?,
+        var team: UByte?,
+        var time: Float?,
+        var compound: UByte?,
+        var era: UByte?,
+        var format: Format = Format.UNKNOWN) : DataItem(){
+
+        override val id = name ?: "DataItem"
+    }
+
+    object Header : DataItem(){
+
+        override val id = HEADER_NAME
+    }
+
+    companion object{
+        const val HEADER_NAME = "HEADER_NAME_F1_LIVE_TIMING"
+    }
 }

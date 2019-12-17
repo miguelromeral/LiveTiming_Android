@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
-import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
+import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItem
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.runnables.MyRunnable
 import kotlinx.coroutines.*
@@ -16,8 +16,8 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
 
     private var uiHandler: LiveTimingFragment.UiHandler? = null
 
-    private var _items = MutableLiveData<List<ItemLiveTiming>>()
-    val items : LiveData<List<ItemLiveTiming>>
+    private var _items = MutableLiveData<List<DataItem.ItemLiveTiming>>()
+    val items : LiveData<List<DataItem.ItemLiveTiming>>
         get() = _items
 
     private var viewModelJob = Job()
@@ -45,7 +45,7 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
         }
     }
 
-    fun sortItemList(lista: List<ItemLiveTiming>? = null){
+    fun sortItemList(lista: List<DataItem.ItemLiveTiming>? = null){
         synchronized(_items){
             val tosort = lista ?: _items.value
 
@@ -62,11 +62,11 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
 
                     val mySize = items.value?.size
                     if(mySize == null || mySize != sessionItems.size){
-                            var newList: MutableList<ItemLiveTiming> = mutableListOf()
+                            var newList: MutableList<DataItem.ItemLiveTiming> = mutableListOf()
                             var count = 0
                             for (p in sessionItems) {
                                 newList.add(
-                                    ItemLiveTiming(
+                                    DataItem.ItemLiveTiming(
                                         position =  p.currentLap.value?.carPosition?.value,
                                         name = p.participant.value?.shortName(),
                                         team = p.participant.value?.teamId?.value,
