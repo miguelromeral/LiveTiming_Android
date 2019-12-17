@@ -34,16 +34,15 @@
     <ImageView
         android:id="@+id/ivColor"
 
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPos"
+        android:layout_width="8sp"
+        android:layout_height="14sp"
+
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvPos"
         app:layout_constraintTop_toTopOf="parent"
-
         app:srcCompat="@drawable/color_icon"
-        android:layout_height="14sp"
-        android:layout_width="8sp"
-        tools:tint="#f00"/>
+        tools:tint="#f00" />
 
     <!--
         app:teamColor="@{item.team}" -->
@@ -51,11 +50,10 @@
     <TextView
         android:id="@+id/tvName"
         style="@style/liveTimingTextView"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivColor"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444"
         tools:text="ALO" />
 
     <TextView
@@ -63,9 +61,19 @@
         style="@style/liveTimingTextView"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ivCompound"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="1:23.4" />
+
+    <ImageView
+        android:id="@+id/ivCompound"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/tyre_yellow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

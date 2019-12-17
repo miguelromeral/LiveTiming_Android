@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:gravity="center">
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/tyres_width_height"
+                android:height="@dimen/tyres_width_height" />
+            <stroke
+                android:width="@dimen/tyres_line_stroke"
+                android:color="@color/tyre_pink" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -67,11 +67,13 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                             for (p in sessionItems) {
                                 newList.add(
                                     ItemLiveTiming(
-                                        p.currentLap.value?.carPosition?.value,
-                                        p.participant.value?.shortName(),
-                                        p.participant.value?.teamId?.value,
-                                        p.currentLap.value?.currentLapTime?.value,
-                                        p.participant.value?.format ?: Format.UNKNOWN
+                                        position =  p.currentLap.value?.carPosition?.value,
+                                        name = p.participant.value?.shortName(),
+                                        team = p.participant.value?.teamId?.value,
+                                        time = p.currentLap.value?.currentLapTime?.value,
+                                        compound = p.carStatus.value?.tyreCompound?.value,
+                                        era = session.sessionData?.era?.value,
+                                        format = p.participant.value?.format ?: Format.UNKNOWN
                                     )
                                 )
                             }

@@ -30,6 +30,14 @@ fun createByteArray(content: ByteArray, begining: Int, iteration: Int = 0, end: 
     return listOf(content[begining + iteration]) + createByteArray(content, begining, iteration + 1, end)
 }
 
+// 1 Byte Array
+fun createUByteArray(content: ByteArray, begining: Int, iteration: Int = 0, end: Int = 4): List<UByte>{
+    if(iteration >= end)
+        return emptyList()
+
+    return listOf(content[begining + iteration].toUByte()) + createUByteArray(content, begining, iteration + 1, end)
+}
+
 // 2 Bytes array
 fun createShortArray(content: ByteArray, begining: Int, iteration: Int = 0, end: Int = 4): List<Short>{
     if(iteration >= end)

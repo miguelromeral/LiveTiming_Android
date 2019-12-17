@@ -14,7 +14,7 @@ class Game {
 
     var frameId = MutableLiveData(0)
 
-    private var _sessionData = Session()
+    /*private*/ var _sessionData = Session()
     val sessionData : Session?
         get() = _sessionData
 

@@ -5,4 +5,8 @@
     <dimen name="appbar_padding">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+
+    <!-- Tyres -->
+    <dimen name="tyres_width_height">100dp</dimen>
+    <dimen name="tyres_line_stroke">20dp</dimen>
 </resources>

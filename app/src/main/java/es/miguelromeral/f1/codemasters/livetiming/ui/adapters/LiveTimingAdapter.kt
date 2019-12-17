@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.databinding.ItemLiveTimingBinding
 import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
+import es.miguelromeral.f1.codemasters.livetiming.ui.getTyreIcon
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 
 
@@ -61,6 +62,9 @@ class LiveTimingAdapter :
             item.team?.let{
                 binding.ivColor.setColorFilter(ContextCompat.getColor(binding.ivColor.context, getColorByTeamId(it)))
                 //binding.ivColor.setBackgroundColor(R.color.colorAccent)
+            }
+            item.compound?.let{
+                binding.ivCompound.setImageResource(getTyreIcon(item.format, item.era, it))
             }
         }
 

@@ -2,6 +2,7 @@ package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import es.miguelromeral.f1.codemasters.livetiming.packets.*
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.ParticipantData
@@ -29,6 +30,8 @@ class Controller(val port: Int = 20777) {
 
 
     fun DEBUG_addItems(){
+        session._sessionData.era.postValue(CarStatusData.ERA_MODERN)
+
         var ml = mutableListOf<Player>()
 
         var i = 0
@@ -37,10 +40,14 @@ class Controller(val port: Int = 20777) {
             p._participant.postValue(Participant().apply {
                 name.postValue("F. LASTNAME $i")
                 teamId.postValue(i.toUByte())
+                format = Format.F1_2018
             })
             p._currentLap.postValue(Lap().apply {
                 carPosition.postValue(i.plus(1).toUByte())
                 currentLapTime.postValue(0f)
+            })
+            p._carStatus.postValue(CarStatus().apply {
+                tyreCompound.postValue(i.toUByte())
             })
             ml.add(p)
             i++

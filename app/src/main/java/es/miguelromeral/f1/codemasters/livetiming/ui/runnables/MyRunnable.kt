@@ -31,6 +31,11 @@ class MyRunnable (private var myHandlerThread: MyHandlerThread,
                     item.time = tmp_lap
                 }
             }
+            player.carStatus.value?.let{
+                synchronized(it){
+                    item.compound = it.tyreCompound?.value
+                }
+            }
 
             myHandlerThread.sendOrder(item)
 
