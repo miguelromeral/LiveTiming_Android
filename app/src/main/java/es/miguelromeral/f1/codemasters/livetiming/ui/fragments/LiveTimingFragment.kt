@@ -16,7 +16,7 @@ import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import timber.log.Timber
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentLiveTimingBinding
-import es.miguelromeral.f1.codemasters.livetiming.ui.activities.Main2Activity
+import es.miguelromeral.f1.codemasters.livetiming.ui.activities.MainActivity
 import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.LiveTimingAdapter
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.factories.LiveTimingViewModelFactory
@@ -38,7 +38,7 @@ class LiveTimingFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, es.miguelromeral.f1.codemasters.livetiming.R.layout.fragment_live_timing, container, false)
-        sharedViewModel = (activity as Main2Activity).viewModel
+        sharedViewModel = (activity as MainActivity).viewModel
 
         adapter = LiveTimingAdapter()
         binding.rvLiveTiming.adapter = adapter

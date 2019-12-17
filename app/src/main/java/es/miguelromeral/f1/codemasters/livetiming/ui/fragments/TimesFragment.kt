@@ -1,7 +1,5 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,11 +9,8 @@ import com.google.android.material.tabs.TabLayout
 
 import es.miguelromeral.f1.codemasters.livetiming.R
 import androidx.viewpager.widget.ViewPager
-import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.Pager
-import android.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentBlankBinding
-import java.nio.file.Files.size
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentManager
 
@@ -23,12 +18,12 @@ import androidx.fragment.app.FragmentManager
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [BlankFragment.OnFragmentInteractionListener] interface
+ * [TimesFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [BlankFragment.newInstance] factory method to
+ * Use the [TimesFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class BlankFragment : Fragment() {
+class TimesFragment : Fragment() {
 
     private lateinit var binding: FragmentBlankBinding
 
@@ -62,7 +57,7 @@ class BlankFragment : Fragment() {
 
         val adapter = Adapter(childFragmentManager)
         adapter.addFragment(LiveTimingFragment.newInstance(), "Times")
-        adapter.addFragment(Tab2(), "Tab 2")
+        //adapter.addFragment(Tab2(), "Tab 2")
         viewPager.adapter = adapter
 
 
@@ -97,7 +92,7 @@ class BlankFragment : Fragment() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            BlankFragment().apply {
+            TimesFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
