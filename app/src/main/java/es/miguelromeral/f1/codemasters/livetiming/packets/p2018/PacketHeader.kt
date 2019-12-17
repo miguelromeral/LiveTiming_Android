@@ -23,8 +23,10 @@ class PacketHeader private constructor(content: ByteArray)
             frameIdentifier = intFromPacket(content.sliceArray(16..19))
             playerCarIndex = content[20]
 
+            Timber.i("Format: $format, Version: $version, id: $id, SUID: $sessionUID, Time: $sessionTime, FID: $frameIdentifier, PCI: $playerCarIndex")
+
         }catch(e: Exception){
-            Timber.i("Testing - Exception when creating PacketHeader.")
+            Timber.i("Testing - Exception when creating PacketHeader: "+e.message)
         }
     }
 
@@ -37,7 +39,7 @@ class PacketHeader private constructor(content: ByteArray)
         const val ID_NOT_INITIALIZED: Byte = -1
 
         fun create(content: ByteArray): PacketHeader{
-            return PacketHeader(content.sliceArray(0 until (HEADER_SIZE - 1)))
+            return PacketHeader(content.sliceArray(0 until HEADER_SIZE))
         }
     }
 }

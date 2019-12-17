@@ -39,6 +39,20 @@ class Participant {
         else -> "Unknown"
     }
 
+    fun shortName(): String {
+        name.value?.let{
+            val values = it.split(" ")
+            val string
+                    = if(values.size > 1)
+                values[1]
+            else
+                values[0]
+            return string.substring(0, 3).toUpperCase()
+
+        }
+        return "---"
+    }
+
     fun team() = when(format){
         Format.F1_2018 -> ParticipantData.getTeam(teamId.value!!)
         else -> "Unknown"

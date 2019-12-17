@@ -24,12 +24,16 @@ class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
                                 content
                             )
                         )
-                        PacketLapData.PACKET_ID -> session.newLapData2018(
+                        PacketLapData.PACKET_ID -> {
+
+                            Timber.i("Lap Pa: ${content.contentToString()}")
+
+                            session.newLapData2018(
                             PacketLapData.create(
                                 header,
                                 content
-                            )
-                        )
+                            ))
+                        }
                         PacketParticipantData.PACKET_ID -> session.newParticipants2018(
                             PacketParticipantData.create(header, content)
                         )

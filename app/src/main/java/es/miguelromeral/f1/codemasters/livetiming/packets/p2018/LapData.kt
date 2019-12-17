@@ -1,6 +1,7 @@
 package es.miguelromeral.f1.codemasters.livetiming.packets
 
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.Packet
+import timber.log.Timber
 
 @kotlin.ExperimentalUnsignedTypes
 class PacketLapData private constructor(header: PacketHeader, content: ByteArray) : Packet(header) {
@@ -19,6 +20,8 @@ class PacketLapData private constructor(header: PacketHeader, content: ByteArray
         val end = init + LapData.SIZE
 
         val lap = LapData(content.sliceArray(init until end))
+
+        Timber.i("Lap It ($iteration) [$init until $end]: ${content.sliceArray(init until end).contentToString()}")
 
         return listOf(
             lap
@@ -59,14 +62,14 @@ class LapData internal constructor(content: ByteArray)
     var resultStatus: UByte
 
     init{
-        lastLapTime = floatFromPacket(content.sliceArray(0..3))
-        currentLapTime = floatFromPacket(content.sliceArray(4..7))
-        bestLapTime = floatFromPacket(content.sliceArray(8..11))
-        sector1Time = floatFromPacket(content.sliceArray(12..15))
-        sector2Time = floatFromPacket(content.sliceArray(16..19))
-        lapDistance = floatFromPacket(content.sliceArray(20..23))
-        totalDistance = floatFromPacket(content.sliceArray(24..27))
-        safetyCarDelta = floatFromPacket(content.sliceArray(28..31))
+        lastLapTime = floatFromPacket(content.sliceArray(0 until 4))
+        currentLapTime = floatFromPacket(content.sliceArray(4 until 8))
+        bestLapTime = floatFromPacket(content.sliceArray(8 until 12))
+        sector1Time = floatFromPacket(content.sliceArray(12 until 16))
+        sector2Time = floatFromPacket(content.sliceArray(16 until 20))
+        lapDistance = floatFromPacket(content.sliceArray(20 until 24))
+        totalDistance = floatFromPacket(content.sliceArray(24 until 28))
+        safetyCarDelta = floatFromPacket(content.sliceArray(28 until 32))
         carPosition = content[32].toUByte()
         currentLapNum = content[33].toUByte()
         pitStatus = content[34].toUByte()

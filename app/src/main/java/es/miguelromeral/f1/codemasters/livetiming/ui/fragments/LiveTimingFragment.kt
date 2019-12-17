@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentLiveTimingBinding
 import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.LiveTimingAdapter
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
-import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.factories.LiveTimingViewModelFactory
+import es.miguelromeral.f1.codemasters.livetiming.ui.factories.LiveTimingViewModelFactory
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
 import java.lang.ref.WeakReference
 

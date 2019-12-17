@@ -7,7 +7,7 @@ import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
-import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.runnables.MyRunnable
+import es.miguelromeral.f1.codemasters.livetiming.ui.runnables.MyRunnable
 import kotlinx.coroutines.*
 import timber.log.Timber
 
@@ -53,6 +53,8 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
         }
     }
 
+    private var currentFrame: Int = 0
+
     suspend fun refreshing(){
         withContext(Dispatchers.Default) {
             while (true) {
@@ -66,7 +68,7 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                 newList.add(
                                     ItemLiveTiming(
                                         p.currentLap.value?.carPosition?.value,
-                                        p.participant.value?.name?.value,
+                                        p.participant.value?.shortName(),
                                         p.participant.value?.teamId?.value,
                                         p.currentLap.value?.currentLapTime?.value,
                                         p.participant.value?.format ?: Format.UNKNOWN
@@ -76,19 +78,23 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                             sortItemList(newList)
                         }else{
 
-                            _items.value?.let{ myItems ->
-                                sortItemList()
+                            //if(currentFrame != session.frameId.value) {
+                            //    currentFrame = session.frameId.value!!
 
-                                for(c in sessionItems.indices){
-                                    MyRunnable(
-                                        myHandlerThread,
-                                        myItems,
-                                        session,
-                                        c
-                                    ).run()
+                                _items.value?.let { myItems ->
+                                    sortItemList()
+
+                                    for (c in sessionItems.indices) {
+                                        MyRunnable(
+                                            myHandlerThread,
+                                            myItems,
+                                            session,
+                                            c
+                                        ).run()
+                                    }
+
                                 }
-
-                            }
+                            //}
 
                     }
                 }
@@ -112,6 +118,6 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
     }
 
     companion object{
-        const val DELAY_TIME = 75L
+        const val DELAY_TIME = 100L
     }
 }

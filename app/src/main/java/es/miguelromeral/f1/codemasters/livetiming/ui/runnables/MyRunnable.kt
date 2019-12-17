@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.runnables
+package es.miguelromeral.f1.codemasters.livetiming.ui.runnables
 
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.MyHandlerThread
@@ -19,13 +19,17 @@ class MyRunnable (private var myHandlerThread: MyHandlerThread,
         if(player != null && item != null){
 
             player.participant.value?.let{
-                item.name = it.name?.value?.toString()
+                item.name = it.shortName()
                 item.team = it.teamId?.value
                 item.format = it.format
             }
             player.currentLap.value?.let{
-                item.position = it.carPosition?.value
-                item.time = it.currentLapTime?.value
+                synchronized(it) {
+                    val tmp_pos = it.carPosition?.value
+                    val tmp_lap = it.currentLapTime?.value
+                    item.position = tmp_pos
+                    item.time = tmp_lap
+                }
             }
 
             myHandlerThread.sendOrder(item)

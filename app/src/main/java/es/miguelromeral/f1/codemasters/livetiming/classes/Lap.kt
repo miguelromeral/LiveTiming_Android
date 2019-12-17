@@ -30,25 +30,28 @@ class Lap {
 
 
 
-    @Synchronized
     fun updateFrom2018(info: LapData){
-        format = Format.F1_2018
-        lastLapTime.postValue(info.lastLapTime)
-        currentLapTime.postValue(info.currentLapTime)
-        bestLapTime.postValue(info.bestLapTime)
-        sector1Time.postValue(info.sector1Time)
-        sector2Time.postValue(info.sector2Time)
-        lapDistance.postValue(info.lapDistance)
-        totalDistance.postValue(info.totalDistance)
-        safetyCarDelta.postValue(info.safetyCarDelta)
-        carPosition.postValue(info.carPosition)
-        currentLapNum.postValue(info.currentLapNum)
-        pitStatus.postValue(info.pitStatus)
-        sector.postValue(info.sector)
-        currentLapInvalid.postValue(info.currentLapInvalid)
-        penalties.postValue(info.penalties)
-        gridPosition.postValue(info.gridPosition)
-        driverStatus.postValue(info.driverStatus)
-        resultStatus.postValue(info.resultStatus)
+        synchronized(this) {
+            val tmp_pos = info.carPosition
+            val tmp_lap = info.currentLapTime
+            format = Format.F1_2018
+            lastLapTime.postValue(info.lastLapTime)
+            currentLapTime.postValue(info.currentLapTime)
+            bestLapTime.postValue(info.bestLapTime)
+            sector1Time.postValue(info.sector1Time)
+            sector2Time.postValue(info.sector2Time)
+            lapDistance.postValue(info.lapDistance)
+            totalDistance.postValue(info.totalDistance)
+            safetyCarDelta.postValue(info.safetyCarDelta)
+            carPosition.postValue(info.carPosition)
+            currentLapNum.postValue(info.currentLapNum)
+            pitStatus.postValue(info.pitStatus)
+            sector.postValue(info.sector)
+            currentLapInvalid.postValue(info.currentLapInvalid)
+            penalties.postValue(info.penalties)
+            gridPosition.postValue(info.gridPosition)
+            driverStatus.postValue(info.driverStatus)
+            resultStatus.postValue(info.resultStatus)
+        }
     }
 }

@@ -13,6 +13,7 @@ import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentSessionBinding
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import kotlinx.android.synthetic.main.fragment_session.*
+import timber.log.Timber
 
 
 class SessionFragment : Fragment() {

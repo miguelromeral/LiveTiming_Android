@@ -8,7 +8,6 @@ import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.ParticipantData
 
 class Player {
 
-    var frameId = MutableLiveData(0)
 
     /*private*/ var _currentLap = MutableLiveData<Lap>()
     val currentLap : LiveData<Lap>
@@ -32,7 +31,6 @@ class Player {
         }
         lap.updateFrom2018(info)
         _currentLap.postValue(lap)
-        frameId.postValue(id)
     }
 
     @Synchronized
@@ -46,7 +44,6 @@ class Player {
             part.updateFrom2018(info)
             _participant.postValue(part)
         }
-        frameId.postValue(id)
     }
 
     @Synchronized

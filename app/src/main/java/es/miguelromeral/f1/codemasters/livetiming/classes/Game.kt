@@ -12,11 +12,7 @@ import timber.log.Timber
 
 class Game {
 
-
-    /*private lateinit var _eventData : MutableLiveData<EventData?>
-    val eventData : LiveData<EventData?>
-        get() = _eventData
-    */
+    var frameId = MutableLiveData(0)
 
     private var _sessionData = Session()
     val sessionData : Session?
@@ -61,6 +57,7 @@ class Game {
 
     @Synchronized
     fun newSessionData2018(session: SessionData){
+        frameId.postValue(session.header.frameIdentifier)
         if(sessionData != null) {
             _sessionData.updateFrom2018(session)
         }
@@ -68,6 +65,7 @@ class Game {
 
     @Synchronized
     fun newLapData2018(lapdata: PacketLapData){
+        frameId.postValue(lapdata.header.frameIdentifier)
         players.value?.let {
             if (it.size != 0) {
                 for ((count, p) in players.value!!.withIndex()) {
@@ -81,6 +79,8 @@ class Game {
 
     @Synchronized
     fun newParticipants2018(info: PacketParticipantData){
+
+        frameId.postValue(info.header.frameIdentifier)
         if(players.value?.size != info.numCars.toInt()){
 
             val list: MutableList<Player>
@@ -99,6 +99,7 @@ class Game {
 
     @Synchronized
     fun newTelemetry2018(info: PacketCarTelemetryData){
+        frameId.postValue(info.header.frameIdentifier)
         players.value?.let{
             if(it.isNotEmpty()){
                 for((count, p) in _players.value!!.withIndex()){

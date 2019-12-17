@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.factories
+package es.miguelromeral.f1.codemasters.livetiming.ui.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
