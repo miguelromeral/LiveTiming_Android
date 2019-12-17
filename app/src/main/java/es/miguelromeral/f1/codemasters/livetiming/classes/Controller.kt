@@ -70,7 +70,7 @@ class Controller(val port: Int = 20777) {
 
     fun addCurrentSession(session: Game){
         this.session = session
-        DEBUG_addItems()
+        //DEBUG_addItems()
     }
 
     @ExperimentalUnsignedTypes
@@ -82,19 +82,19 @@ class Controller(val port: Int = 20777) {
                 while(true) {
 
                     // TESTING
-                    delay(100L)
-                    DEBUG_updateItems()
+                    //delay(100L)
+                    //DEBUG_updateItems()
                     // END OF TESTING
 
 
-/*
+
                     buffer = ByteArray(MAX_BUFFER)
                     val packet = DatagramPacket(buffer, buffer.size)
                     socket.receive(packet)
-                    //Timber.i("Lap Or: ${packet.data.contentToString()}")
+                    //Timber.i("Raw Packet: ${packet.data.contentToString()}")
                     newPacket(packet.data)
 
-                    */
+
                 }
             }catch (e: Exception){
                 Timber.i("Testing - Exception while listening in the Controller: "+e.message)

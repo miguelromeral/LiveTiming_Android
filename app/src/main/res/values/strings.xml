@@ -10,6 +10,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+    <!-- PREFERENCES -->
+    <string name="preference_key_update_interval">PREFERENCE_UPDATE_INTERVAL</string>
+
 
     <string name="unknown">TBD</string>
 

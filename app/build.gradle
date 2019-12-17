@@ -54,4 +54,7 @@ dependencies {
 
     // Bottom Navigation
     implementation 'com.android.support:design:29.0.0'
+
+    // Preferences
+    implementation "androidx.preference:preference:1.0.0-rc02"
 }

@@ -3,6 +3,8 @@ package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.preference.PreferenceManager
+import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItemLiveTiming
@@ -81,8 +83,8 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                             sortItemList(newList)
                         }else{
 
-                            //if(currentFrame != session.frameId.value) {
-                            //    currentFrame = session.frameId.value!!
+                            if(currentFrame != session.frameId.value) {
+                                currentFrame = session.frameId.value!!
 
                                 _items.value?.let { myItems ->
                                     sortItemList()
@@ -97,12 +99,12 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                     }
 
                                 }
-                            //}
+                            }
 
                     }
                 }
                 Timber.i("Testing - Escuchando...!")
-                delay(DELAY_TIME)
+                delay(MyApplication.getPreferenceIntervalUpdate())
             }
         }
     }

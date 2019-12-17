@@ -2,14 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:title="Films"
+    <item android:title="Live"
         android:id="@+id/action_films"
         android:icon="@drawable/tyre_red"/>
 
 
-    <item android:title="Music"
+    <item android:title="Session"
         android:id="@+id/action_music"
         android:icon="@drawable/tyre_yellow"/>
+
+
+    <item android:title="Settings"
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_menu_manage"/>
 
 
 </menu>

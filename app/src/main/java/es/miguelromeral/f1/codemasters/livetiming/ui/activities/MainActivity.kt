@@ -1,5 +1,6 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,12 @@ import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.TimesFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.SessionFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import kotlinx.android.synthetic.main.activity_main2.*
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.SettingsFragment
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +38,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.action_films -> {
                     val fragment = TimesFragment.newInstance()
+                    openFragment(fragment)
+                    true
+                }
+                R.id.action_settings -> {
+                    /*val intent = Intent(baseContext, SettingsActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)*/
+                    val fragment = SettingsFragment()
                     openFragment(fragment)
                     true
                 }
