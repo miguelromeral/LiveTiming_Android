@@ -1,11 +1,12 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.runnables
 
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
-import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItem
+import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItemLiveTiming
+import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.MyHandlerThread
 
 class MyRunnable (private var myHandlerThread: MyHandlerThread,
-                  private var items: List<DataItem.ItemLiveTiming>,
+                  private var items: List<ItemLiveTiming>,
                   private var session: Game,
                   private var position: Int
 ) : Runnable {

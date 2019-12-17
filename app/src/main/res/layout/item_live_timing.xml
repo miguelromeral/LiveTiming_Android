@@ -8,7 +8,7 @@
     <data>
         <variable
             name="item"
-            type="es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItem.ItemLiveTiming" />
+            type="es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming" />
     </data>
 
 

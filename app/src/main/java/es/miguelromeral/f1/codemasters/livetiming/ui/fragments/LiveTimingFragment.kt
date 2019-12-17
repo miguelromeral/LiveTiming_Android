@@ -17,9 +17,10 @@ import timber.log.Timber
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentLiveTimingBinding
 import es.miguelromeral.f1.codemasters.livetiming.ui.activities.MainActivity
-import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItem
+import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.LiveTimingAdapter
 import es.miguelromeral.f1.codemasters.livetiming.ui.factories.LiveTimingViewModelFactory
+import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
 import java.lang.ref.WeakReference
 
@@ -125,11 +126,11 @@ class LiveTimingFragment : Fragment() {
         private var wrListAdapter = WeakReference(listAdapter)
         private var wrRecyclerView = WeakReference(recyclerView)
 
-        private fun notifyAdapter(item: DataItem.ItemLiveTiming){
+        private fun notifyAdapter(itemLiveTiming: ItemLiveTiming){
             //wrListAdapter.get()?.get
             wrRecyclerView.get()?.adapter?.let{
 
-                Timber.i("Actualizado: ${item.position} -> ${item.time}")
+                Timber.i("Actualizado: ${itemLiveTiming.position} -> ${itemLiveTiming.time}")
                 it.notifyDataSetChanged()
             }
         }
@@ -137,7 +138,7 @@ class LiveTimingFragment : Fragment() {
         override fun handleMessage(msg: Message?){
             super.handleMessage(msg)
 
-            val item = (msg?.obj as DataItem.ItemLiveTiming)
+            val item = (msg?.obj as ItemLiveTiming)
 
             notifyAdapter(item)
         }

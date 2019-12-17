@@ -1,6 +1,5 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.adapters
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import es.miguelromeral.f1.codemasters.livetiming.databinding.ItemLiveTimingBind
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
 import es.miguelromeral.f1.codemasters.livetiming.ui.getTyreIcon
+import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ import java.lang.ClassCastException
 
 
 class LiveTimingAdapter :
-        ListAdapter<DataItem, RecyclerView.ViewHolder>
+        ListAdapter<DataItemLiveTiming, RecyclerView.ViewHolder>
             (LiveTimingDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -31,16 +31,16 @@ class LiveTimingAdapter :
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
-            is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
-            is DataItem.ItemLiveTiming -> ITEM_VIEW_TYPE_ITEM
+            is DataItemLiveTiming.Header -> ITEM_VIEW_TYPE_HEADER
+            is DataItemLiveTiming.Content -> ITEM_VIEW_TYPE_ITEM
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
             is ViewHolder -> {
-                val item = getItem(position) as DataItem.ItemLiveTiming
-                holder.bind(item, position)
+                val item = getItem(position) as DataItemLiveTiming.Content
+                holder.bind(item.data, position)
             }
         }
 
@@ -54,11 +54,13 @@ class LiveTimingAdapter :
         }
     }
 
-    fun addHeaderAndSubmitList(list: List<DataItem.ItemLiveTiming>?){
+    fun addHeaderAndSubmitList(list: List<ItemLiveTiming>?){
         adapterScope.launch {
             val items = when (list) {
-                null -> listOf(DataItem.Header)
-                else -> listOf(DataItem.Header) + list
+                null -> listOf(DataItemLiveTiming.Header)
+                else -> listOf(DataItemLiveTiming.Header) + list.map {
+                    DataItemLiveTiming.Content(it)
+                }
             }
             withContext(Dispatchers.Main) {
                 submitList(items)
@@ -82,7 +84,7 @@ class LiveTimingAdapter :
     class ViewHolder private constructor(val binding: ItemLiveTimingBinding) :
         RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: DataItem.ItemLiveTiming, position: Int){
+        fun bind(itemLiveTiming: ItemLiveTiming, position: Int){
             binding.rootItemLiveTiming.let {
                 it.setBackgroundColor(
                     ContextCompat.getColor(
@@ -97,21 +99,21 @@ class LiveTimingAdapter :
                     )
                 )
             }
-            binding.item = item
-            binding.tvName.text = item.name
-            item.position?.let{
+            binding.item = itemLiveTiming
+            binding.tvName.text = itemLiveTiming.name
+            itemLiveTiming.position?.let{
                 binding.tvPos.text = it.toString()
             }
-            item.time?.let{
+            itemLiveTiming.time?.let{
                 binding.tvCurrentTime.text =
                     floatToTimeFormatted(it)
             }
-            item.team?.let{
+            itemLiveTiming.team?.let{
                 binding.ivColor.setColorFilter(ContextCompat.getColor(binding.ivColor.context, getColorByTeamId(it)))
                 //binding.ivColor.setBackgroundColor(R.color.colorAccent)
             }
-            item.compound?.let{
-                binding.ivCompound.setImageResource(getTyreIcon(item.format, item.era, it))
+            itemLiveTiming.compound?.let{
+                binding.ivCompound.setImageResource(getTyreIcon(itemLiveTiming.format, itemLiveTiming.era, it))
             }
         }
 
@@ -170,11 +172,11 @@ class LiveTimingAdapter :
 
 }
 
-class LiveTimingDiffCallback : DiffUtil.ItemCallback<DataItem>(){
+class LiveTimingDiffCallback : DiffUtil.ItemCallback<DataItemLiveTiming>(){
 
-    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-        val oh = oldItem.id == DataItem.HEADER_NAME
-        val nh = newItem.id == DataItem.HEADER_NAME
+    override fun areItemsTheSame(oldItemLiveTiming: DataItemLiveTiming, newItemLiveTiming: DataItemLiveTiming): Boolean {
+        val oh = oldItemLiveTiming.id == DataItemLiveTiming.HEADER_NAME
+        val nh = newItemLiveTiming.id == DataItemLiveTiming.HEADER_NAME
 
         if(oh && nh)
             return true
@@ -182,36 +184,30 @@ class LiveTimingDiffCallback : DiffUtil.ItemCallback<DataItem>(){
         if(oh || nh)
             return false
 
-        val oi = oldItem as DataItem.ItemLiveTiming
-        val ni = newItem as DataItem.ItemLiveTiming
+        val oi = oldItemLiveTiming as DataItemLiveTiming.Content
+        val ni = newItemLiveTiming as DataItemLiveTiming.Content
 
-        return oi.name == ni.name && oi.time == ni.time
+        return oi.data.name == ni.data.name && oi.data.time == ni.data.time
     }
 
-    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean{
-        return oldItem.equals(newItem)
+    override fun areContentsTheSame(oldItemLiveTiming: DataItemLiveTiming, newItemLiveTiming: DataItemLiveTiming): Boolean{
+        return oldItemLiveTiming.equals(newItemLiveTiming)
     }
 
 }
 
 
-sealed class DataItem {
+sealed class DataItemLiveTiming {
 
     abstract val id: String
 
-    data class ItemLiveTiming (
-        var position: UByte?,
-        var name: String?,
-        var team: UByte?,
-        var time: Float?,
-        var compound: UByte?,
-        var era: UByte?,
-        var format: Format = Format.UNKNOWN) : DataItem(){
+    data class Content (
+        var data: ItemLiveTiming) : DataItemLiveTiming(){
 
-        override val id = name ?: "DataItem"
+        override val id = data.name ?: "DataItemLiveTiming"
     }
 
-    object Header : DataItem(){
+    object Header : DataItemLiveTiming(){
 
         override val id = HEADER_NAME
     }
