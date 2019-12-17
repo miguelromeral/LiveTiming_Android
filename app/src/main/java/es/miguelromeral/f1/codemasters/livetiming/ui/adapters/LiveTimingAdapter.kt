@@ -13,12 +13,18 @@ import es.miguelromeral.f1.codemasters.livetiming.databinding.ItemLiveTimingBind
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
 import es.miguelromeral.f1.codemasters.livetiming.ui.getTyreIcon
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.ClassCastException
 
 
 class LiveTimingAdapter :
         ListAdapter<DataItem, RecyclerView.ViewHolder>
             (LiveTimingDiffCallback()) {
+
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
 
     private val ITEM_VIEW_TYPE_HEADER = 0
     private val ITEM_VIEW_TYPE_ITEM = 1
@@ -49,11 +55,15 @@ class LiveTimingAdapter :
     }
 
     fun addHeaderAndSubmitList(list: List<DataItem.ItemLiveTiming>?){
-        val items = when(list) {
-            null -> listOf(DataItem.Header)
-            else -> listOf(DataItem.Header) + list
+        adapterScope.launch {
+            val items = when (list) {
+                null -> listOf(DataItem.Header)
+                else -> listOf(DataItem.Header) + list
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
         }
-        submitList(items)
     }
 
 
