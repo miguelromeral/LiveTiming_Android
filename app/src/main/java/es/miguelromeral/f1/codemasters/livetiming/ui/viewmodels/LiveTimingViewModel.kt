@@ -123,7 +123,7 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
     }
 
     companion object{
-        const val DELAY_TIME = 100L
+        const val DEFAULT_DELAY_TIME = 100
     }
 }
 

@@ -11,6 +11,7 @@
     <string name="title_notifications">Notifications</string>
 
     <!-- PREFERENCES -->
+    <string name="preference_key_udp_port">PREFERENCE_UDP_PORT</string>
     <string name="preference_key_update_interval">PREFERENCE_UPDATE_INTERVAL</string>
 
 

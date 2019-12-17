@@ -8,6 +8,9 @@ import timber.log.Timber
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.preference.PreferenceManager
+import es.miguelromeral.f1.codemasters.livetiming.classes.Controller
+import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
+import java.lang.Exception
 
 
 class MyApplication: Application() {
@@ -30,6 +33,14 @@ class MyApplication: Application() {
             return instance?.applicationContext
         }
 
-        fun getPreferenceIntervalUpdate() = myPreferences.getInt(allResources.getString(R.string.preference_key_update_interval), 100).toLong()
+        fun getPreferencePortUDP(): Int {
+            val port = myPreferences.getString(allResources.getString(R.string.preference_key_udp_port), Controller.DEFAULT_PORT.toString())
+            try{
+                return port?.toInt() ?: Controller.DEFAULT_PORT
+            }catch (e: Exception){
+                return Controller.DEFAULT_PORT
+            }
+        }
+        fun getPreferenceIntervalUpdate() = myPreferences.getInt(allResources.getString(R.string.preference_key_update_interval), LiveTimingViewModel.DEFAULT_DELAY_TIME).toLong()
     }
 }

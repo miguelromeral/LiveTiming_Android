@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.net.*
 
-class Controller(val port: Int = 20777) {
+class Controller(val port: Int = DEFAULT_PORT) {
 
     /*private var dSocket = ServerSocket().apply {
         reuseAddress = true
@@ -70,7 +70,8 @@ class Controller(val port: Int = 20777) {
 
     fun addCurrentSession(session: Game){
         this.session = session
-        //DEBUG_addItems()
+        Timber.i("Listening on port $port")
+        DEBUG_addItems()
     }
 
     @ExperimentalUnsignedTypes
@@ -82,18 +83,18 @@ class Controller(val port: Int = 20777) {
                 while(true) {
 
                     // TESTING
-                    //delay(100L)
-                    //DEBUG_updateItems()
+                    delay(100L)
+                    DEBUG_updateItems()
                     // END OF TESTING
 
 
-
+/*
                     buffer = ByteArray(MAX_BUFFER)
                     val packet = DatagramPacket(buffer, buffer.size)
                     socket.receive(packet)
                     //Timber.i("Raw Packet: ${packet.data.contentToString()}")
                     newPacket(packet.data)
-
+*/
 
                 }
             }catch (e: Exception){
@@ -165,5 +166,6 @@ class Controller(val port: Int = 20777) {
         const val FORMAT_2018 = 2018
         const val FORMAT_2019 = 2019
 
+        const val DEFAULT_PORT = 20777
     }
 }

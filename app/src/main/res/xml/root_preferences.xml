@@ -2,6 +2,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
+        android:title="UDP Configuration">
+
+        <EditTextPreference
+            android:key="@string/preference_key_udp_port"
+            android:title="Port to listen on"
+            android:dialogTitle="UDP Port:"
+            android:summary="Enter the same UDP port from your F1 Game pause menu."
+            android:defaultValue="20777"
+            android:inputType="number" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="Performance Settings">
 
         <SeekBarPreference
@@ -12,15 +25,8 @@
             app:min="100"
             android:defaultValue="100" />
 
-<!--
-        <Preference
-            android:key="@string/preference_id_restore_game_settings"
-            android:title="@string/preference_restart_game_settings"
-            android:summary="@string/preference_restart_game_settings_summary"
-            app:singleLineTitle="true" />
--->
-
-
     </PreferenceCategory>
+
+
 
 </PreferenceScreen>

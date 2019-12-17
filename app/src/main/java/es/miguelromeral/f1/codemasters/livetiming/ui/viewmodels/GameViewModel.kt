@@ -1,6 +1,7 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
+import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.classes.Controller
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import kotlinx.coroutines.*
@@ -21,7 +22,7 @@ class GameViewModel : ViewModel() {
 
     init{
         currentSession = Game()
-        _controller = Controller(20777).apply {
+        _controller = Controller(MyApplication.getPreferencePortUDP()).apply {
             addCurrentSession(currentSession)
         }
     }
