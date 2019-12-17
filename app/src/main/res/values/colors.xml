@@ -8,6 +8,7 @@
     <color name="liveTimingListOdd">#111</color>
     <color name="liveTimingListEven">#2a2a2a</color>
     <color name="fullWhite">#FFF</color>
+    <color name="fullBlack">#000</color>
 
     <!-- TYRES -->
     <color name="tyre_background">#262626</color>

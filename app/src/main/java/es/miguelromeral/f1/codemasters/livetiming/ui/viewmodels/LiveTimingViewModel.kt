@@ -123,3 +123,4 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
         const val DELAY_TIME = 100L
     }
 }
+

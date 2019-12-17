@@ -1,5 +1,5 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.activities
-
+/*
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
@@ -39,3 +39,4 @@ class MainActivity : AppCompatActivity() {
         viewModel.stopListeningUDP()
     }
 }
+*/

@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import es.miguelromeral.f1.codemasters.livetiming.ui.activities.MainActivity
 
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentSessionBinding
+import es.miguelromeral.f1.codemasters.livetiming.ui.activities.Main2Activity
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import kotlinx.android.synthetic.main.fragment_session.*
 import timber.log.Timber
@@ -27,13 +27,11 @@ class SessionFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_session, container, false)
-        viewModel = (activity as MainActivity).viewModel
+        viewModel = (activity as Main2Activity).viewModel
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
 
-        //viewModel.currentSession.sessionDataAvailable.observe(this, Observer {
-        //    if(it == true){
         viewModel.currentSession.sessionData?.trackTemperature?.observe(this, Observer {
             tvTrackTemperature.text = "Track Temperature listened: " + it
         })

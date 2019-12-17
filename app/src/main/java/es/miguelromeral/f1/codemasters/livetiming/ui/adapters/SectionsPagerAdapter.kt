@@ -1,5 +1,5 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.adapters
-
+/*
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -37,3 +37,5 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
         return 2
     }
 }
+
+ */
