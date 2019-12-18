@@ -120,6 +120,8 @@ class Packet2017 private constructor(content: ByteArray){
             return Packet2017(content.sliceArray(0 until SIZE))
         }
 
+        const val ERA_MODERN = 2017
+        const val ERA_CLASSIC = 1980
 
         fun getTrack(trackId: Byte) = when(trackId.toInt()){
             0 -> "Melbourne"

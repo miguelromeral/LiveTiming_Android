@@ -5,6 +5,7 @@ import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.packets.createUByteArray
 import es.miguelromeral.f1.codemasters.livetiming.packets.floatFromPacket
 import es.miguelromeral.f1.codemasters.livetiming.packets.intFromPacket
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarTelemetryData
 
@@ -69,5 +70,12 @@ class CarStatus {
         ersHarvestedThisLapMGUK.postValue(info.ersHarvestedThisLapMGUK)
         ersHarvestedThisLapMGUH.postValue(info.ersHarvestedThisLapMGUH)
         ersDeployedThisLap.postValue(info.ersDeployedThisLap)
+    }
+
+    @Synchronized
+    fun updateFrom2017(info: CarUDPData){
+        format = Format.F1_2017
+        tyreCompound.postValue(info.tyreCompound.toUByte())
+        pitLimiterStatus.postValue(info.inPits.toUByte())
     }
 }

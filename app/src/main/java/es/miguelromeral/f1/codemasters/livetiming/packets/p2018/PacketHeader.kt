@@ -23,7 +23,7 @@ class PacketHeader private constructor(content: ByteArray)
             frameIdentifier = intFromPacket(content.sliceArray(16..19))
             playerCarIndex = content[20]
 
-            Timber.i("Format: $format, Version: $version, id: $id, SUID: $sessionUID, Time: $sessionTime, FID: $frameIdentifier, PCI: $playerCarIndex")
+            //Timber.i("Format: $format, Version: $version, id: $id, SUID: $sessionUID, Time: $sessionTime, FID: $frameIdentifier, PCI: $playerCarIndex")
 
         }catch(e: Exception){
             Timber.i("Testing - Exception when creating PacketHeader: "+e.message)

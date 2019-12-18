@@ -7,6 +7,7 @@ import android.os.Message
 import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
+import timber.log.Timber
 
 class MyHandlerThread(private var uiHandler: LiveTimingFragment.UiHandler) : HandlerThread("MyHandlerThread") {
 
@@ -18,7 +19,7 @@ class MyHandlerThread(private var uiHandler: LiveTimingFragment.UiHandler) : Han
             override fun handleMessage(msg: Message?) {
                 super.handleMessage(msg)
 
-                var item = msg?.obj as DataItemLiveTiming.Content
+                var item = msg?.obj as ItemLiveTiming
 
                 val processedMessage = Message()
                 processedMessage.obj = item
@@ -28,9 +29,14 @@ class MyHandlerThread(private var uiHandler: LiveTimingFragment.UiHandler) : Han
     }
 
     fun sendOrder(itemLiveTiming: ItemLiveTiming){
-        val message = Message()
-        message.obj = itemLiveTiming
-        handler?.sendMessage(message)
+        try {
+            val message = Message()
+            message.obj = itemLiveTiming
+            handler?.sendMessage(message)
+        }catch (e: Exception){
+            Timber.i("Exception: "+e.message)
+            Timber.i("Exception: "+e.printStackTrace())
+        }
     }
 
     override fun onLooperPrepared() {

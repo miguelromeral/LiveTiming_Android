@@ -71,7 +71,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
     fun addCurrentSession(session: Game){
         this.session = session
         Timber.i("Listening on port $port")
-        DEBUG_addItems()
+        //DEBUG_addItems()
     }
 
     @ExperimentalUnsignedTypes
@@ -83,18 +83,18 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 while(true) {
 
                     // TESTING
-                    delay(100L)
-                    DEBUG_updateItems()
+                    //delay(100L)
+                    //DEBUG_updateItems()
                     // END OF TESTING
 
 
-/*
+
                     buffer = ByteArray(MAX_BUFFER)
                     val packet = DatagramPacket(buffer, buffer.size)
                     socket.receive(packet)
                     //Timber.i("Raw Packet: ${packet.data.contentToString()}")
                     newPacket(packet.data)
-*/
+
 
                 }
             }catch (e: Exception){
@@ -110,54 +110,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
     @Synchronized
     fun newPacket(content: ByteArray){
         PacketDispatcher(content, session).run()
-        /*try {
-            when(shortFromPacket(content.sliceArray(0..1)).toInt()){
-                Controller.FORMAT_2018 -> {
-                    val header = PacketHeader.create(content)
-                    //Timber.i("Testing - New packet received | ID: "+ header.id)
-                    when (header.id.toInt()) {
-                        SessionData.PACKET_ID -> session.newSessionData2018(
-                            SessionData.create(
-                                header,
-                                content
-                            )
-                        )
-                        PacketLapData.PACKET_ID -> {
 
-                            Timber.i("Lap Pa: ${content.contentToString()}")
-
-                            session.newLapData2018(
-                                PacketLapData.create(
-                                    header,
-                                    content
-                                ))
-                        }
-                        PacketParticipantData.PACKET_ID -> session.newParticipants2018(
-                            PacketParticipantData.create(header, content)
-                        )
-                        //PacketCarTelemetryData.PACKET_ID -> session.newTelemetry2018(PacketCarTelemetryData.create(header, content))
-
-                        //EventData.PACKET_ID -> EventData(content)
-
-                        else ->
-                            Timber.i("Packet not identified by its ID")
-                    }
-                }
-                Controller.FORMAT_2019 -> {
-
-                }
-
-                else -> {
-                    // 2017 Format doesn't have the format in the first two bytes
-                    Timber.i("Testing - Unknown packet format received.")
-                    session.newData2017(Packet2017.create(content))
-                }
-
-            }
-
-        }catch(e: Exception){
-            Timber.e("Error in PacketDispatcher: "+e.message)
-        }*/
     }
 
     companion object{

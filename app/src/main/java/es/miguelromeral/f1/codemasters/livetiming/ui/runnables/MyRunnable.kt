@@ -15,7 +15,7 @@ class MyRunnable (private var myHandlerThread: MyHandlerThread,
 
 
         var item = items?.get(position)
-        val player = session.players.value?.filter { it.participant.value?.name?.value == item?.name }?.firstOrNull()
+        val player = session.getPlayerByNameOrID(item.fullname, id = item.driverId)
 
         if(player != null && item != null){
 
@@ -23,6 +23,8 @@ class MyRunnable (private var myHandlerThread: MyHandlerThread,
                 item.name = it.shortName()
                 item.team = it.teamId?.value
                 item.format = it.format
+                item.driverId = it.driverId?.value
+                item.fullname = it.name?.value
             }
             player.currentLap.value?.let{
                 synchronized(it) {

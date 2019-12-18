@@ -72,6 +72,8 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                     ItemLiveTiming(
                                         position =  p.currentLap.value?.carPosition?.value,
                                         name = p.participant.value?.shortName(),
+                                        driverId = p.participant.value?.driverId?.value,
+                                        fullname = p.participant.value?.name?.value,
                                         team = p.participant.value?.teamId?.value,
                                         time = p.currentLap.value?.currentLapTime?.value,
                                         compound = p.carStatus.value?.tyreCompound?.value,

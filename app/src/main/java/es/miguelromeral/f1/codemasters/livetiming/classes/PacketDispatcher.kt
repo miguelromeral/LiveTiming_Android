@@ -26,7 +26,7 @@ class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
                         )
                         PacketLapData.PACKET_ID -> {
 
-                            Timber.i("Lap Pa: ${content.contentToString()}")
+                            //Timber.i("Lap Pa: ${content.contentToString()}")
 
                             session.newLapData2018(
                             PacketLapData.create(
@@ -51,7 +51,7 @@ class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
 
                 else -> {
                     // 2017 Format doesn't have the format in the first two bytes
-                    Timber.i("Testing - Unknown packet format received.")
+                    //Timber.i("Testing - Unknown packet format received: proccessed as 2017")
                     session.newData2017(Packet2017.create(content))
                 }
 

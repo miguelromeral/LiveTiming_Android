@@ -130,11 +130,15 @@
     <string name="driver_Sergio_Perez">Sergio Perez</string>
     <string name="driver_Valtteri_Bottas">Valtteri Bottas</string>
     <string name="driver_Esteban_Ocon">Esteban Ocon</string>
+    <string name="driver_Felipe_Massa">Felipe Massa</string>
+    <string name="driver_Daniil_Kvyat">Daniil Kvyat</string>
     <string name="driver_Stoffel_Vandoorne">Stoffel Vandoorne</string>
     <string name="driver_Lance_Stroll">Lance Stroll</string>
     <string name="driver_Arron_Barnes">Arron Barnes</string>
+    <string name="driver_Jolyon_Palmer">Jolyon Palmer</string>
     <string name="driver_Martin_Giles">Martin Giles</string>
     <string name="driver_Alex_Murray">Alex Murray</string>
+    <string name="driver_Pascal_Wehrlein">Pascal Wehrlein</string>
     <string name="driver_Lucas_Roth">Lucas Roth</string>
     <string name="driver_Igor_Correia">Igor Correia</string>
     <string name="driver_Sophie_Levasseur">Sophie Levasseur</string>

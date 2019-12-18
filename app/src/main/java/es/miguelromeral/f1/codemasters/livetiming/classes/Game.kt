@@ -2,13 +2,11 @@ package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import es.miguelromeral.f1.codemasters.livetiming.packets.LapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketLapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
-import timber.log.Timber
 
 class Game {
 
@@ -37,17 +35,21 @@ class Game {
     }*/
 
 
-    fun getPlayerByPosition(position: Int?): Player?{
-        position?.let {
-            synchronized(players) {
-                players.value?.let { list ->
+    fun getPlayerByNameOrID(name: String?, id: UByte?): Player?{
+        synchronized(players) {
+            players.value?.let { list ->
+                if (name == null) {
 
-
-
-
-                    return list.filter {
-                        it.currentLap.value?.carPosition?.value == position.toUByte()
+                    val tmp = list.filter {
+                        it.participant.value?.driverId?.value == id
                     }.firstOrNull()
+                    return tmp
+
+                } else {
+                    val tmp = list.filter{
+                        it.participant.value?.name?.value.equals(name)
+                    }.firstOrNull()
+                    return tmp
                 }
             }
         }
@@ -88,7 +90,7 @@ class Game {
 
             for(p in info.participants){
                 var inst = Player().apply {
-                    newParticipant2018(p, info.header.frameIdentifier)
+                    newParticipant2018(p, sessionData?.era?.value?.toUByte())
                 }
                 list.add(inst)
             }
@@ -110,10 +112,24 @@ class Game {
     }
 
 
-    @Synchronized
     fun newData2017(info: Packet2017){
-        sessionData?.let{
-            _sessionData.updateFrom2017(info)
+        synchronized(_sessionData) {
+            _sessionData?.let {
+                _sessionData.updateFrom2017(info)
+            }
+        }
+        synchronized(_players){
+            _players.value?.let{
+                var count = 0
+                for(p in it){
+                    synchronized(p){
+                        p.newLap2017(info.car_data[count])
+                        p.newParticipant2017(info.car_data[count])
+                        p.newCarStatus2017(info.car_data[count])
+                    }
+                    count++
+                }
+            }
         }
     }
 

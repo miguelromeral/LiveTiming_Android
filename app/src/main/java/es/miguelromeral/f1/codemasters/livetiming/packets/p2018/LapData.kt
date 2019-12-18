@@ -21,7 +21,7 @@ class PacketLapData private constructor(header: PacketHeader, content: ByteArray
 
         val lap = LapData(content.sliceArray(init until end))
 
-        Timber.i("Lap It ($iteration) [$init until $end]: ${content.sliceArray(init until end).contentToString()}")
+        //Timber.i("Lap It ($iteration) [$init until $end]: ${content.sliceArray(init until end).contentToString()}")
 
         return listOf(
             lap

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.packets.LapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 
 @ExperimentalUnsignedTypes
 class Lap {
@@ -32,8 +33,6 @@ class Lap {
 
     fun updateFrom2018(info: LapData){
         synchronized(this) {
-            val tmp_pos = info.carPosition
-            val tmp_lap = info.currentLapTime
             format = Format.F1_2018
             lastLapTime.postValue(info.lastLapTime)
             currentLapTime.postValue(info.currentLapTime)
@@ -52,6 +51,23 @@ class Lap {
             gridPosition.postValue(info.gridPosition)
             driverStatus.postValue(info.driverStatus)
             resultStatus.postValue(info.resultStatus)
+        }
+    }
+
+    fun updateFrom2017(info: CarUDPData){
+        synchronized(this){
+            format = Format.F1_2017
+            lastLapTime.postValue(info.lastLapTime)
+            currentLapTime.postValue(info.currentLapTime)
+            bestLapTime.postValue(info.bestLapTime)
+            sector1Time.postValue(info.sector1Time)
+            sector2Time.postValue(info.sector2Time)
+            lapDistance.postValue(info.lapDistance)
+            carPosition.postValue(info.carPosition.toUByte())
+            currentLapNum.postValue(info.currentLapNum.toUByte())
+            sector.postValue(info.sector.toUByte())
+            currentLapInvalid.postValue(info.currentLapInvalid.toUByte())
+            penalties.postValue(info.penalties.toUByte())
         }
     }
 }
