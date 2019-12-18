@@ -11,7 +11,7 @@ class CarUDPData internal constructor(content: ByteArray) {
     val lastLapTime = floatFromPacket(content.sliceArray(12 until 16))
     val currentLapTime = floatFromPacket(content.sliceArray(16 until 20))
     val bestLapTime = floatFromPacket(content.sliceArray(20 until 24))
-    val sector1Time= floatFromPacket(content.sliceArray(24 until 28))
+    val sector1Time = floatFromPacket(content.sliceArray(24 until 28))
     val sector2Time = floatFromPacket(content.sliceArray(28 until 32))
     val lapDistance = floatFromPacket(content.sliceArray(32 until 36))
     val driverId = content[36]

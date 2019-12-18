@@ -39,25 +39,25 @@ fun createUByteArray(content: ByteArray, begining: Int, iteration: Int = 0, end:
 }
 
 // 2 Bytes array
-fun createShortArray(content: ByteArray, begining: Int, iteration: Int = 0, end: Int = 4): List<Short>{
-    if(iteration >= end)
+fun createShortArray(content: ByteArray, begining: Int, iteration: Int = 0, endloop: Int = 4): List<Short>{
+    if(iteration >= endloop)
         return emptyList()
 
     val start = begining + (iteration * 2)
     val end = start + 2
 
-    return listOf(shortFromPacket(content.sliceArray(start until end))) + createShortArray(content, begining, iteration + 1, end)
+    return listOf(shortFromPacket(content.sliceArray(start until end))) + createShortArray(content, begining, iteration + 1, endloop)
 }
 
 
 // 4 Bytes array
-fun createFloatArray(content: ByteArray, begining: Int, iteration: Int = 0, end: Int = 4): List<Float>{
-    if(iteration >= end)
+fun createFloatArray(content: ByteArray, begining: Int, iteration: Int = 0, endloop: Int = 4): List<Float>{
+    if(iteration >= endloop)
         return emptyList()
 
     val start = begining + (iteration * 4)
     val end = start + 4
 
-    return listOf(floatFromPacket(content.sliceArray(start until end))) + createFloatArray(content, begining, iteration + 1, end)
+    return listOf(floatFromPacket(content.sliceArray(start until end))) + createFloatArray(content, begining, iteration + 1, endloop)
 }
 

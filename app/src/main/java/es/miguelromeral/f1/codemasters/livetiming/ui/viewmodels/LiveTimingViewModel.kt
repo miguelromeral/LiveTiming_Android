@@ -85,8 +85,9 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                             sortItemList(newList)
                         }else{
 
-                            if(currentFrame != session.frameId.value) {
-                                currentFrame = session.frameId.value!!
+
+                            /*if(currentFrame != session.frameId.value) {
+                                currentFrame = session.frameId.value!!*/
 
                                 _items.value?.let { myItems ->
                                     sortItemList()
@@ -101,7 +102,7 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                     }
 
                                 }
-                            }
+                            //}
 
                     }
                 }

@@ -36,10 +36,14 @@ class Participant {
     }
 
     @Synchronized
-    fun updateFrom2017(info: CarUDPData){
+    fun updateFrom2017(info: CarUDPData, era: UByte? = null){
         format = Format.F1_2017
         driverId.postValue(info.driverId.toUByte())
         teamId.postValue(info.teamId.toUByte())
+        name.postValue(null)
+        era?.let{
+            this.era.postValue(it)
+        }
     }
 
     fun aiControlled() = when(format){

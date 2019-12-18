@@ -78,9 +78,9 @@ class Player {
     }
 
     @Synchronized
-    fun newParticipant2017(info: CarUDPData){
+    fun newParticipant2017(info: CarUDPData, era: UByte? = null){
         var part = getParticipantOrNew()
-        part.updateFrom2017(info)
+        part.updateFrom2017(info, era)
         _participant.postValue(part)
     }
 

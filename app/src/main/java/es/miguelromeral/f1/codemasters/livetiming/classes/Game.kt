@@ -81,23 +81,32 @@ class Game {
 
     @Synchronized
     fun newParticipants2018(info: PacketParticipantData){
-
         frameId.postValue(info.header.frameIdentifier)
-        if(players.value?.size != info.numCars.toInt()){
+        var list = getPlayersOrNew(info.numCars.toInt())
 
-            val list: MutableList<Player>
-                = mutableListOf<Player>()
+        var count = 0
+        for(p in list){
+            p.newParticipant2018(info.participants[count], sessionData?.era?.value?.toUByte())
+            count++
 
-            for(p in info.participants){
-                var inst = Player().apply {
-                    newParticipant2018(p, sessionData?.era?.value?.toUByte())
-                }
-                list.add(inst)
-            }
-
-            _players.postValue(list)
         }
+        _players.postValue(list)
     }
+
+    @Synchronized
+    private fun getPlayersOrNew(count: Int): MutableList<Player> {
+        players.value?.let{
+            return it
+        }
+        var c = 0
+        val list: MutableList<Player> = mutableListOf<Player>()
+        while (c < count) {
+            list.add(Player())
+            c++
+        }
+        return list
+    }
+
 
     @Synchronized
     fun newTelemetry2018(info: PacketCarTelemetryData){
@@ -119,17 +128,15 @@ class Game {
             }
         }
         synchronized(_players){
-            _players.value?.let{
-                var count = 0
-                for(p in it){
-                    synchronized(p){
-                        p.newLap2017(info.car_data[count])
-                        p.newParticipant2017(info.car_data[count])
-                        p.newCarStatus2017(info.car_data[count])
-                    }
-                    count++
-                }
+            var list = getPlayersOrNew(info.num_cars.toInt())
+
+            var count = 0
+            for(p in list){
+                p.newParticipant2017(info.car_data[count], sessionData?.era?.value?.toUByte())
+                count++
+
             }
+            _players.postValue(list)
         }
     }
 
