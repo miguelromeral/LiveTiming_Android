@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.databinding.ItemLiveTimingBinding
-import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
-import es.miguelromeral.f1.codemasters.livetiming.ui.getTyreIcon
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
+import es.miguelromeral.f1.codemasters.livetiming.ui.setBackgroundByPosition
+import es.miguelromeral.f1.codemasters.livetiming.ui.setColorByTeam
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -85,84 +85,18 @@ class LiveTimingAdapter :
         RecyclerView.ViewHolder(binding.root){
 
         fun bind(itemLiveTiming: ItemLiveTiming, position: Int){
-            binding.rootItemLiveTiming.let {
-                it.setBackgroundColor(
-                    ContextCompat.getColor(
-                        it.context,
-                        if (position % 2 == 0)
-                            /*if(position == 0)
-                                R.color.colorPrimary
-                            else*/
-                                R.color.liveTimingListOdd
-                        else
-                            R.color.liveTimingListEven
-                    )
-                )
-            }
+
+            setBackgroundByPosition(binding.rootItemLiveTiming, itemLiveTiming.position)
             binding.item = itemLiveTiming
-            binding.tvName.text = itemLiveTiming.name
-            itemLiveTiming.position?.let{
-                binding.tvPos.text = it.toString()
-            }
-            itemLiveTiming.time?.let{
-                binding.tvCurrentTime.text =
-                    floatToTimeFormatted(it)
-            }
-            itemLiveTiming.team?.let{
-                binding.ivColor.setColorFilter(ContextCompat.getColor(binding.ivColor.context, getColorByTeamId(it)))
-                //binding.ivColor.setBackgroundColor(R.color.colorAccent)
-            }
-            itemLiveTiming.compound?.let{
-                binding.ivCompound.setImageResource(getTyreIcon(itemLiveTiming.format, itemLiveTiming.era, it))
-            }
+            binding.executePendingBindings()
         }
-
-        fun getColorByTeamId(teamId: UByte): Int =
-            when(teamId.toInt()){
-                0 -> R.color.teamMercedes
-                1 -> R.color.teamFerrari
-                2 -> R.color.teamRedBull
-                3 -> R.color.teamWilliams
-                4 -> R.color.teamRacingPoint
-                5 -> R.color.teamRenault
-                6 -> R.color.teamToroRosso
-                7 -> R.color.teamHaas
-                8 -> R.color.teamMcLaren
-                9 -> R.color.teamAlfaRomeo
-                /*
-                10 -> "McLaren 1988"
-                11 -> "McLaren 1991"
-                12 -> "Williams 1992"
-                13 -> "Ferrari 1995"
-                14 -> "Williams 1996"
-                15 -> "McLaren 1998"
-                16 -> "Ferrari 2002"
-                17 -> "Ferrari 2004"
-                18 -> "Renault 2006"
-                19 -> "Ferrari 2007"
-                20 -> "McLaren 2008"
-                21 -> "RedBull 2010"
-                22 -> "Ferrari 1976"
-                34 -> "McLaren 1976"
-                35 -> "Lotus 1972"
-                36 -> "Ferrari 1979"
-                37 -> "McLaren 1982"
-                38 -> "Williams 2003"
-                39 -> "Brawn 2009"
-                40 -> "Lotus 1978"*/
-                else -> R.color.teamUnknown
-        }
-
-
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
 
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = ItemLiveTimingBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(
-                    binding
-                )
+                return ViewHolder(binding)
 
             }
         }
