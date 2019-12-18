@@ -1,9 +1,8 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes
+package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.packets.LapData
-import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 
 @ExperimentalUnsignedTypes
@@ -29,6 +28,11 @@ class Lap {
     var driverStatus = MutableLiveData<UByte>(0u)
     var resultStatus = MutableLiveData<UByte>(0u)
 
+    var lastSector: UByte? = null
+
+    var lastSector1Time: Float? = null
+    var lastSector2Time: Float? = null
+    var lastSector3Time: Float? = null
 
 
     fun updateFrom2018(info: LapData){
@@ -51,7 +55,29 @@ class Lap {
             gridPosition.postValue(info.gridPosition)
             driverStatus.postValue(info.driverStatus)
             resultStatus.postValue(info.resultStatus)
+            advancedLap()
         }
+    }
+
+    fun advancedLap(){
+        sector.value?.let {
+            when (it.toInt()) {
+                1 -> {
+                    lastSector3Time =
+                        if (lastLapTime.value == null || lastSector2Time == null || lastSector1Time == null)
+                            null
+                        else
+                            (lastLapTime.value!! - lastSector2Time!! - lastSector1Time!!)
+                }
+                2 -> {
+                    lastSector1Time = sector1Time.value
+                }
+                3 -> {
+                    lastSector2Time = sector2Time.value
+                }
+            }
+        }
+        lastSector = sector.value
     }
 
     fun updateFrom2017(info: CarUDPData){
@@ -68,6 +94,7 @@ class Lap {
             sector.postValue(info.sector.toUByte())
             currentLapInvalid.postValue(info.currentLapInvalid.toUByte())
             penalties.postValue(info.penalties.toUByte())
+            advancedLap()
         }
     }
 }

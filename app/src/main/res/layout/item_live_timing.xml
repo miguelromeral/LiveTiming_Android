@@ -16,41 +16,36 @@
     android:id="@+id/root_item_live_timing"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/liveTimingListOdd">
+    tools:background="@color/liveTimingListOdd">
 
     <TextView
         android:id="@+id/tvPos"
         style="@style/liveTimingTextView"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
-        android:minWidth="18sp"
+        android:text="@{item.position.toString()}"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="11"
-        android:textAlignment="center"/>
+
+        tools:text="14"/>
 
     <ImageView
         android:id="@+id/ivColor"
+        style="@style/row_team_color"
 
-        android:layout_width="8sp"
-        android:layout_height="14sp"
+        app:teamColor="@{item.teamAsInt}"
+        app:format="@{item.format}"
 
-        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvPos"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/color_icon"
-        tools:tint="#f00" />
-
-    <!--
-        app:teamColor="@{item.team}" -->
+        tools:tint="@color/teamMcLaren" />
 
     <TextView
         android:id="@+id/tvName"
         style="@style/liveTimingTextView"
-        android:layout_marginStart="4dp"
+        android:text="@{item.name}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivColor"
         app:layout_constraintTop_toTopOf="parent"
@@ -59,7 +54,7 @@
     <TextView
         android:id="@+id/tvCurrentTime"
         style="@style/liveTimingTextView"
-        android:layout_marginEnd="8dp"
+        app:timeFormatted="@{item.time}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ivCompound"
         app:layout_constraintTop_toTopOf="parent"
@@ -67,13 +62,52 @@
 
     <ImageView
         android:id="@+id/ivCompound"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="8dp"
+        app:tyre="@{item.compoundAsInt}"
+        app:format="@{item.format}"
+        app:era="@{item.eraAsInt}"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/tyre_yellow" />
+        android:layout_marginEnd="4dp"
+
+        app:srcCompat="@drawable/tyre_yellow"
+        style="@style/image_tyre_row" />
+
+    <TextView
+        android:id="@+id/tvSector1Time"
+        style="@style/liveTimingTextView"
+        app:timeFormatted="@{item.sector1Time}"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvName"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="27.1" />
+
+    <TextView
+        android:id="@+id/tvSector2Time"
+        style="@style/liveTimingTextView"
+        app:timeFormatted="@{item.sector2Time}"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvSector1Time"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="32.0" />
+
+    <TextView
+        android:id="@+id/tvSector3Time"
+        style="@style/liveTimingTextView"
+        app:timeFormatted="@{item.sector3Time}"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvSector2Time"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="19.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

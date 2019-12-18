@@ -21,7 +21,37 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:minWidth">18sp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/fullWhite</item>
     </style>
+
+    <style name="row_team_color">
+        <item name="android:layout_width">8sp</item>
+        <item name="android:layout_height">16sp</item>
+        <item name="android:layout_marginStart">4sp</item>
+        <item name="android:layout_marginEnd">4sp</item>
+    </style>
+
+    <style name="image_tyre_row">
+        <item name="android:layout_width">20sp</item>
+        <item name="android:layout_height">20dp</item>
+    </style>
+
+    <style name="title_section">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/backgroundSectionTitle</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/fullBlack</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_temperature">
+        <item name="android:textSize">28sp</item>
+    </style>
+
 
 </resources>

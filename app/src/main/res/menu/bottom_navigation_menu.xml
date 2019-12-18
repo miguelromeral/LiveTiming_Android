@@ -4,17 +4,17 @@
 
     <item android:title="Live"
         android:id="@+id/action_films"
-        android:icon="@drawable/tyre_red"/>
+        android:icon="@drawable/clock"/>
 
 
     <item android:title="Session"
         android:id="@+id/action_music"
-        android:icon="@drawable/tyre_yellow"/>
+        android:icon="@drawable/flag"/>
 
 
     <item android:title="Settings"
         android:id="@+id/action_settings"
-        android:icon="@android:drawable/ic_menu_manage"/>
+        android:icon="@drawable/settings"/>
 
 
 </menu>

@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes
+package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
@@ -11,40 +11,43 @@ class Session {
 
     var format: Format = Format.UNKNOWN
 
-    var weather = MutableLiveData<UByte>(10u)
+    // Weather Info
+    var weather = MutableLiveData<UByte>(0u)
     var trackTemperature = MutableLiveData<Byte>(0)
+    var airTemperature = MutableLiveData<Byte>(0)
 
-    var airTemperature: Byte = 0
-
-    var totalLaps: UByte = 0u
-    var trackLength: Short = 0
-    var trackId = MutableLiveData<Byte>(-1)
-    var pitSpeedLimit: UByte = 0u
-    var numMarshalZones: UByte = 0u
-    var marshalZones : List<MarshalZone> = listOf()
-
+    // Session Info
     var sessionType = MutableLiveData<UByte>(20u)
     var era = MutableLiveData<UByte>(10u)
-
     var sessionTimeLeft: Short = 0
     var sessionDuration: Short = 0
     var safetyCarStatus: UByte = 0u
+    var networkGame: UByte = 0u
+
+    // Grand Prix Info
+    var totalLaps: UByte = 0u
+    var trackLength: Short = 0
+    var trackId = MutableLiveData<Byte>(-1)
+    var numMarshalZones: UByte = 0u
+    var marshalZones : List<MarshalZone> = listOf()
+
+    var pitSpeedLimit: UByte = 0u
+
+
 
     var gamePaused  = MutableLiveData<UByte>(0u)
 
     var isSpectating: UByte = 0u
     var spectatorCardIndex: UByte = 0u
-    var networkGame: UByte = 0u
 
     var sliProNativeSupport: UByte = 0u
-
 
     @Synchronized
     fun updateFrom2018(info: SessionData){
         format = Format.F1_2018
         weather.postValue(info.weather)
         trackTemperature.postValue(info.trackTemperature)
-        airTemperature = info.airTemperature
+        airTemperature.postValue(info.airTemperature)
         totalLaps = info.totalLaps
         trackLength = info.trackLength
         sessionType.postValue(info.sessionType)
@@ -69,6 +72,8 @@ class Session {
         trackId.postValue(info.track_number.toByte())
         //totalLaps = info.total_laps.toUByte()
     }
+
+    fun weatherAsInt() = weather.value?.toInt()
 
 
 

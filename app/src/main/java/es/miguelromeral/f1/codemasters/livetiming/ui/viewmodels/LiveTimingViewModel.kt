@@ -3,11 +3,9 @@ package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.preference.PreferenceManager
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
-import es.miguelromeral.f1.codemasters.livetiming.classes.Game
+import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Game
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format
-import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.runnables.MyRunnable
@@ -68,27 +66,29 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                             var newList: MutableList<ItemLiveTiming> = mutableListOf()
                             var count = 0
                             for (p in sessionItems) {
+                                val lap = p.currentLap.value
                                 newList.add(
-                                    ItemLiveTiming(
-                                        position =  p.currentLap.value?.carPosition?.value,
-                                        name = p.participant.value?.shortName(),
-                                        driverId = p.participant.value?.driverId?.value,
-                                        fullname = p.participant.value?.name?.value,
-                                        team = p.participant.value?.teamId?.value,
-                                        time = p.currentLap.value?.currentLapTime?.value,
-                                        compound = p.carStatus.value?.tyreCompound?.value,
-                                        era = session.sessionData?.era?.value,
-                                        format = p.participant.value?.format ?: Format.UNKNOWN
-                                    )
+                                    ItemLiveTiming.create(
+                                        participant = p.participant.value,
+                                        lap = p.currentLap.value,
+                                        carStatus = p.carStatus.value,
+                                        session = session.sessionData.value)
                                 )
                             }
                             sortItemList(newList)
                         }else{
 
+                        /*
+                            val keepupdating = session.format != Format.F1_2017
 
-                            /*if(currentFrame != session.frameId.value) {
-                                currentFrame = session.frameId.value!!*/
+                            if(keepupdating &&
+                                currentFrame != session.frameId.value) {
 
+                                if(keepupdating)
+                                    currentFrame = session.frameId.value!!
+
+
+                         */
                                 _items.value?.let { myItems ->
                                     sortItemList()
 
@@ -102,7 +102,7 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                     }
 
                                 }
-                            //}
+//                            }
 
                     }
                 }

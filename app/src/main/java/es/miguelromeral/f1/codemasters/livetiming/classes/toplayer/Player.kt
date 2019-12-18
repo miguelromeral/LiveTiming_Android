@@ -1,10 +1,9 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes
+package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.LapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
-import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.ParticipantData

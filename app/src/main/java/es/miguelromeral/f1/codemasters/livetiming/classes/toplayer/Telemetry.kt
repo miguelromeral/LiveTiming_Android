@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes
+package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.Format

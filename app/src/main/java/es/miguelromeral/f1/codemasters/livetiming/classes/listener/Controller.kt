@@ -1,11 +1,8 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes
+package es.miguelromeral.f1.codemasters.livetiming.classes.listener
 
+import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.*
 import es.miguelromeral.f1.codemasters.livetiming.packets.*
-import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
-import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
-import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
-import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.ParticipantData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -30,7 +27,15 @@ class Controller(val port: Int = DEFAULT_PORT) {
 
 
     fun DEBUG_addItems(){
-        session._sessionData.era.postValue(CarStatusData.ERA_MODERN)
+        val mySession = Session().apply{
+            format = Format.F1_2018
+            weather.postValue(3u)
+            era.postValue(CarStatusData.ERA_MODERN)
+            airTemperature.postValue(31)
+            trackTemperature.postValue(53)
+        }
+        session._sessionData.postValue(mySession)
+
 
         var ml = mutableListOf<Player>()
 
@@ -62,6 +67,8 @@ class Controller(val port: Int = DEFAULT_PORT) {
 
                 val tmp = it._currentLap.value?.currentLapTime?.value?.plus(0.1f)
                 it._currentLap.value?.currentLapTime?.postValue(tmp)
+                it._currentLap.value?.sector1Time?.postValue(12.3f)
+                it._currentLap.value?.sector2Time?.postValue(23.4f)
             }
 
             i++
@@ -71,7 +78,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
     fun addCurrentSession(session: Game){
         this.session = session
         Timber.i("Listening on port $port")
-        //DEBUG_addItems()
+        DEBUG_addItems()
     }
 
     @ExperimentalUnsignedTypes
@@ -83,18 +90,18 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 while(true) {
 
                     // TESTING
-                    //delay(100L)
-                    //DEBUG_updateItems()
+                    delay(100L)
+                    DEBUG_updateItems()
                     // END OF TESTING
 
 
-
+/*
                     buffer = ByteArray(MAX_BUFFER)
                     val packet = DatagramPacket(buffer, buffer.size)
                     socket.receive(packet)
                     //Timber.i("Raw Packet: ${packet.data.contentToString()}")
                     newPacket(packet.data)
-
+*/
 
                 }
             }catch (e: Exception){
@@ -109,7 +116,10 @@ class Controller(val port: Int = DEFAULT_PORT) {
     @ExperimentalUnsignedTypes
     @Synchronized
     fun newPacket(content: ByteArray){
-        PacketDispatcher(content, session).run()
+        PacketDispatcher(
+            content,
+            session
+        ).run()
 
     }
 

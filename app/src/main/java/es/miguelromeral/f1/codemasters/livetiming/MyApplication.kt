@@ -5,10 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Resources
 import timber.log.Timber
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.preference.PreferenceManager
-import es.miguelromeral.f1.codemasters.livetiming.classes.Controller
+import es.miguelromeral.f1.codemasters.livetiming.classes.listener.Controller
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
 import java.lang.Exception
 

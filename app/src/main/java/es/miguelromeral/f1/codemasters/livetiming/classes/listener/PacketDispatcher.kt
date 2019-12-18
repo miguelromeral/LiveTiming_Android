@@ -1,5 +1,6 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes
+package es.miguelromeral.f1.codemasters.livetiming.classes.listener
 
+import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Game
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketHeader
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketLapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData

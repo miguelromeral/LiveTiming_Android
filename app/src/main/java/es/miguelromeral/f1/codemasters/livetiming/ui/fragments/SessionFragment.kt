@@ -27,10 +27,10 @@ class SessionFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_session, container, false)
         viewModel = (activity as MainActivity).viewModel
-        binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
 
+        /*
         viewModel.currentSession.sessionData?.trackTemperature?.observe(this, Observer {
             tvTrackTemperature.text = "Track Temperature listened: " + it
         })
@@ -50,7 +50,10 @@ class SessionFragment : Fragment() {
             tvEra.text = "Era: "+viewModel.currentSession.sessionData?.era()
         })
 
-
+*/
+        viewModel.currentSession.sessionData.observe(this, Observer {
+            binding.session = it
+        })
 
 
         return binding.root

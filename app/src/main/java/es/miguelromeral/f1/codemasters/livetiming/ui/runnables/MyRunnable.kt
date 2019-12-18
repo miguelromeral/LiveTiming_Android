@@ -1,7 +1,6 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.runnables
 
-import es.miguelromeral.f1.codemasters.livetiming.classes.Game
-import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.DataItemLiveTiming
+import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Game
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.MyHandlerThread
 
@@ -28,10 +27,10 @@ class MyRunnable (private var myHandlerThread: MyHandlerThread,
             }
             player.currentLap.value?.let{
                 synchronized(it) {
-                    val tmp_pos = it.carPosition?.value
-                    val tmp_lap = it.currentLapTime?.value
-                    item.position = tmp_pos
-                    item.time = tmp_lap
+                    item.position = it.carPosition?.value
+                    item.time = it.currentLapTime?.value
+                    item.sector1Time = it.sector1Time?.value
+                    item.sector2Time = it.sector2Time?.value
                 }
             }
             player.carStatus.value?.let{
