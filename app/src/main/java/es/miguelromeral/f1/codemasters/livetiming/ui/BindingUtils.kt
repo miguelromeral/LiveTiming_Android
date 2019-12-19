@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Format
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
@@ -72,47 +73,9 @@ fun ImageView.setTyreImage(compound: Int?, format: Format, era: Int? = Packet201
     setImageResource(resource)
 }
 
-@BindingAdapter("teamColor","format", requireAll = true)
-fun ImageView.setColorByTeam(team: Int?, format: Format){
-    if(team == null){
-        setColorFilter(getColor(context, es.miguelromeral.f1.codemasters.livetiming.R.color.teamUnknown))
-    }else{
-        val resource = when(team){
-            0 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamMercedes
-            1 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamFerrari
-            2 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamRedBull
-            3 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamWilliams
-            4 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamRacingPoint
-            5 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamRenault
-            6 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamToroRosso
-            7 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamHaas
-            8 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamMcLaren
-            9 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamAlfaRomeo
-            /*
-            10 -> "McLaren 1988"
-            11 -> "McLaren 1991"
-            12 -> "Williams 1992"
-            13 -> "Ferrari 1995"
-            14 -> "Williams 1996"
-            15 -> "McLaren 1998"
-            16 -> "Ferrari 2002"
-            17 -> "Ferrari 2004"
-            18 -> "Renault 2006"
-            19 -> "Ferrari 2007"
-            20 -> "McLaren 2008"
-            21 -> "RedBull 2010"
-            22 -> "Ferrari 1976"
-            34 -> "McLaren 1976"
-            35 -> "Lotus 1972"
-            36 -> "Ferrari 1979"
-            37 -> "McLaren 1982"
-            38 -> "Williams 2003"
-            39 -> "Brawn 2009"
-            40 -> "Lotus 1978"*/
-            else -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamUnknown
-        }
-        setColorFilter(getColor(context, resource))
-    }
+@BindingAdapter("teamColor")
+fun ImageView.setColorByTeam(team: Int?){
+    setColorFilter(getColor(context, Standard.TEAMS.getTeamColor(team)))
 }
 
 

@@ -34,8 +34,6 @@
         style="@style/row_team_color"
 
         app:teamColor="@{item.teamAsInt}"
-        app:format="@{item.format}"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tvPos"
         app:layout_constraintTop_toTopOf="parent"

@@ -1,6 +1,7 @@
 package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 import androidx.lifecycle.MutableLiveData
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
@@ -11,9 +12,9 @@ class Participant {
 
     var format = Format.UNKNOWN
 
-    var aiControlled = MutableLiveData<Byte>(TopLayer.UNKNOWN.toByte())
+    var aiControlled = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var driverId = MutableLiveData<UByte>(0u)
-    var teamId = MutableLiveData<UByte>(0u)
+    var teamId = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var raceNumber = MutableLiveData<UByte>(0u)
     var nationality = MutableLiveData<UByte>(0u)
     var name = MutableLiveData<String>()
@@ -24,9 +25,9 @@ class Participant {
     @Synchronized
     fun updateFrom2018(info: ParticipantData, era: UByte? = null){
         format = Format.F1_2018
-        aiControlled.postValue(info.getAiControlledTopLayer().toByte())
+        aiControlled.postValue(info.getStandardAIControlled().toByte())
         driverId.postValue(info.driverId)
-        teamId.postValue(info.teamId)
+        teamId.postValue(info.getStandardTeamId().toByte())
         raceNumber.postValue(info.raceNumber)
         nationality.postValue(info.nationality)
         name.postValue(info.name)
@@ -39,7 +40,7 @@ class Participant {
     fun updateFrom2017(info: CarUDPData, era: UByte? = null){
         format = Format.F1_2017
         driverId.postValue(info.driverId.toUByte())
-        teamId.postValue(info.teamId.toUByte())
+        teamId.postValue(info.getStandardTeam(era).toByte())
         name.postValue(null)
         era?.let{
             this.era.postValue(it)
@@ -50,12 +51,12 @@ class Participant {
         MyApplication.getContext()?.resources?.let {
             return it.getString(
                 when (aiControlled.value?.toInt()) {
-                    TopLayer.AIMode.HUMAN -> R.string.ai_human
-                    TopLayer.AIMode.AI -> R.string.ai_npc
+                    Standard.AIMode.HUMAN -> R.string.ai_human
+                    Standard.AIMode.AI -> R.string.ai_npc
                     else -> R.string.unknown
                 })
         }
-        return TopLayer.UNKNOWN_TEXT
+        return Standard.UNKNOWN_TEXT
     }
 
     fun driver(era: UByte? = Packet2017.ERA_MODERN.toUByte()) = when(format){
@@ -76,14 +77,5 @@ class Participant {
         return string.substring(0, 3).toUpperCase()
     }
 
-    fun team(era: UByte) = when(format){
-        Format.F1_2017 -> CarUDPData.getTeam(teamId.value!!, era)
-        Format.F1_2018 -> ParticipantData.getTeam(teamId.value!!)
-        else -> "Unknown"
-    }
-
-    fun nationality() = when(format){
-        Format.F1_2018 -> ParticipantData.getNationality(nationality.value!!)
-        else -> "Unknown"
-    }
+    fun team() = Standard.TEAMS.getTeamName(teamId.value?.toInt())
 }

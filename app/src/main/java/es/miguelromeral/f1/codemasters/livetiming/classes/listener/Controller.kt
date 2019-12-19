@@ -51,7 +51,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
             var p = Player()
             p._participant.postValue(Participant().apply {
                 name.postValue("F. LASTNAME $i")
-                teamId.postValue(i.toUByte())
+                teamId.postValue(i.toByte())
                 format = Format.F1_2018
             })
             p._currentLap.postValue(Lap().apply {

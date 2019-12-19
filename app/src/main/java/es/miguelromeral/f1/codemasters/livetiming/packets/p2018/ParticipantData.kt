@@ -1,9 +1,8 @@
 package es.miguelromeral.f1.codemasters.livetiming.packets.p2018
 
-import android.content.res.Resources
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.TopLayer
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketHeader
 import es.miguelromeral.f1.codemasters.livetiming.packets.stringFromPacket
 
@@ -46,11 +45,45 @@ class ParticipantData private constructor(content: ByteArray){
     val name = stringFromPacket(content.sliceArray(5 until SIZE))
 
 
-    fun getAiControlledTopLayer() = when (aiControlled.toInt()) {
-            0 -> TopLayer.AIMode.HUMAN
-            1 -> TopLayer.AIMode.AI
-            else -> TopLayer.UNKNOWN
+    fun getStandardAIControlled() = when (aiControlled.toInt()) {
+            0 -> Standard.AIMode.HUMAN
+            1 -> Standard.AIMode.AI
+            else -> Standard.UNKNOWN
         }
+
+    fun getStandardTeamId() = when(teamId.toInt()){
+        0 -> Standard.TEAMS.MERCEDES
+        1 -> Standard.TEAMS.FERRARI
+        2 -> Standard.TEAMS.REDBULL
+        3 -> Standard.TEAMS.WILLIAMS
+        4 -> Standard.TEAMS.FORCE_INDIA
+        5 -> Standard.TEAMS.RENAULT
+        6 -> Standard.TEAMS.TORO_ROSSO
+        7 -> Standard.TEAMS.HAAS
+        8 -> Standard.TEAMS.MCLAREN
+        9 -> Standard.TEAMS.SAUBER
+        10 -> Standard.TEAMS.MCLAREN_1988
+        11 -> Standard.TEAMS.MCLAREN_1991
+        12 -> Standard.TEAMS.WILLIAMS_1992
+        13 -> Standard.TEAMS.FERRARI_1995
+        14 -> Standard.TEAMS.WILLIAMS_1996
+        15 -> Standard.TEAMS.MCLAREN_1998
+        16 -> Standard.TEAMS.FERRARI_2002
+        17 -> Standard.TEAMS.FERRARI_2004
+        18 -> Standard.TEAMS.RENAULT_2006
+        19 -> Standard.TEAMS.FERRARI_2007
+        20 -> Standard.TEAMS.MCLAREN_2008
+        21 -> Standard.TEAMS.REDBULL_2010
+        22 -> Standard.TEAMS.FERRARI_1976
+        34 -> Standard.TEAMS.MCLAREN_1976
+        35 -> Standard.TEAMS.LOTUS_1972
+        36 -> Standard.TEAMS.FERRARI_1979
+        37 -> Standard.TEAMS.MCLAREN_1982
+        38 -> Standard.TEAMS.WILLIAMS_2003
+        39 -> Standard.TEAMS.BRAWN_2009
+        40 -> Standard.TEAMS.LOTUS_1978
+        else -> Standard.UNKNOWN
+    }
 
     companion object{
         const val MAX_PARTICIPANT = 20

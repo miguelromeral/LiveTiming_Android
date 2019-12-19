@@ -13,7 +13,7 @@ class ItemLiveTiming private constructor()
     var name: String? = null
     var fullname: String? = null
     var driverId: UByte? = null
-    var team: UByte? = null
+    var team: Byte? = null
     var time: Float? = null
     var compound: UByte? = null
     var era: UByte? = null
