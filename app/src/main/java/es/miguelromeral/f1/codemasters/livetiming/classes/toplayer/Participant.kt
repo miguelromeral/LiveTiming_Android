@@ -1,7 +1,8 @@
 package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 import androidx.lifecycle.MutableLiveData
-import es.miguelromeral.f1.codemasters.livetiming.packets.Format
+import es.miguelromeral.f1.codemasters.livetiming.MyApplication
+import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.ParticipantData
@@ -10,7 +11,7 @@ class Participant {
 
     var format = Format.UNKNOWN
 
-    var aiControlled = MutableLiveData<UByte>(0u)
+    var aiControlled = MutableLiveData<Byte>(TopLayer.UNKNOWN.toByte())
     var driverId = MutableLiveData<UByte>(0u)
     var teamId = MutableLiveData<UByte>(0u)
     var raceNumber = MutableLiveData<UByte>(0u)
@@ -23,7 +24,7 @@ class Participant {
     @Synchronized
     fun updateFrom2018(info: ParticipantData, era: UByte? = null){
         format = Format.F1_2018
-        aiControlled.postValue(info.aiControlled)
+        aiControlled.postValue(info.getAiControlledTopLayer().toByte())
         driverId.postValue(info.driverId)
         teamId.postValue(info.teamId)
         raceNumber.postValue(info.raceNumber)
@@ -45,9 +46,16 @@ class Participant {
         }
     }
 
-    fun aiControlled() = when(format){
-        Format.F1_2018 -> ParticipantData.getAiControlled(aiControlled.value!!)
-        else -> "Unknown"
+    fun aiControlled(): String {
+        MyApplication.getContext()?.resources?.let {
+            return it.getString(
+                when (aiControlled.value?.toInt()) {
+                    TopLayer.AIMode.HUMAN -> R.string.ai_human
+                    TopLayer.AIMode.AI -> R.string.ai_npc
+                    else -> R.string.unknown
+                })
+        }
+        return TopLayer.UNKNOWN_TEXT
     }
 
     fun driver(era: UByte? = Packet2017.ERA_MODERN.toUByte()) = when(format){

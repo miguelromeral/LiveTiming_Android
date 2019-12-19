@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.packets
+package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 enum class Format {
     UNKNOWN,

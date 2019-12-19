@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Game
-import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.runnables.MyRunnable

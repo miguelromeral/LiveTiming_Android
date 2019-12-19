@@ -1,7 +1,6 @@
 package es.miguelromeral.f1.codemasters.livetiming.classes.listener
 
 import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.*
-import es.miguelromeral.f1.codemasters.livetiming.packets.*
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

@@ -2,7 +2,6 @@ package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketLapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017

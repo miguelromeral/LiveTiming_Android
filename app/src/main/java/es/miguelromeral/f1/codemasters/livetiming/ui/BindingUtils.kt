@@ -1,19 +1,14 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui
 
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import es.miguelromeral.f1.codemasters.livetiming.R
-import es.miguelromeral.f1.codemasters.livetiming.packets.Format
+import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Format
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
-import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
-import java.util.concurrent.TimeUnit
-
 
 
 @BindingAdapter("backgroundByPosition")

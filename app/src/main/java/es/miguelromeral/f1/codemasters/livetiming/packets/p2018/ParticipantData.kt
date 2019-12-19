@@ -3,6 +3,7 @@ package es.miguelromeral.f1.codemasters.livetiming.packets.p2018
 import android.content.res.Resources
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
+import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.TopLayer
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketHeader
 import es.miguelromeral.f1.codemasters.livetiming.packets.stringFromPacket
 
@@ -45,6 +46,12 @@ class ParticipantData private constructor(content: ByteArray){
     val name = stringFromPacket(content.sliceArray(5 until SIZE))
 
 
+    fun getAiControlledTopLayer() = when (aiControlled.toInt()) {
+            0 -> TopLayer.AIMode.HUMAN
+            1 -> TopLayer.AIMode.AI
+            else -> TopLayer.UNKNOWN
+        }
+
     companion object{
         const val MAX_PARTICIPANT = 20
         const val SIZE = 53
@@ -53,18 +60,6 @@ class ParticipantData private constructor(content: ByteArray){
             return ParticipantData(content.sliceArray(0 until SIZE))
         }
 
-        fun getAiControlled(aiControlled: UByte):String {
-            MyApplication.getContext()?.resources?.let {
-                return it.getString(
-                    when (aiControlled.toInt()) {
-                        0 -> R.string.ai_human
-                        1 -> R.string.ai_npc
-                        else -> R.string.unknown
-                    }
-                )
-            }
-            return "Unknown"
-        }
 
         fun getNationality(nationality: UByte) :String {
             MyApplication.getContext()?.resources?.let {
