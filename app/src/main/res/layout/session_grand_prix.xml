@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable
+            name="session"
+            type="es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Session" />
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/frame_grand_prix"
+        style="@style/section_frame"
+        tools:showIn="@layout/fragment_session">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/section_constraintlayout"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTitleGrandPrix"
+                style="@style/title_section"
+                android:text="Grand Prix Info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="CIRCUIT"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleGrandPrix" />
+
+            <TextView
+                android:id="@+id/tvTrack"
+                style="@style/text_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{session.track()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9"
+                tools:text="Monaco" />
+
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="TRACK LENGTH"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTrack" />
+
+            <TextView
+                android:id="@+id/tvTrackLength"
+                style="@style/text_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:length="@{session.trackLength.intValue()}"
+                tools:text="4567 m." />
+
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="TOTAL LAPS"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTrackLength" />
+
+            <TextView
+                android:id="@+id/tvTotalLaps"
+                style="@style/text_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{session.totalLaps.toString()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11"
+                tools:text="99" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+</layout>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable
+            name="session"
+            type="es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Session" />
+    </data>
+
+
+<FrameLayout
+    android:id="@+id/frame_weather"
+    style="@style/section_frame"
+    tools:showIn="@layout/fragment_session">
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/section_constraintlayout">
+
+        <TextView
+            android:id="@+id/tvTitleWeather"
+            style="@style/title_section"
+            android:text="Weather Info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="AIR"
+            app:layout_constraintEnd_toStartOf="@+id/tvAirTemperature"
+            app:layout_constraintTop_toTopOf="@+id/tvAirTemperature" />
+
+        <TextView
+            android:id="@+id/tvAirTemperature"
+            style="@style/text_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/textView2"
+            app:temperature="@{session.airTemperature.toString()}"
+            tools:text="30 ºC" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="TRACK"
+            app:layout_constraintEnd_toStartOf="@+id/tvTrackTemperature2"
+            app:layout_constraintTop_toTopOf="@+id/tvTrackTemperature2" />
+
+        <TextView
+            android:id="@+id/tvTrackTemperature2"
+            style="@style/text_temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
+            app:temperature="@{session.trackTemperature.toString()}"
+            tools:text="54 ºC" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="50sp"
+            android:layout_margin="10sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
+            app:srcCompat="@drawable/clear_day"
+            app:weather="@{session.weatherAsInt()}" />
+
+        <TextView
+            android:id="@+id/tvWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@{session.weather()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            tools:text="Clear" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
+</layout>
