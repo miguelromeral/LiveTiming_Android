@@ -174,6 +174,16 @@ fun ImageView.setSafetyCarStatus(sc: Int?){
 }
 
 
+@BindingAdapter("length")
+fun TextView.setLenght(length: Int?){
+    length?.let{
+        text = "$it m."
+        return
+    }
+    text = "- m."
+}
+
+
 fun floatToTimeFormatted(inf : Float?, long: Boolean = false): String? {
     if(inf == null)
         return ""

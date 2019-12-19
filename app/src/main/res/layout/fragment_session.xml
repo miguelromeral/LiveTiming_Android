@@ -13,226 +13,301 @@
 
 
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragments.SessionFragment">
+
+<!--    tools:context=".ui.fragments.SessionFragment"> -->
 
 
     <FrameLayout
-        android:id="@+id/frame_weather"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#00E46060">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_section"
-            android:background="@color/backgroundSection">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvTitleWeather"
-                style="@style/title_section"
-                android:text="Weather Info"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="AIR"
-                app:layout_constraintEnd_toStartOf="@+id/tvAirTemperature"
-                app:layout_constraintTop_toTopOf="@+id/tvAirTemperature" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvAirTemperature"
-                style="@style/text_temperature"
-                app:temperature="@{session.airTemperature.toString()}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="@+id/textView2"
-                tools:text="30 ºC" />
+                <FrameLayout
+                    android:id="@+id/frame_grand_prix"
+                    style="@style/section_frame"
+                    android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:text="TRACK"
-                app:layout_constraintEnd_toStartOf="@+id/tvTrackTemperature2"
-                app:layout_constraintTop_toTopOf="@+id/tvTrackTemperature2" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/section_constraintlayout"
+                        android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvTrackTemperature2"
-                style="@style/text_temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
-                app:temperature="@{session.trackTemperature.toString()}"
-                tools:text="54 ºC" />
+                        <TextView
+                            android:id="@+id/tvTitleGrandPrix"
+                            style="@style/title_section"
+                            android:text="Grand Prix Info"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:layout_margin="10sp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                app:layout_constraintEnd_toStartOf="@+id/textView4"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
-                app:srcCompat="@drawable/clear_day"
-                app:weather="@{session.weatherAsInt()}" />
 
-            <TextView
-                android:id="@+id/tvWeather"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="@{session.weather()}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                tools:text="Clear" />
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19dp"
+                            android:text="CIRCUIT"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleGrandPrix" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:id="@+id/tvTrack"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{session.track()}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView9"
+                            tools:text="Monaco" />
+
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19dp"
+                            android:text="TRACK LENGTH"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTrack" />
+
+                        <TextView
+                            android:id="@+id/tvTrackLength"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView10"
+                            app:length="@{session.trackLength.intValue()}"
+                            tools:text="4567 m." />
+
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19dp"
+                            android:text="TOTAL LAPS"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTrackLength" />
+
+                        <TextView
+                            android:id="@+id/tvTotalLaps"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{session.totalLaps.toString()}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView11"
+                            tools:text="99" />
+
+                        -->
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frame_weather"
+                    style="@style/section_frame">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout style="@style/section_constraintlayout">
+
+                        <TextView
+                            android:id="@+id/tvTitleWeather"
+                            style="@style/title_section"
+                            android:text="Weather Info"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="AIR"
+                            app:layout_constraintEnd_toStartOf="@+id/tvAirTemperature"
+                            app:layout_constraintTop_toTopOf="@+id/tvAirTemperature" />
+
+                        <TextView
+                            android:id="@+id/tvAirTemperature"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            app:layout_constraintEnd_toStartOf="@+id/textView2"
+                            app:layout_constraintTop_toTopOf="@+id/textView2"
+                            app:temperature="@{session.airTemperature.toString()}"
+                            tools:text="30 ºC" />
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:text="TRACK"
+                            app:layout_constraintEnd_toStartOf="@+id/tvTrackTemperature2"
+                            app:layout_constraintTop_toTopOf="@+id/tvTrackTemperature2" />
+
+                        <TextView
+                            android:id="@+id/tvTrackTemperature2"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
+                            app:temperature="@{session.trackTemperature.toString()}"
+                            tools:text="54 ºC" />
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50sp"
+                            android:layout_margin="10sp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="24dp"
+                            app:layout_constraintEnd_toStartOf="@+id/textView4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
+                            app:srcCompat="@drawable/clear_day"
+                            app:weather="@{session.weatherAsInt()}" />
+
+                        <TextView
+                            android:id="@+id/tvWeather"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:text="@{session.weather()}"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/imageView"
+                            app:layout_constraintStart_toStartOf="@+id/imageView"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView"
+                            tools:text="Clear" />
+
+                        <androidx.constraintlayout.widget.Group
+                            android:id="@+id/group"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/frame_session"
+                    style="@style/section_frame">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout style="@style/section_constraintlayout">
+
+
+                        <TextView
+                            android:id="@+id/tvTitleSession"
+                            style="@style/title_section"
+                            android:text="Session Info"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <ImageView
+                            android:id="@+id/ivSafetyCar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50sp"
+                            android:layout_margin="10sp"
+                            android:tint="@color/teamMcLaren"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
+                            app:safetyCarStatus="@{session.safetycarStatusAsInt()}"
+                            app:srcCompat="@drawable/safety_car" />
+
+
+                        <TextView
+                            android:id="@+id/tvSafetyCar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19dp"
+                            android:text="@{session.safetyCarStatus()}"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivSafetyCar"
+                            tools:text="@string/safety_car_vsc" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19dp"
+                            android:text="ERA"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvSessionDuration" />
+
+
+                        <TextView
+                            android:id="@+id/tvEra"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{session.era()}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView7"
+                            tools:text="Modern" />
+
+
+                        <TextView
+                            android:id="@+id/tvSessionDuration"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView6"
+                            app:time_minutes_seconds="@{session.sessionDuration.intValue()}"
+                            tools:text="18:00" />
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19dp"
+                            android:text="DURATION"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvSessionTimeLeft" />
+
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19dp"
+                            android:text="TIME LEFT"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvSessionType" />
+
+
+                        <TextView
+                            android:id="@+id/tvSessionTimeLeft"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView3"
+                            app:time_minutes_seconds="@{session.sessionTimeLeft.intValue()}"
+                            tools:text="17:59" />
+
+
+                        <TextView
+                            android:id="@+id/tvSessionType"
+                            style="@style/text_temperature"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{session.sessionType()}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
+                            tools:text="P1" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
     </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/frame_session"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#00E46060">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_section"
-            android:background="@color/backgroundSection">
-
-
-            <TextView
-                android:id="@+id/tvTitleSession"
-                style="@style/title_section"
-                android:text="Session Info"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:id="@+id/ivSafetyCar"
-                android:layout_width="wrap_content"
-                android:layout_height="50sp"
-                android:layout_margin="10sp"
-                android:tint="@color/teamMcLaren"
-                app:safetyCarStatus="@{session.safetycarStatusAsInt()}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
-                app:srcCompat="@drawable/safety_car" />
-
-
-            <TextView
-                android:id="@+id/tvSafetyCar"
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:text="@{session.safetyCarStatus()}"
-                tools:text="@string/safety_car_vsc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivSafetyCar" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:text="ERA"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSessionDuration" />
-
-
-            <TextView
-                android:id="@+id/tvEra"
-                style="@style/text_temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{session.era()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7"
-                tools:text="Modern" />
-
-
-            <TextView
-                android:id="@+id/tvSessionDuration"
-                style="@style/text_temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:time_minutes_seconds="@{session.sessionDuration.intValue()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"
-                tools:text="18:00" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:text="DURATION"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSessionTimeLeft" />
-
-
-
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="19dp"
-                android:text="TIME LEFT"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSessionType" />
-
-
-            <TextView
-                android:id="@+id/tvSessionTimeLeft"
-                style="@style/text_temperature"
-                app:time_minutes_seconds="@{session.sessionTimeLeft.intValue()}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                tools:text="17:59" />
-
-
-
-            <TextView
-                android:id="@+id/tvSessionType"
-                style="@style/text_temperature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{session.sessionType()}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
-                tools:text="P1" />
-
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
-
-</LinearLayout>
 
 </layout>

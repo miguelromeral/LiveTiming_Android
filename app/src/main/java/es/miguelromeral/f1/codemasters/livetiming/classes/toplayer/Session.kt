@@ -25,8 +25,8 @@ class Session {
     var networkGame: UByte = 0u
 
     // Grand Prix Info
-    var totalLaps: UByte = 0u
-    var trackLength: Short = 0
+    var totalLaps = MutableLiveData<UByte>(0u)
+    var trackLength = MutableLiveData<Short>(0)
     var trackId = MutableLiveData<Byte>(-1)
     var numMarshalZones: UByte = 0u
     var marshalZones : List<MarshalZone> = listOf()
@@ -48,8 +48,8 @@ class Session {
         weather.postValue(info.weather)
         trackTemperature.postValue(info.trackTemperature)
         airTemperature.postValue(info.airTemperature)
-        totalLaps = info.totalLaps
-        trackLength = info.trackLength
+        totalLaps.postValue(info.totalLaps)
+        trackLength.postValue(info.trackLength)
         sessionType.postValue(info.sessionType)
         trackId.postValue(info.trackId)
         era.postValue(info.era)
