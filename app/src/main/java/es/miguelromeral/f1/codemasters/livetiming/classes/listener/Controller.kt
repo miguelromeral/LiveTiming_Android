@@ -33,6 +33,12 @@ class Controller(val port: Int = DEFAULT_PORT) {
             era.postValue(CarStatusData.ERA_MODERN)
             airTemperature.postValue(31)
             trackTemperature.postValue(53)
+            sessionType.postValue(3u)
+            era.postValue(1u)
+            sessionTimeLeft.postValue(599)
+            sessionDuration.postValue(1200)
+            safetyCarStatus.postValue(0u)
+
         }
         session._sessionData.postValue(mySession)
 
@@ -70,6 +76,10 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 it._currentLap.value?.sector1Time?.postValue(12.3f)
                 it._currentLap.value?.sector2Time?.postValue(23.4f)
             }
+
+            /*var ses = session._sessionData.value
+            ses?.sessionTimeLeft?.postValue(ses?.sessionTimeLeft?.value?.dec())
+            session._sessionData.postValue(ses)*/
 
             i++
         }

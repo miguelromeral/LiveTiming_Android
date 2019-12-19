@@ -127,16 +127,18 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
             return "Unknown"
         }
 
-        fun getSafetyCarStatus(safetyCarStatus: UByte) :String {
-            MyApplication.getContext()?.resources?.let {
-                return it.getString(
-                    when (safetyCarStatus.toInt()) {
-                        0 -> R.string.safety_car_no
-                        1 -> R.string.safety_car_sc
-                        2 -> R.string.safety_car_vsc
-                        else -> R.string.unknown
-                    }
-                )
+        fun getSafetyCarStatus(safetyCarStatus: UByte?): String {
+            MyApplication.getContext()?.resources?.let {resources ->
+                safetyCarStatus?.let {
+                    return resources.getString(
+                        when (it.toInt()) {
+                            0 -> R.string.safety_car_no
+                            1 -> R.string.safety_car_sc
+                            2 -> R.string.safety_car_vsc
+                            else -> R.string.unknown
+                        }
+                    )
+                }
             }
             return "Unknown"
         }

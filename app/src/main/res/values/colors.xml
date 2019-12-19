@@ -9,6 +9,7 @@
     <color name="liveTimingListEven">#2a2a2a</color>
     <color name="liveTimingHeader">#777</color>
     <color name="fullWhite">#FFF</color>
+    <color name="fullGray">#9C9C9C</color>
     <color name="fullBlack">#000</color>
 
     <color name="backgroundSection">#DDD</color>

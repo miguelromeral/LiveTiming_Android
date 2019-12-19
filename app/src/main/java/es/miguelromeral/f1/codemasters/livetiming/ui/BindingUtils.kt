@@ -12,6 +12,9 @@ import es.miguelromeral.f1.codemasters.livetiming.packets.Format
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
+import java.util.concurrent.TimeUnit
+
+
 
 @BindingAdapter("backgroundByPosition")
 fun setBackgroundByPosition(viewGroup: ViewGroup, position: UByte?){
@@ -23,9 +26,9 @@ fun setBackgroundByPosition(viewGroup: ViewGroup, position: UByte?){
                 /*if(position == 0)
                 R.color.colorPrimary
             else*/
-                    R.color.liveTimingListEven
+                    es.miguelromeral.f1.codemasters.livetiming.R.color.liveTimingListEven
                 else
-                    R.color.liveTimingListOdd
+                    es.miguelromeral.f1.codemasters.livetiming.R.color.liveTimingListOdd
             )
         )
     }
@@ -38,7 +41,7 @@ fun TextView.setTimeFormatted(time: Float?) {
 
 @BindingAdapter("tyre", "format", "era", requireAll = false)
 fun ImageView.setTyreImage(compound: Int?, format: Format, era: Int? = Packet2017.ERA_MODERN){
-    var resource = R.drawable.tyre_unknown
+    var resource = es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_unknown
     if(compound != null){
         when(format){
             Format.F1_2018 -> {
@@ -47,23 +50,23 @@ fun ImageView.setTyreImage(compound: Int?, format: Format, era: Int? = Packet201
                         CarStatusData.ERA_MODERN.toInt() -> {
                             if (compound != null)
                                 resource = when (compound) {
-                                    0 -> R.drawable.tyre_pink
-                                    1 -> R.drawable.tyre_purple
-                                    2 -> R.drawable.tyre_red
-                                    3 -> R.drawable.tyre_yellow
-                                    4 -> R.drawable.tyre_white
-                                    5 -> R.drawable.tyre_cyan
-                                    6 -> R.drawable.tyre_orange
-                                    7 -> R.drawable.tyre_green
-                                    8 -> R.drawable.tyre_blue
-                                    else -> R.drawable.tyre_unknown
+                                    0 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_pink
+                                    1 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_purple
+                                    2 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_red
+                                    3 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_yellow
+                                    4 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_white
+                                    5 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_cyan
+                                    6 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_orange
+                                    7 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_green
+                                    8 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_blue
+                                    else -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_unknown
                                 }
                         }
                         CarStatusData.ERA_CLASSIC.toInt() -> {
                             if (compound != null)
                                 resource = when (compound) {
-                                    in 0..6 -> R.drawable.tyre_yellow
-                                    else -> R.drawable.tyre_blue
+                                    in 0..6 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_white
+                                    else -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_blue
                                 }
                         }
                     }
@@ -77,19 +80,19 @@ fun ImageView.setTyreImage(compound: Int?, format: Format, era: Int? = Packet201
 @BindingAdapter("teamColor","format", requireAll = true)
 fun ImageView.setColorByTeam(team: Int?, format: Format){
     if(team == null){
-        setColorFilter(getColor(context, R.color.teamUnknown))
+        setColorFilter(getColor(context, es.miguelromeral.f1.codemasters.livetiming.R.color.teamUnknown))
     }else{
         val resource = when(team){
-            0 -> R.color.teamMercedes
-            1 -> R.color.teamFerrari
-            2 -> R.color.teamRedBull
-            3 -> R.color.teamWilliams
-            4 -> R.color.teamRacingPoint
-            5 -> R.color.teamRenault
-            6 -> R.color.teamToroRosso
-            7 -> R.color.teamHaas
-            8 -> R.color.teamMcLaren
-            9 -> R.color.teamAlfaRomeo
+            0 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamMercedes
+            1 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamFerrari
+            2 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamRedBull
+            3 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamWilliams
+            4 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamRacingPoint
+            5 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamRenault
+            6 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamToroRosso
+            7 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamHaas
+            8 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamMcLaren
+            9 -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamAlfaRomeo
             /*
             10 -> "McLaren 1988"
             11 -> "McLaren 1991"
@@ -111,7 +114,7 @@ fun ImageView.setColorByTeam(team: Int?, format: Format){
             38 -> "Williams 2003"
             39 -> "Brawn 2009"
             40 -> "Lotus 1978"*/
-            else -> R.color.teamUnknown
+            else -> es.miguelromeral.f1.codemasters.livetiming.R.color.teamUnknown
         }
         setColorFilter(getColor(context, resource))
     }
@@ -122,18 +125,28 @@ fun ImageView.setColorByTeam(team: Int?, format: Format){
 fun ImageView.setWeatherIcon(weather: Int?){
     weather?.let{
         var resource = when(weather){
-            0 -> R.drawable.clear_day
-            1 -> R.drawable.light_cloud_day
-            2 -> R.drawable.overcast
-            3 -> R.drawable.light_rain
-            4 -> R.drawable.heavy_rain
-            5 -> R.drawable.storm
-            else -> R.drawable.unknown
+            0 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.clear_day
+            1 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.light_cloud_day
+            2 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.overcast
+            3 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.light_rain
+            4 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.heavy_rain
+            5 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.storm
+            else -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.unknown
         }
         setImageResource(resource)
     }
 }
 
+@BindingAdapter("time_minutes_seconds")
+fun TextView.setTimeMinutesSeconds(time: Int?){
+    time?.let{
+        val minutes = time / 60
+        val seconds = time % 60
+        text = String.format("%d:%02d", minutes, seconds)
+        return
+    }
+    text = "-.--"
+}
 
 @BindingAdapter("temperature")
 fun TextView.setTemperature(temperature: String?){
@@ -142,6 +155,22 @@ fun TextView.setTemperature(temperature: String?){
         return
     }
     text = "--"
+}
+
+/////////////////////////////////
+
+        //DOESN'T WORK YET
+
+/////////////////////////////////
+@BindingAdapter("safetyCarStatus")
+fun ImageView.setSafetyCarStatus(sc: Int?){
+    if(sc != null) {
+        if (sc in 1..2) {
+            setColorFilter(R.color.colorAccent)
+            return
+        }
+    }
+    setColorFilter(R.color.colorAccent)
 }
 
 

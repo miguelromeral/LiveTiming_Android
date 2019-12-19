@@ -21,14 +21,15 @@
 
 
     <FrameLayout
+        android:id="@+id/frame_weather"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#00E46060">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_margin="@dimen/margin_section"
             android:background="@color/backgroundSection">
 
             <TextView
@@ -109,6 +110,126 @@
                 android:id="@+id/group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_session"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#00E46060">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_section"
+            android:background="@color/backgroundSection">
+
+
+            <TextView
+                android:id="@+id/tvTitleSession"
+                style="@style/title_section"
+                android:text="Session Info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/ivSafetyCar"
+                android:layout_width="wrap_content"
+                android:layout_height="50sp"
+                android:layout_margin="10sp"
+                android:tint="@color/teamMcLaren"
+                app:safetyCarStatus="@{session.safetycarStatusAsInt()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
+                app:srcCompat="@drawable/safety_car" />
+
+
+            <TextView
+                android:id="@+id/tvSafetyCar"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="@{session.safetyCarStatus()}"
+                tools:text="@string/safety_car_vsc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivSafetyCar" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="ERA"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSessionDuration" />
+
+
+            <TextView
+                android:id="@+id/tvEra"
+                style="@style/text_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{session.era()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7"
+                tools:text="Modern" />
+
+
+            <TextView
+                android:id="@+id/tvSessionDuration"
+                style="@style/text_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:time_minutes_seconds="@{session.sessionDuration.intValue()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                tools:text="18:00" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="DURATION"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSessionTimeLeft" />
+
+
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="19dp"
+                android:text="TIME LEFT"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSessionType" />
+
+
+            <TextView
+                android:id="@+id/tvSessionTimeLeft"
+                style="@style/text_temperature"
+                app:time_minutes_seconds="@{session.sessionTimeLeft.intValue()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                tools:text="17:59" />
+
+
+
+            <TextView
+                android:id="@+id/tvSessionType"
+                style="@style/text_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{session.sessionType()}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
+                tools:text="P1" />
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

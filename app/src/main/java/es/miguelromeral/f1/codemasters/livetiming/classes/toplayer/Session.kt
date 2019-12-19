@@ -17,11 +17,11 @@ class Session {
     var airTemperature = MutableLiveData<Byte>(0)
 
     // Session Info
-    var sessionType = MutableLiveData<UByte>(20u)
-    var era = MutableLiveData<UByte>(10u)
-    var sessionTimeLeft: Short = 0
-    var sessionDuration: Short = 0
-    var safetyCarStatus: UByte = 0u
+    var sessionType = MutableLiveData<UByte>(0u)
+    var era = MutableLiveData<UByte>(0u)
+    var sessionTimeLeft = MutableLiveData<Short>(0)
+    var sessionDuration = MutableLiveData<Short>(0)
+    var safetyCarStatus = MutableLiveData<UByte>(0u)
     var networkGame: UByte = 0u
 
     // Grand Prix Info
@@ -53,8 +53,8 @@ class Session {
         sessionType.postValue(info.sessionType)
         trackId.postValue(info.trackId)
         era.postValue(info.era)
-        sessionTimeLeft = info.sessionTimeLeft
-        sessionDuration = info.sessionDuration
+        sessionTimeLeft.postValue(info.sessionTimeLeft)
+        sessionDuration.postValue(info.sessionDuration)
         pitSpeedLimit = info.pitSpeedLimit
         gamePaused.postValue(info.gamePaused)
         isSpectating = info.isSpectating
@@ -62,7 +62,7 @@ class Session {
         sliProNativeSupport = info.sliProNativeSupport
         numMarshalZones = info.numMarshalZones
         marshalZones = info.marshalZones
-        safetyCarStatus = info.safetyCarStatus
+        safetyCarStatus.postValue(info.safetyCarStatus)
         networkGame = info.networkGame
     }
 
@@ -94,9 +94,11 @@ class Session {
     }
 
     fun safetyCarStatus(): String = when(format){
-        Format.F1_2018 -> SessionData.getSafetyCarStatus(safetyCarStatus)
+        Format.F1_2018 -> SessionData.getSafetyCarStatus(safetyCarStatus.value)
         else -> "Unknown"
     }
+
+    fun safetycarStatusAsInt() = safetyCarStatus.value?.toInt()
 
     fun networkGame(): String = when(format){
         Format.F1_2018 -> SessionData.getNateworkGame(networkGame)

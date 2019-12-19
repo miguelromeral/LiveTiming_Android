@@ -49,7 +49,7 @@
     <string name="game_mode_online">Online</string>
 
     <!-- SAFETY CAR STATUS -->
-    <string name="safety_car_no">Clear</string>
+    <string name="safety_car_no">Track Clear</string>
     <string name="safety_car_sc">Safety Car</string>
     <string name="safety_car_vsc">Virtual Safety Car</string>
 
