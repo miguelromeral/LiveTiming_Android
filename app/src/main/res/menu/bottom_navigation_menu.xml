@@ -3,14 +3,17 @@
 
 
     <item android:title="Live"
-        android:id="@+id/action_films"
+        android:id="@+id/action_live"
         android:icon="@drawable/clock"/>
 
 
-    <item android:title="Session"
-        android:id="@+id/action_music"
-        android:icon="@drawable/flag"/>
+    <item android:title="Setup"
+        android:id="@+id/action_setup"
+        android:icon="@drawable/car"/>
 
+    <item android:title="Session"
+        android:id="@+id/action_session"
+        android:icon="@drawable/flag"/>
 
     <item android:title="Settings"
         android:id="@+id/action_settings"

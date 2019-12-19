@@ -30,27 +30,6 @@ class SessionFragment : Fragment() {
 
         binding.lifecycleOwner = this
 
-        /*
-        viewModel.currentSession.sessionData?.trackTemperature?.observe(this, Observer {
-            tvTrackTemperature.text = "Track Temperature listened: " + it
-        })
-        viewModel.currentSession.sessionData?.gamePaused?.observe(this, Observer {
-            tvSessionType.text = "GamePaused: "+it.toString()
-        })
-
-
-        viewModel.currentSession.sessionData?.weather?.observe(this, Observer {
-            tvWeather.text = "Weather: "+viewModel.currentSession.sessionData?.weather()
-        })
-
-        viewModel.currentSession.sessionData?.trackId?.observe(this, Observer {
-            tvTrackId.text = "Track: "+viewModel.currentSession.sessionData?.track()
-        })
-        viewModel.currentSession.sessionData?.era?.observe(this, Observer {
-            tvEra.text = "Era: "+viewModel.currentSession.sessionData?.era()
-        })
-
-*/
         viewModel.currentSession.sessionData.observe(this, Observer {
             binding.session = it
         })

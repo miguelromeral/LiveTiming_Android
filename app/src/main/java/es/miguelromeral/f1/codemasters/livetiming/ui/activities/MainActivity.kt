@@ -1,6 +1,5 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +9,7 @@ import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.TimesFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.SessionFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import kotlinx.android.synthetic.main.activity_main2.*
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.CarFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.SettingsFragment
 
 
@@ -31,12 +27,17 @@ class MainActivity : AppCompatActivity() {
 
         bottom_navigation_view.setOnNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId){
-                R.id.action_music -> {
+                R.id.action_session -> {
                     val fragment = SessionFragment.newInstance()
                     openFragment(fragment)
                     true
                 }
-                R.id.action_films -> {
+                R.id.action_setup -> {
+                    val fragment = CarFragment.newInstance()
+                    openFragment(fragment)
+                    true
+                }
+                R.id.action_live -> {
                     val fragment = TimesFragment.newInstance()
                     openFragment(fragment)
                     true
@@ -52,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        bottom_navigation_view.selectedItemId = R.id.action_films
+        bottom_navigation_view.selectedItemId = R.id.action_live
     }
 
     private fun openFragment(fragment: Fragment) {
