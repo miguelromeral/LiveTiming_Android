@@ -2,8 +2,8 @@ package es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
-import es.miguelromeral.f1.codemasters.livetiming.classes.listener.Controller
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Game
+import es.miguelromeral.f1.codemasters.livetiming.listener.Controller
+import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import kotlinx.coroutines.*
 import timber.log.Timber
 

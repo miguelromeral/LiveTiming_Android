@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
+package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,7 +19,7 @@ class Player {
     val participant : LiveData<Participant>
         get() = _participant
 
-    private var _telemetry = MutableLiveData<Telemetry>()
+    /*private*/ var _telemetry = MutableLiveData<Telemetry>()
     val telemetry : LiveData<Telemetry>
         get() = _telemetry
 
@@ -42,7 +42,7 @@ class Player {
     }
 
     @Synchronized
-    fun newParticipant2018(info: ParticipantData, era: UByte? = null){
+    fun newParticipant2018(info: ParticipantData, era: Byte? = null){
         var part = getParticipantOrNew()
         part.updateFrom2018(info, era)
         _participant.postValue(part)
@@ -77,7 +77,7 @@ class Player {
     }
 
     @Synchronized
-    fun newParticipant2017(info: CarUDPData, era: UByte? = null){
+    fun newParticipant2017(info: CarUDPData, era: Byte? = null){
         var part = getParticipantOrNew()
         part.updateFrom2017(info, era)
         _participant.postValue(part)
@@ -120,5 +120,4 @@ class Player {
         }else{
             carStatus.value!!
         }
-
 }

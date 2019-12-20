@@ -1,13 +1,15 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
+package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.LapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
+import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
 @ExperimentalUnsignedTypes
 class Lap {
 
-    var format: Format = Format.UNKNOWN
+    var format: Format =
+        Format.UNKNOWN
 
     var lastLapTime = MutableLiveData<Float>(0f)
     var currentLapTime = MutableLiveData<Float>(0f)

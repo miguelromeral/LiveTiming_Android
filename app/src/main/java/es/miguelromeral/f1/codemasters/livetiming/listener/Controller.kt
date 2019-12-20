@@ -1,7 +1,8 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes.listener
+package es.miguelromeral.f1.codemasters.livetiming.listener
 
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.*
+import es.miguelromeral.f1.codemasters.livetiming.classes.*
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
+import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -33,7 +34,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
             airTemperature.postValue(31)
             trackTemperature.postValue(53)
             sessionType.postValue(3u)
-            era.postValue(1u)
+            era.postValue(0u)
             sessionTimeLeft.postValue(599)
             sessionDuration.postValue(1200)
             safetyCarStatus.postValue(0u)
@@ -50,7 +51,8 @@ class Controller(val port: Int = DEFAULT_PORT) {
         while(i < DEBUG_count){
             var p = Player()
             p._participant.postValue(Participant().apply {
-                name.postValue("F. LASTNAME $i")
+                //name.postValue("F. LASTNAME $i")
+                driverId.postValue(i.toByte())
                 teamId.postValue(i.toByte())
                 format = Format.F1_2018
             })
@@ -60,6 +62,9 @@ class Controller(val port: Int = DEFAULT_PORT) {
             })
             p._carStatus.postValue(CarStatus().apply {
                 tyreCompound.postValue(i.toUByte())
+            })
+            p._telemetry.postValue(Telemetry().apply {
+                engineTemperature.postValue(i.toShort())
             })
             ml.add(p)
             i++

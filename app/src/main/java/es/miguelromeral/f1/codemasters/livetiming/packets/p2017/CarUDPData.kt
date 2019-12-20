@@ -25,47 +25,6 @@ class CarUDPData internal constructor(content: ByteArray) {
     val currentLapInvalid = content[43]
     val penalties = content[44]
 
-    fun getStandardTeam(era: UByte?): Int {
-        era?.let {
-            return when (it.toInt()) {
-                Packet2017.ERA_MODERN -> {
-                    when (teamId.toInt()) {
-                        0 -> Standard.TEAMS.REDBULL
-                        1 -> Standard.TEAMS.FERRARI
-                        2 -> Standard.TEAMS.MCLAREN
-                        3 -> Standard.TEAMS.RENAULT
-                        4 -> Standard.TEAMS.MERCEDES
-                        5 -> Standard.TEAMS.SAUBER
-                        6 -> Standard.TEAMS.FORCE_INDIA
-                        7 -> Standard.TEAMS.WILLIAMS
-                        8 -> Standard.TEAMS.TORO_ROSSO
-                        11 -> Standard.TEAMS.HAAS
-                        else -> Standard.UNKNOWN
-                    }
-                }
-                Packet2017.ERA_CLASSIC -> {
-                    when (teamId.toInt()) {
-                        0 -> Standard.TEAMS.WILLIAMS_1992
-                        1 -> Standard.TEAMS.MCLAREN_1988
-                        2 -> Standard.TEAMS.MCLAREN_2008
-                        3 -> Standard.TEAMS.FERRARI_2004
-                        4 -> Standard.TEAMS.FERRARI_1995
-                        5 -> Standard.TEAMS.FERRARI_2007
-                        6 -> Standard.TEAMS.MCLAREN_1998
-                        7 -> Standard.TEAMS.WILLIAMS_1996
-                        8 -> Standard.TEAMS.RENAULT_2006
-                        10 -> Standard.TEAMS.FERRARI_2002
-                        11 -> Standard.TEAMS.REDBULL_2010
-                        12 -> Standard.TEAMS.MCLAREN_1991
-                        else -> Standard.UNKNOWN
-                    }
-                }
-                else -> Standard.UNKNOWN
-            }
-        }
-        return Standard.UNKNOWN
-    }
-
     companion object{
         const val SIZE = 45
 

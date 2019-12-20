@@ -2,8 +2,7 @@ package es.miguelromeral.f1.codemasters.livetiming.ui.factories
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Game
-import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
+import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.SetupViewModel
 import java.lang.IllegalArgumentException
 

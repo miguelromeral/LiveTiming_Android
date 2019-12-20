@@ -59,19 +59,6 @@ class LiveTimingFragment : Fragment() {
 
         (binding.rvLiveTiming.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
-        /*sharedViewModel.currentSession.players.observe(this, Observer {
-            it?.let{
-                Timber.i("Submitting the new list.")
-
-                it.forEach{
-                    it.currentLap.observe(lifecycleOwner, Observer {
-
-                    })
-                }
-
-                adapter.submitList(it)
-            }
-        })*/
 
         viewModel?.let{ vm ->
             vm.items.observe(this, Observer {

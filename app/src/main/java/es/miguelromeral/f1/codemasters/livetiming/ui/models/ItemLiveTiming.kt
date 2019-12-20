@@ -1,10 +1,10 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.models
 
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.CarStatus
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Lap
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Participant
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Session
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Format
+import es.miguelromeral.f1.codemasters.livetiming.classes.CarStatus
+import es.miguelromeral.f1.codemasters.livetiming.classes.Lap
+import es.miguelromeral.f1.codemasters.livetiming.classes.Participant
+import es.miguelromeral.f1.codemasters.livetiming.classes.Session
+import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
 
 class ItemLiveTiming private constructor()
@@ -12,7 +12,7 @@ class ItemLiveTiming private constructor()
     var position: UByte? = null
     var name: String? = null
     var fullname: String? = null
-    var driverId: UByte? = null
+    var driverId: Byte? = null
     var team: Byte? = null
     var time: Float? = null
     var compound: UByte? = null

@@ -5,12 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewParent
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentCarBinding
@@ -20,6 +24,7 @@ import es.miguelromeral.f1.codemasters.livetiming.ui.factories.SetupViewModelFac
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.SetupViewModel
+import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.TabsAdapter
 
 
 class CarFragment : Fragment() {
@@ -28,19 +33,26 @@ class CarFragment : Fragment() {
     private lateinit var sharedViewModel: GameViewModel
     private lateinit var viewModel: SetupViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_car, container, false)
-        sharedViewModel = (activity as MainActivity).viewModel
 
-        viewModel = ViewModelProviders.of(this,
-            SetupViewModelFactory(
-                sharedViewModel.currentSession
-            )
-        ).get(SetupViewModel::class.java)
+        sharedViewModel = (activity as MainActivity).viewModel
+        viewModel = (activity as MainActivity).setupViewModel
+
+        val viewPager = binding.viewpagerCar as ViewPager
+        setupViewPager(viewPager)
+        val tabs = binding.resultTabsCar as TabLayout
+        tabs.setupWithViewPager(viewPager)
+
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
@@ -59,10 +71,10 @@ class CarFragment : Fragment() {
 
                 binding.spPlayers.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-                        binding.viewModel?.setSelectedItem(items[i])
+                        viewModel?.setSelectedItem(i, items[i], it[i])
                     }
                     override fun onNothingSelected(adapterView: AdapterView<*>) {
-                        binding.viewModel?.setSelectedItem()
+                        //viewModel?.setSelectedItem()
                     }
                 }
 
@@ -73,6 +85,16 @@ class CarFragment : Fragment() {
 
         return binding.root
     }
+
+
+    private fun setupViewPager(viewPager: ViewPager) {
+        val adapter = TabsAdapter(childFragmentManager)
+        adapter.addFragment(StatusFragment.newInstance(), "Status")
+        adapter.addFragment(TelemetryFragment.newInstance(), "Telemetry")
+        viewPager.adapter = adapter
+    }
+
+
 
     companion object {
 

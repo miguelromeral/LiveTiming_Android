@@ -1,7 +1,8 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
+package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarTelemetryData
+import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
 
 @ExperimentalUnsignedTypes

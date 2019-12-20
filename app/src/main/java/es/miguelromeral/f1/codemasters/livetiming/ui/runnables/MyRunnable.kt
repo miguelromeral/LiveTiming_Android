@@ -1,6 +1,6 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.runnables
 
-import es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Game
+import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.MyHandlerThread
 

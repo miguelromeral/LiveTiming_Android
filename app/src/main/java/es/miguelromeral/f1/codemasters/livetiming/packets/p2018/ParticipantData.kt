@@ -46,42 +46,14 @@ class ParticipantData private constructor(content: ByteArray){
 
 
     fun getStandardAIControlled() = when (aiControlled.toInt()) {
-            0 -> Standard.AIMode.HUMAN
-            1 -> Standard.AIMode.AI
+            0 -> Standard.AI.HUMAN
+            1 -> Standard.AI.AI
             else -> Standard.UNKNOWN
         }
 
-    fun getStandardTeamId() = when(teamId.toInt()){
-        0 -> Standard.TEAMS.MERCEDES
-        1 -> Standard.TEAMS.FERRARI
-        2 -> Standard.TEAMS.REDBULL
-        3 -> Standard.TEAMS.WILLIAMS
-        4 -> Standard.TEAMS.FORCE_INDIA
-        5 -> Standard.TEAMS.RENAULT
-        6 -> Standard.TEAMS.TORO_ROSSO
-        7 -> Standard.TEAMS.HAAS
-        8 -> Standard.TEAMS.MCLAREN
-        9 -> Standard.TEAMS.SAUBER
-        10 -> Standard.TEAMS.MCLAREN_1988
-        11 -> Standard.TEAMS.MCLAREN_1991
-        12 -> Standard.TEAMS.WILLIAMS_1992
-        13 -> Standard.TEAMS.FERRARI_1995
-        14 -> Standard.TEAMS.WILLIAMS_1996
-        15 -> Standard.TEAMS.MCLAREN_1998
-        16 -> Standard.TEAMS.FERRARI_2002
-        17 -> Standard.TEAMS.FERRARI_2004
-        18 -> Standard.TEAMS.RENAULT_2006
-        19 -> Standard.TEAMS.FERRARI_2007
-        20 -> Standard.TEAMS.MCLAREN_2008
-        21 -> Standard.TEAMS.REDBULL_2010
-        22 -> Standard.TEAMS.FERRARI_1976
-        34 -> Standard.TEAMS.MCLAREN_1976
-        35 -> Standard.TEAMS.LOTUS_1972
-        36 -> Standard.TEAMS.FERRARI_1979
-        37 -> Standard.TEAMS.MCLAREN_1982
-        38 -> Standard.TEAMS.WILLIAMS_2003
-        39 -> Standard.TEAMS.BRAWN_2009
-        40 -> Standard.TEAMS.LOTUS_1978
+    fun getStandardDriverId() = when (driverId.toInt()) {
+        0 -> Standard.AI.HUMAN
+        1 -> Standard.AI.AI
         else -> Standard.UNKNOWN
     }
 
@@ -192,104 +164,5 @@ class ParticipantData private constructor(content: ByteArray){
             return "Unknown"
         }
 
-        fun getTeam(teamId: UByte):String {
-            MyApplication.getContext()?.resources?.let {
-                return it.getString(
-                    when (teamId.toInt()) {
-                        0 -> R.string.team_mercedes
-                        1 -> R.string.team_ferrari
-                        2 -> R.string.team_redbull
-                        3 -> R.string.team_williams
-                        4 -> R.string.team_force_india
-                        5 -> R.string.team_renault
-                        6 -> R.string.team_toro_rosso
-                        7 -> R.string.team_haas
-                        8 -> R.string.team_mclaren
-                        9 -> R.string.team_sauber
-                        10 -> R.string.team_mclaren_1988
-                        11 -> R.string.team_mclaren_1991
-                        12 -> R.string.team_williams_1992
-                        13 -> R.string.team_ferrari_1995
-                        14 -> R.string.team_williams_1996
-                        15 -> R.string.team_mclaren_1998
-                        16 -> R.string.team_ferrari_2002
-                        17 -> R.string.team_ferrari_2004
-                        18 -> R.string.team_renault_2006
-                        19 -> R.string.team_ferrari_2007
-                        20 -> R.string.team_mclaren_2008
-                        21 -> R.string.team_redbull_2010
-                        22 -> R.string.team_ferrari_1976
-                        34 -> R.string.team_mclaren_1976
-                        35 -> R.string.team_lotus_1972
-                        36 -> R.string.team_ferrari_1979
-                        37 -> R.string.team_mclaren_1982
-                        38 -> R.string.team_williams_2003
-                        39 -> R.string.team_brawn_2009
-                        40 -> R.string.team_lotus_1978
-                        else -> R.string.unknown
-                    }
-                )
-            }
-            return "Unknown"
-        }
-
-        fun getDriver(driverId: UByte):String {
-            MyApplication.getContext()?.resources?.let {
-                return it.getString(
-                    when (driverId.toInt()) {
-                        0 -> R.string.driver_Carlos_Sainz
-                        2 -> R.string.driver_Daniel_Ricciardo
-                        3 -> R.string.driver_Fernando_Alonso
-                        6 -> R.string.driver_Kimi_Raikkonen
-                        7 -> R.string.driver_Lewis_Hamilton
-                        8 -> R.string.driver_Marcus_Ericcson
-                        9 -> R.string.driver_Max_Verstappen
-                        10 -> R.string.driver_Nico_Hulkenberg
-                        11 -> R.string.driver_Kevin_Magnussen
-                        12 -> R.string.driver_Romain_Grosjean
-                        13 -> R.string.driver_Sebastian_Vettel
-                        14 -> R.string.driver_Sergio_Perez
-                        15 -> R.string.driver_Valtteri_Bottas
-                        17 -> R.string.driver_Esteban_Ocon
-                        18 -> R.string.driver_Stoffel_Vandoorne
-                        19 -> R.string.driver_Lance_Stroll
-                        20 -> R.string.driver_Arron_Barnes
-                        21 -> R.string.driver_Martin_Giles
-                        22 -> R.string.driver_Alex_Murray
-                        23 -> R.string.driver_Lucas_Roth
-                        24 -> R.string.driver_Igor_Correia
-                        25 -> R.string.driver_Sophie_Levasseur
-                        26 -> R.string.driver_Jonas_Schiffer
-                        27 -> R.string.driver_Alain_Forest
-                        28 -> R.string.driver_Jay_Letourneau
-                        29 -> R.string.driver_Esto_Saari
-                        30 -> R.string.driver_Yasar_Atiyeh
-                        31 -> R.string.driver_Callisto_Calabresi
-                        32 -> R.string.driver_Naota_Izum
-                        33 -> R.string.driver_Howard_Clarke
-                        34 -> R.string.driver_Wilheim_Kaufmann
-                        35 -> R.string.driver_Marie_Laursen
-                        36 -> R.string.driver_Flavio_Nieves
-                        37 -> R.string.driver_Peter_Belousov
-                        38 -> R.string.driver_Klimek_Michalski
-                        39 -> R.string.driver_Santiago_Moreno
-                        40 -> R.string.driver_Benjamin_Coppens
-                        41 -> R.string.driver_Noah_Visser
-                        42 -> R.string.driver_Gert_Waldmuller
-                        43 -> R.string.driver_Julian_Quesada
-                        44 -> R.string.driver_Daniel_Jones
-                        58 -> R.string.driver_Charles_Leclerc
-                        59 -> R.string.driver_Pierre_Gasly
-                        60 -> R.string.driver_Brendon_Hartley
-                        61 -> R.string.driver_Sergey_Sirotkin
-                        69 -> R.string.driver_Ruben_Meijer
-                        70 -> R.string.driver_Rashid_Nair
-                        71 -> R.string.driver_Jack_Tremblay
-                        else -> R.string.unknown
-                    }
-                )
-            }
-            return "Unknown"
-        }
     }
 }

@@ -10,9 +10,10 @@ import com.google.android.material.tabs.TabLayout
 import es.miguelromeral.f1.codemasters.livetiming.R
 import androidx.viewpager.widget.ViewPager
 import androidx.databinding.DataBindingUtil
-import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentBlankBinding
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentManager
+import es.miguelromeral.f1.codemasters.livetiming.databinding.FragmentTimesBinding
+import es.miguelromeral.f1.codemasters.livetiming.ui.adapters.TabsAdapter
 
 
 /**
@@ -25,7 +26,7 @@ import androidx.fragment.app.FragmentManager
  */
 class TimesFragment : Fragment() {
 
-    private lateinit var binding: FragmentBlankBinding
+    private lateinit var binding: FragmentTimesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,15 +38,13 @@ class TimesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_blank, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_times, container, false)
 
-        val viewPager = binding.viewpager as ViewPager
+        val viewPager = binding.viewpagerCar as ViewPager
         setupViewPager(viewPager)
         // Set Tabs inside Toolbar
-        val tabs = binding.resultTabs as TabLayout
+        val tabs = binding.resultTabsCar as TabLayout
         tabs.setupWithViewPager(viewPager)
-
-
 
         // Inflate the layout for this fragment
         return binding.root
@@ -53,40 +52,11 @@ class TimesFragment : Fragment() {
 
 
     private fun setupViewPager(viewPager: ViewPager) {
-
-
-        val adapter = Adapter(childFragmentManager)
+        val adapter = TabsAdapter(childFragmentManager)
         adapter.addFragment(LiveTimingFragment.newInstance(), "Times")
         //adapter.addFragment(Tab2(), "Tab 2")
         viewPager.adapter = adapter
-
-
     }
-
-
-    internal class Adapter(manager: FragmentManager
-    ) : FragmentPagerAdapter(manager) {
-        private val mFragmentList = mutableListOf<Fragment>()
-        private val mFragmentTitleList = mutableListOf<String>()
-
-        override fun getItem(position: Int): Fragment {
-            return mFragmentList.get(position)
-        }
-
-        override fun getCount(): Int {
-            return mFragmentList.size
-        }
-
-        fun addFragment(fragment: Fragment, title: String) {
-            mFragmentList.add(fragment)
-            mFragmentTitleList.add(title)
-        }
-
-        override fun getPageTitle(position: Int): CharSequence? {
-            return mFragmentTitleList.get(position)
-        }
-    }
-
 
 
     companion object {

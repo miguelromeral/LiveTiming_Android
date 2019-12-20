@@ -1,4 +1,4 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
+package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,13 +7,16 @@ import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
+import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
 class Game {
 
     var frameId = MutableLiveData(0)
     var format = Format.UNKNOWN
 
-    /*private*/ var _sessionData: MutableLiveData<Session> = MutableLiveData(Session())
+    /*private*/ var _sessionData: MutableLiveData<Session> = MutableLiveData(
+        Session()
+    )
     val sessionData : LiveData<Session>
         get() = _sessionData
 
@@ -36,7 +39,7 @@ class Game {
     }*/
 
 
-    fun getPlayerByNameOrID(name: String?, id: UByte?): Player?{
+    fun getPlayerByNameOrID(name: String?, id: Byte?): Player?{
         synchronized(players) {
             players.value?.let { list ->
                 if (name == null) {
@@ -92,7 +95,7 @@ class Game {
 
         var count = 0
         for(p in list){
-            p.newParticipant2018(info.participants[count], sessionData.value?.era?.value?.toUByte())
+            p.newParticipant2018(info.participants[count], sessionData.value?.era?.value?.toByte())
             count++
 
         }
@@ -126,7 +129,7 @@ class Game {
             var count = 0
             for(p in list){
                 val car = info.car_data[count]
-                p.newParticipant2017(car, sessionData.value?.era?.value?.toUByte())
+                p.newParticipant2017(car, sessionData.value?.era?.value?.toByte())
                 p.newLap2017(car)
                 p.newCarStatus2017(car)
                 count++

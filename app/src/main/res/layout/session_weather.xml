@@ -9,7 +9,7 @@
     <data>
         <variable
             name="session"
-            type="es.miguelromeral.f1.codemasters.livetiming.classes.toplayer.Session" />
+            type="es.miguelromeral.f1.codemasters.livetiming.classes.Session" />
     </data>
 
 

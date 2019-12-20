@@ -1,14 +1,16 @@
-package es.miguelromeral.f1.codemasters.livetiming.classes.toplayer
+package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.MarshalZone
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
+import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
 @ExperimentalUnsignedTypes
 class Session {
 
-    var format: Format = Format.UNKNOWN
+    var format: Format =
+        Format.UNKNOWN
 
     // Weather Info
     var weather = MutableLiveData<UByte>(0u)

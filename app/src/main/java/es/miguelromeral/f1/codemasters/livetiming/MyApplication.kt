@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import timber.log.Timber
 import androidx.preference.PreferenceManager
-import es.miguelromeral.f1.codemasters.livetiming.classes.listener.Controller
+import es.miguelromeral.f1.codemasters.livetiming.listener.Controller
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.LiveTimingViewModel
 import java.lang.Exception
 

@@ -5,24 +5,31 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import es.miguelromeral.f1.codemasters.livetiming.R
+import es.miguelromeral.f1.codemasters.livetiming.ui.factories.SetupViewModelFactory
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.TimesFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.SessionFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.GameViewModel
 import kotlinx.android.synthetic.main.activity_main2.*
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.CarFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.SettingsFragment
+import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.SetupViewModel
 
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: GameViewModel
+    lateinit var setupViewModel: SetupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
-
+        setupViewModel = ViewModelProviders.of(this,
+            SetupViewModelFactory(
+                viewModel.currentSession
+            )
+        ).get(SetupViewModel::class.java)
 
 
         bottom_navigation_view.setOnNavigationItemSelectedListener { menuItem ->
