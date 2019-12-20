@@ -2,6 +2,32 @@ package es.miguelromeral.f1.codemasters.livetiming.packets
 
 import android.content.res.Resources
 import classes.toplayer.Standard
+import classes.toplayer.Standard.TRACKS
+import classes.toplayer.Standard.TRACKS.ABU_DHABI
+import classes.toplayer.Standard.TRACKS.AUSTRIA
+import classes.toplayer.Standard.TRACKS.BAKU
+import classes.toplayer.Standard.TRACKS.BRAZIL
+import classes.toplayer.Standard.TRACKS.CATALUNYA
+import classes.toplayer.Standard.TRACKS.HOCKENHEIM
+import classes.toplayer.Standard.TRACKS.HUNGARORING
+import classes.toplayer.Standard.TRACKS.MELBOURNE
+import classes.toplayer.Standard.TRACKS.MEXICO
+import classes.toplayer.Standard.TRACKS.MONACO
+import classes.toplayer.Standard.TRACKS.MONTREAL
+import classes.toplayer.Standard.TRACKS.MONZA
+import classes.toplayer.Standard.TRACKS.PAUL_RICARD
+import classes.toplayer.Standard.TRACKS.SAKHIR
+import classes.toplayer.Standard.TRACKS.SAKHIR_SHORT
+import classes.toplayer.Standard.TRACKS.SHANGHAI
+import classes.toplayer.Standard.TRACKS.SILVERSTONE
+import classes.toplayer.Standard.TRACKS.SILVERSTONE_SHORT
+import classes.toplayer.Standard.TRACKS.SINGAPORE
+import classes.toplayer.Standard.TRACKS.SOCHI
+import classes.toplayer.Standard.TRACKS.SPA
+import classes.toplayer.Standard.TRACKS.SUZUKA
+import classes.toplayer.Standard.TRACKS.SUZUKA_SHORT
+import classes.toplayer.Standard.TRACKS.TEXAS
+import classes.toplayer.Standard.TRACKS.TEXAS_SHORT
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.Packet
@@ -80,45 +106,38 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
         else -> Standard.UNKNOWN
     }
 
+    fun getStandardTrackId(): Int = when(trackId.toInt()){
+        0 -> MELBOURNE
+        1 -> PAUL_RICARD
+        2 -> SHANGHAI
+        3 -> SAKHIR
+        4 -> CATALUNYA
+        5 -> MONACO
+        6 -> MONTREAL
+        7 -> SILVERSTONE
+        8 -> HOCKENHEIM
+        9 -> HUNGARORING
+        10 -> SPA
+        11 -> MONZA
+        12 -> SINGAPORE
+        13 -> SUZUKA
+        14 -> ABU_DHABI
+        15 -> TEXAS
+        16 -> BRAZIL
+        17 -> AUSTRIA
+        18 -> SOCHI
+        19 -> MEXICO
+        20 -> BAKU
+        21 -> SAKHIR_SHORT
+        22 -> SILVERSTONE_SHORT
+        23 -> TEXAS_SHORT
+        24 -> SUZUKA_SHORT
+        else -> Standard.UNKNOWN
+    }
+
     companion object {
         const val PACKET_ID = 1
         const val MAX_MARSHAL_ZONES = 21
-
-        fun getTrack(trackId: Byte):String {
-            MyApplication.getContext()?.resources?.let {
-                return it.getString(
-                    when (trackId.toInt()) {
-                        0 -> R.string.track_melbourne
-                        1 -> R.string.track_paul_ricard
-                        2 -> R.string.track_shangai
-                        3 -> R.string.track_sakhir
-                        4 -> R.string.track_catalunya
-                        5 -> R.string.track_monaco
-                        6 -> R.string.track_montreal
-                        7 -> R.string.track_silverstone
-                        8 -> R.string.track_hockenheim
-                        9 -> R.string.track_hungaroring
-                        10 -> R.string.track_spa
-                        11 -> R.string.track_monza
-                        12 -> R.string.track_singapore
-                        13 -> R.string.track_suzuka
-                        14 -> R.string.track_abu_dhabi
-                        15 -> R.string.track_texas
-                        16 -> R.string.track_brazil
-                        17 -> R.string.track_austria
-                        18 -> R.string.track_sochi
-                        19 -> R.string.track_mexico
-                        20 -> R.string.track_baku
-                        21 -> R.string.track_sakhir_short
-                        22 -> R.string.track_silverstone_short
-                        23 -> R.string.track_texas_short
-                        24 -> R.string.track_suzuka_short
-                        else -> R.string.unknown
-                    }
-                )
-            }
-            return "Unknown"
-        }
 
         fun getNateworkGame(networkGame: UByte):String {
             MyApplication.getContext()?.resources?.let {

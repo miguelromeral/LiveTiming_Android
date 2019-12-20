@@ -38,7 +38,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
             sessionTimeLeft.postValue(599)
             sessionDuration.postValue(1200)
             safetyCarStatus.postValue(0u)
-            trackId.postValue(4)
+            trackId.postValue(Standard.TRACKS.MONACO.toByte())
             trackLength.postValue(3900)
             totalLaps.postValue(70u)
         }

@@ -100,12 +100,12 @@ class CarUDPData internal constructor(content: ByteArray) {
         }
         return Standard.UNKNOWN
     }
-
-     fun getStandardAI() = when (driverId.toInt()) {
+/*
+     fun getStandardAI() = when (.toInt()) {
             0 -> Standard.AI.HUMAN
             1 -> Standard.AI.AI
             else -> Standard.UNKNOWN
-        }
+        }*/
 
 
     companion object{

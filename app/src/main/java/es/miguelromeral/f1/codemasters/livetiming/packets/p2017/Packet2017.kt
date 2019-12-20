@@ -129,6 +129,35 @@ class Packet2017 private constructor(content: ByteArray){
         else -> Standard.UNKNOWN
     }
 
+    fun getStandardTrackId() = when(track_number.toInt()){
+        0 -> Standard.TRACKS.MELBOURNE
+        1 -> Standard.TRACKS.SEPANG
+        2 -> Standard.TRACKS.SHANGHAI
+        3 -> Standard.TRACKS.SAKHIR
+        4 -> Standard.TRACKS.CATALUNYA
+        5 -> Standard.TRACKS.MONACO
+        6 -> Standard.TRACKS.MONTREAL
+        7 -> Standard.TRACKS.SILVERSTONE
+        8 -> Standard.TRACKS.HOCKENHEIM
+        9 -> Standard.TRACKS.HUNGARORING
+        10 -> Standard.TRACKS.SPA
+        11 -> Standard.TRACKS.MONZA
+        12 -> Standard.TRACKS.SINGAPORE
+        13 -> Standard.TRACKS.SUZUKA
+        14 -> Standard.TRACKS.ABU_DHABI
+        15 -> Standard.TRACKS.TEXAS
+        16 -> Standard.TRACKS.BRAZIL
+        17 -> Standard.TRACKS.AUSTRIA
+        18 -> Standard.TRACKS.SOCHI
+        19 -> Standard.TRACKS.MEXICO
+        20 -> Standard.TRACKS.BAKU
+        21 -> Standard.TRACKS.SAKHIR_SHORT
+        22 -> Standard.TRACKS.SILVERSTONE_SHORT
+        23 -> Standard.TRACKS.TEXAS_SHORT
+        24 -> Standard.TRACKS.SUZUKA_SHORT
+        else -> Standard.UNKNOWN
+    }
+
     companion object {
         const val SIZE = 1289
         const val MAX_CAR_NUMBER = 20

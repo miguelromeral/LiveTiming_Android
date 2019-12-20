@@ -10,8 +10,7 @@ import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 @ExperimentalUnsignedTypes
 class Session {
 
-    var format: Format =
-        Format.UNKNOWN
+    var format: Format = Format.UNKNOWN
 
     // Weather Info
     var weather = MutableLiveData<UByte>(0u)
@@ -29,7 +28,7 @@ class Session {
     // Grand Prix Info
     var totalLaps = MutableLiveData<UByte>(0u)
     var trackLength = MutableLiveData<Short>(0)
-    var trackId = MutableLiveData<Byte>(-1)
+    var trackId = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var numMarshalZones: UByte = 0u
     var marshalZones : List<MarshalZone> = listOf()
 
@@ -53,7 +52,7 @@ class Session {
         totalLaps.postValue(info.totalLaps)
         trackLength.postValue(info.trackLength)
         sessionType.postValue(info.sessionType)
-        trackId.postValue(info.trackId)
+        trackId.postValue(info.getStandardTrackId().toByte())
         era.postValue(info.getStandardEra().toByte())
         sessionTimeLeft.postValue(info.sessionTimeLeft)
         sessionDuration.postValue(info.sessionDuration)
@@ -71,7 +70,7 @@ class Session {
     @Synchronized
     fun updateFrom2017(info: Packet2017){
         format = Format.F1_2017
-        trackId.postValue(info.track_number.toByte())
+        trackId.postValue(info.getStandardTrackId().toByte())
         era.postValue(info.getStandardEra().toByte())
         //totalLaps = info.total_laps.toUByte()
     }
@@ -84,12 +83,6 @@ class Session {
             Format.F1_2018 -> SessionData.getWeather(weather.value!!)
             else -> "Unknown"
         }
-
-    fun track(): String = when(format) {
-        Format.F1_2017 -> Packet2017.getTrack(trackId.value!!)
-        Format.F1_2018 -> SessionData.getTrack(trackId.value!!)
-        else -> "Unknown"
-    }
 
     fun sessionType(): String = when(format){
         Format.F1_2018 -> SessionData.getSessionType(sessionType.value!!)

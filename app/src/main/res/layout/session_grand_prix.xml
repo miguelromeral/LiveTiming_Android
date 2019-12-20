@@ -45,7 +45,7 @@
                 style="@style/text_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{session.track()}"
+                app:track="@{session.trackId.intValue()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9"
                 tools:text="Monaco" />

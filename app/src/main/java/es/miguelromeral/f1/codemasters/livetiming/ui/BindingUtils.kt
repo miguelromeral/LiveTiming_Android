@@ -8,8 +8,6 @@ import androidx.databinding.BindingAdapter
 import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.standard.Format
-import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
-import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 
 
 @BindingAdapter("backgroundByPosition")
@@ -48,6 +46,11 @@ fun ImageView.setColorByTeam(team: Int?){
 @BindingAdapter("era")
 fun TextView.setEra(era: Int?){
     text = context.getString(Standard.ERA.getEraName(era))
+}
+
+@BindingAdapter("track")
+fun TextView.setTrack(track: Int?){
+    text = context.getString(Standard.TRACKS.getTrackName(track))
 }
 
 

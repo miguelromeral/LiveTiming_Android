@@ -215,6 +215,66 @@ class Standard {
         }
     }
 
+    object TRACKS {
+        const val MELBOURNE = 0
+        const val PAUL_RICARD = 1
+        const val SHANGHAI = 2
+        const val SAKHIR = 3
+        const val CATALUNYA = 4
+        const val MONACO = 5
+        const val MONTREAL = 6
+        const val SILVERSTONE = 7
+        const val HOCKENHEIM = 8
+        const val HUNGARORING = 9
+        const val SPA = 10
+        const val MONZA = 11
+        const val SINGAPORE = 12
+        const val SUZUKA = 13
+        const val ABU_DHABI = 14
+        const val TEXAS = 15
+        const val BRAZIL = 16
+        const val AUSTRIA = 17
+        const val SOCHI = 18
+        const val MEXICO = 19
+        const val BAKU = 20
+        const val SEPANG = 21
+        const val SAKHIR_SHORT = 31
+        const val SILVERSTONE_SHORT = 32
+        const val TEXAS_SHORT = 33
+        const val SUZUKA_SHORT = 34
+
+        fun getTrackName(trackId: Int?): Int = when (trackId) {
+                MELBOURNE -> R.string.track_melbourne
+                PAUL_RICARD -> R.string.track_paul_ricard
+                SHANGHAI -> R.string.track_shangai
+                SAKHIR -> R.string.track_sakhir
+                CATALUNYA -> R.string.track_catalunya
+                MONACO -> R.string.track_monaco
+                MONTREAL -> R.string.track_montreal
+                SILVERSTONE -> R.string.track_silverstone
+                HOCKENHEIM -> R.string.track_hockenheim
+                HUNGARORING -> R.string.track_hungaroring
+                SPA -> R.string.track_spa
+                MONZA -> R.string.track_monza
+                SINGAPORE -> R.string.track_singapore
+                SUZUKA -> R.string.track_suzuka
+                SEPANG -> R.string.track_sepang
+                ABU_DHABI -> R.string.track_abu_dhabi
+                TEXAS -> R.string.track_texas
+                BRAZIL -> R.string.track_brazil
+                AUSTRIA -> R.string.track_austria
+                SOCHI -> R.string.track_sochi
+                MEXICO -> R.string.track_mexico
+                BAKU -> R.string.track_baku
+                SAKHIR_SHORT -> R.string.track_sakhir_short
+                SILVERSTONE_SHORT -> R.string.track_silverstone_short
+                TEXAS_SHORT -> R.string.track_texas_short
+                SUZUKA_SHORT -> R.string.track_suzuka_short
+                else -> R.string.unknown
+            }
+
+    }
+
     object ERA {
         const val CLASSIC_2017 = 0
         const val CLASSIC_2018 = 1
