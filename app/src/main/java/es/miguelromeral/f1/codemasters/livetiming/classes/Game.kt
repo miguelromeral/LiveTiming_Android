@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketLapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
 import es.miguelromeral.f1.codemasters.livetiming.standard.Format
@@ -86,6 +87,23 @@ class Game {
             }
         }
     }
+
+
+    @Synchronized
+    fun newCarStatus2018(info: PacketCarStatusData){
+        format = Format.F1_2018
+        frameId.postValue(info.header.frameIdentifier)
+        players.value?.let {
+            if (it.size != 0) {
+                for ((count, p) in players.value!!.withIndex()) {
+                    synchronized(p) {
+                        p.newCarStatus2018(info.carStatusData[count])
+                    }
+                }
+            }
+        }
+    }
+
 
     @Synchronized
     fun newParticipants2018(info: PacketParticipantData){

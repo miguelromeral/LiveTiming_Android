@@ -39,8 +39,9 @@ class Participant {
     @Synchronized
     fun updateFrom2017(info: CarUDPData, era: Byte? = null){
         format = Format.F1_2017
-        driverId.postValue(info.driverId)
-        teamId.postValue(Standard.TEAMS.getStandardName2017(info.teamId, era).toByte())
+        aiControlled.postValue(info.getStandardAI().toByte())
+        driverId.postValue(info.getStandardDriverId(era).toByte())
+        teamId.postValue(Standard.TEAMS.getStandardTeamName2017(info.teamId, era).toByte())
         name.postValue(null)
         era?.let{
             this.era.postValue(it)

@@ -35,47 +35,19 @@ fun TextView.setTimeFormatted(time: Float?) {
     text = floatToTimeFormatted(time)
 }
 
-@BindingAdapter("tyre", "format", "era", requireAll = false)
-fun ImageView.setTyreImage(compound: Int?, format: Format, era: Int? = Packet2017.ERA_MODERN){
-    var resource = es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_unknown
-    if(compound != null){
-        when(format){
-            Format.F1_2018 -> {
-                if (era != null) {
-                    when (era) {
-                        CarStatusData.ERA_MODERN.toInt() -> {
-                            if (compound != null)
-                                resource = when (compound) {
-                                    0 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_pink
-                                    1 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_purple
-                                    2 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_red
-                                    3 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_yellow
-                                    4 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_white
-                                    5 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_cyan
-                                    6 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_orange
-                                    7 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_green
-                                    8 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_blue
-                                    else -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_unknown
-                                }
-                        }
-                        CarStatusData.ERA_CLASSIC.toInt() -> {
-                            if (compound != null)
-                                resource = when (compound) {
-                                    in 0..6 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_white
-                                    else -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.tyre_blue
-                                }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    setImageResource(resource)
+@BindingAdapter("tyre", "format", requireAll = false)
+fun ImageView.setTyreImage(compound: Int?, format: Format){
+    setImageResource(Standard.TYRES.getTyreDrawable(compound))
 }
 
 @BindingAdapter("teamColor")
 fun ImageView.setColorByTeam(team: Int?){
     setColorFilter(getColor(context, Standard.TEAMS.getTeamColor(team)))
+}
+
+@BindingAdapter("era")
+fun TextView.setEra(era: Int?){
+    text = context.getString(Standard.ERA.getEraName(era))
 }
 
 
@@ -139,6 +111,15 @@ fun TextView.setLenght(length: Int?){
         return
     }
     text = "- m."
+}
+
+@BindingAdapter("test")
+fun TextView.setTest(value: Int?){
+    value?.let{
+        text = value.toString()
+        return
+    }
+    text = "---"
 }
 
 

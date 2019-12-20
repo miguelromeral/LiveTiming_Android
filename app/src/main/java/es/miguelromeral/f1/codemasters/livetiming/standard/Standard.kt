@@ -1,9 +1,12 @@
 package classes.toplayer
 
 import android.content.Context
+import classes.toplayer.Standard.Companion.UNKNOWN_TEXT
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData.Companion.ERA_CLASSIC
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData.Companion.ERA_MODERN
 
 class Standard {
 
@@ -15,6 +18,83 @@ class Standard {
     object AI {
         const val HUMAN = 0
         const val AI = 1
+    }
+
+    object TYRES {
+        const val HYPERSOFT = 0
+        const val ULTRASOFT = 1
+        const val SUPERSOFT = 2
+        const val SOFT = 3
+        const val MEDIUM = 4
+        const val HARD = 5
+        const val SUPERHARD = 6
+        const val INTER = 7
+        const val WET = 8
+
+        fun getTyreName(tyre: Int?): Int {
+            tyre?.let{
+                return when(tyre){
+                    HYPERSOFT -> R.string.tyre_hypersoft
+                    ULTRASOFT -> R.string.tyre_ultrasoft
+                    SUPERSOFT -> R.string.tyre_supersoft
+                    SOFT -> R.string.tyre_soft
+                    MEDIUM -> R.string.tyre_medium
+                    HARD -> R.string.tyre_hard
+                    SUPERHARD -> R.string.tyre_superhard
+                    INTER -> R.string.tyre_inter
+                    WET -> R.string.tyre_wet
+                    else -> R.string.unknown
+                }
+            }
+            return R.string.unknown
+        }
+
+        fun getTyreColor(tyre: Int?): Int {
+            tyre?.let{
+                return when(tyre){
+                    HYPERSOFT -> R.color.tyre_pink
+                    ULTRASOFT -> R.color.tyre_purple
+                    SUPERSOFT -> R.color.tyre_red
+                    SOFT -> R.color.tyre_yellow
+                    MEDIUM -> R.color.tyre_white
+                    HARD -> R.color.tyre_cyan
+                    SUPERHARD -> R.color.tyre_orange
+                    INTER -> R.color.tyre_green
+                    WET -> R.color.tyre_blue
+                    else -> R.color.tyre_unknown
+                }
+            }
+            return R.color.tyre_unknown
+        }
+
+        fun getTyreDrawable(tyre: Int?) = when (tyre) {
+                0 -> R.drawable.tyre_pink
+                1 -> R.drawable.tyre_purple
+                2 -> R.drawable.tyre_red
+                3 -> R.drawable.tyre_yellow
+                4 -> R.drawable.tyre_white
+                5 -> R.drawable.tyre_cyan
+                6 -> R.drawable.tyre_orange
+                7 -> R.drawable.tyre_green
+                8 -> R.drawable.tyre_blue
+                else -> R.drawable.tyre_unknown
+            }
+
+    }
+
+    object FUELMIX {
+        const val LEAN = 0
+        const val STANDARD = 1
+        const val RICH = 2
+        const val MAX = 3
+
+        fun getFuelMixName(fuelmix: Int?) = when(fuelmix){
+            LEAN -> R.string.fuelmix_lean
+            STANDARD -> R.string.fuelmix_standard
+            RICH -> R.string.fuelmix_rich
+            MAX -> R.string.fuelmix_max
+            else -> R.string.unknown
+        }
     }
 
     object DRIVERS {
@@ -29,15 +109,19 @@ class Standard {
         const val ALONSO = 14
         const val LECLERC = 16
         const val STROLL = 18
+        const val MASSA = 19
         const val MAGNUSSEN = 20
+        const val KVYAT = 26
         const val HULKENBERG = 27
         const val HARTLEY = 28
+        const val PALMER = 30
         const val OCON = 31
         const val VERSTAPPEN = 33
         const val SIROTKIN = 35
         const val HAMILTON = 44
         const val SAINZ = 55
         const val BOTTAS = 77
+        const val WEHRLEIN = 94
         const val BARNES = 200
         const val GILES = 201
         const val MURRAY = 202
@@ -72,10 +156,12 @@ class Standard {
                 return it.getString(
                     when (driver) {
                         SAINZ -> R.string.driver_Carlos_Sainz
+                        MASSA -> R.string.driver_Felipe_Massa
                         RICCIARDO -> R.string.driver_Daniel_Ricciardo
                         ALONSO -> R.string.driver_Fernando_Alonso
                         RAIKKONEN -> R.string.driver_Kimi_Raikkonen
                         HAMILTON -> R.string.driver_Lewis_Hamilton
+                        KVYAT -> R.string.driver_Daniil_Kvyat
                         ERICCSON -> R.string.driver_Marcus_Ericcson
                         VERSTAPPEN -> R.string.driver_Max_Verstappen
                         HULKENBERG -> R.string.driver_Nico_Hulkenberg
@@ -88,6 +174,8 @@ class Standard {
                         VANDOORNE -> R.string.driver_Stoffel_Vandoorne
                         STROLL -> R.string.driver_Lance_Stroll
                         BARNES -> R.string.driver_Arron_Barnes
+                        PALMER -> R.string.driver_Jolyon_Palmer
+                        WEHRLEIN -> R.string.driver_Pascal_Wehrlein
                         GILES -> R.string.driver_Martin_Giles
                         MURRAY -> R.string.driver_Alex_Murray
                         ROTH -> R.string.driver_Lucas_Roth
@@ -124,6 +212,19 @@ class Standard {
                 )
             }
             return UNKNOWN_TEXT
+        }
+    }
+
+    object ERA {
+        const val CLASSIC_2017 = 0
+        const val CLASSIC_2018 = 1
+        const val MODERN_2017 = 10
+        const val MODERN_2018 = 11
+
+        fun getEraName(era: Int?) = when(era){
+            CLASSIC_2017, CLASSIC_2018 -> R.string.era_classic
+            MODERN_2017, MODERN_2018 -> R.string.era_modern
+            else -> R.string.unknown
         }
     }
 
@@ -196,10 +297,10 @@ class Standard {
         }
 
 
-        fun getStandardName2017(teamId: Byte?, era: Byte?): Int {
+        fun getStandardTeamName2017(teamId: Byte?, era: Byte?): Int {
             era?.let {
                 return when (it.toInt()) {
-                    Packet2017.ERA_MODERN -> {
+                    ERA.MODERN_2017 -> {
                         when (teamId?.toInt()) {
                             0 -> Standard.TEAMS.REDBULL
                             1 -> Standard.TEAMS.FERRARI
@@ -214,7 +315,7 @@ class Standard {
                             else -> Standard.UNKNOWN
                         }
                     }
-                    Packet2017.ERA_CLASSIC -> {
+                    ERA.CLASSIC_2017 -> {
                         when (teamId?.toInt()) {
                             0 -> Standard.TEAMS.WILLIAMS_1992
                             1 -> Standard.TEAMS.MCLAREN_1988

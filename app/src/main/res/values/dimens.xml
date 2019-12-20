@@ -10,6 +10,8 @@
 
     <dimen name="margin_section">15sp</dimen>
 
+    <dimen name="size_spinner">42sp</dimen>
+
     <!-- Tyres -->
     <dimen name="tyres_width_height">100dp</dimen>
     <dimen name="tyres_line_stroke">20dp</dimen>

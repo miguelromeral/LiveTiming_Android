@@ -62,7 +62,6 @@
         android:id="@+id/ivCompound"
         app:tyre="@{item.compoundAsInt}"
         app:format="@{item.format}"
-        app:era="@{item.eraAsInt}"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

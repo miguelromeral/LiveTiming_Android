@@ -1,6 +1,7 @@
 package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.MutableLiveData
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.MarshalZone
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
@@ -19,7 +20,7 @@ class Session {
 
     // Session Info
     var sessionType = MutableLiveData<UByte>(0u)
-    var era = MutableLiveData<UByte>(0u)
+    var era = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var sessionTimeLeft = MutableLiveData<Short>(0)
     var sessionDuration = MutableLiveData<Short>(0)
     var safetyCarStatus = MutableLiveData<UByte>(0u)
@@ -53,7 +54,7 @@ class Session {
         trackLength.postValue(info.trackLength)
         sessionType.postValue(info.sessionType)
         trackId.postValue(info.trackId)
-        era.postValue(info.era)
+        era.postValue(info.getStandardEra().toByte())
         sessionTimeLeft.postValue(info.sessionTimeLeft)
         sessionDuration.postValue(info.sessionDuration)
         pitSpeedLimit = info.pitSpeedLimit
@@ -71,6 +72,7 @@ class Session {
     fun updateFrom2017(info: Packet2017){
         format = Format.F1_2017
         trackId.postValue(info.track_number.toByte())
+        era.postValue(info.getStandardEra().toByte())
         //totalLaps = info.total_laps.toUByte()
     }
 
@@ -103,11 +105,6 @@ class Session {
 
     fun networkGame(): String = when(format){
         Format.F1_2018 -> SessionData.getNateworkGame(networkGame)
-        else -> "Unknown"
-    }
-
-    fun era(): String = when(format){
-        Format.F1_2018 -> SessionData.getEra(era.value!!)
         else -> "Unknown"
     }
 }

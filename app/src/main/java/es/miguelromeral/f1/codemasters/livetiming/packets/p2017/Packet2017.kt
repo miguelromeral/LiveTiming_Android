@@ -1,5 +1,6 @@
 package es.miguelromeral.f1.codemasters.livetiming.packets.p2017
 
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.*
 
 @kotlin.ExperimentalUnsignedTypes
@@ -112,6 +113,22 @@ class Packet2017 private constructor(content: ByteArray){
         return listOf(CarUDPData(content.sliceArray(start until end))) + createCarDataArray(content, begining, iteration + 1)
     }
 
+
+    fun getStandardFuelMix() = when(fuel_mix.toInt()){
+        0 -> Standard.FUELMIX.LEAN
+        1 -> Standard.FUELMIX.STANDARD
+        2 -> Standard.FUELMIX.RICH
+        3 -> Standard.FUELMIX.MAX
+        else -> Standard.UNKNOWN
+    }
+
+
+    fun getStandardEra() = when(era.toInt()){
+        2017 -> Standard.ERA.MODERN_2017
+        1980 -> Standard.ERA.CLASSIC_2017
+        else -> Standard.UNKNOWN
+    }
+
     companion object {
         const val SIZE = 1289
         const val MAX_CAR_NUMBER = 20
@@ -119,9 +136,6 @@ class Packet2017 private constructor(content: ByteArray){
         fun create(content: ByteArray): Packet2017 {
             return Packet2017(content.sliceArray(0 until SIZE))
         }
-
-        const val ERA_MODERN = 2017
-        const val ERA_CLASSIC = 1980
 
         fun getTrack(trackId: Byte) = when(trackId.toInt()){
             0 -> "Melbourne"

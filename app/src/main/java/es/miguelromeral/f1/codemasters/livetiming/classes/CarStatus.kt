@@ -1,6 +1,7 @@
 package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.MutableLiveData
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.standard.Format
@@ -11,17 +12,17 @@ class CarStatus {
 
     var tractionControl = MutableLiveData<UByte>(0u)
     var antiLockBrakes = MutableLiveData<UByte>(0u)
-    var fuelMix = MutableLiveData<UByte>(0u)
+    var fuelMix = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var frontBrakeBias = MutableLiveData<UByte>(0u)
     var pitLimiterStatus = MutableLiveData<UByte>(0u)
     var fuelInTank = MutableLiveData<Float>(0f)
     var fuelCapacity = MutableLiveData<Float>(0f)
-    var maxRPM = MutableLiveData<Int>(0)
-    var idleRPM = MutableLiveData<Int>(0)
+    var maxRPM = MutableLiveData<Short>(0)
+    var idleRPM = MutableLiveData<Short>(0)
     var maxGears = MutableLiveData<UByte>(0u)
     var drsAllowed = MutableLiveData<UByte>(0u)
     var tyresWear = MutableLiveData<List<UByte>>(mutableListOf())
-    var tyreCompound = MutableLiveData<UByte>(0u)
+    var tyreCompound = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var tyresDamage = MutableLiveData<List<UByte>>(mutableListOf())
     var frontLeftWingDamage = MutableLiveData<UByte>(0u)
     var frontRightWingDamage = MutableLiveData<UByte>(0u)
@@ -42,7 +43,7 @@ class CarStatus {
         format = Format.F1_2018
         tractionControl.postValue(info.tractionControl)
         antiLockBrakes.postValue(info.antiLockBrakes)
-        fuelMix.postValue(info.fuelMix)
+        fuelMix.postValue(info.getStandardFuelMix().toByte())
         frontBrakeBias.postValue(info.frontBrakeBias)
         pitLimiterStatus.postValue(info.pitLimiterStatus)
         fuelInTank.postValue(info.fuelInTank)
@@ -52,7 +53,7 @@ class CarStatus {
         maxGears.postValue(info.maxGears)
         drsAllowed.postValue(info.drsAllowed)
         tyresWear.postValue(info.tyresWear)
-        tyreCompound.postValue(info.tyreCompound)
+        tyreCompound.postValue(info.getStandardTyreCompound().toByte())
         tyresDamage.postValue(info.tyresDamage)
         frontLeftWingDamage.postValue(info.frontLeftWingDamage)
         frontRightWingDamage.postValue(info.frontRightWingDamage)
@@ -71,7 +72,7 @@ class CarStatus {
     @Synchronized
     fun updateFrom2017(info: CarUDPData){
         format = Format.F1_2017
-        tyreCompound.postValue(info.tyreCompound.toUByte())
+        tyreCompound.postValue(info.getStandardTyreCompound().toByte())
         pitLimiterStatus.postValue(info.inPits.toUByte())
     }
 }

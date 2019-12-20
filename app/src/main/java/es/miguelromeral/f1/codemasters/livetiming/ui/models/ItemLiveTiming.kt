@@ -15,8 +15,8 @@ class ItemLiveTiming private constructor()
     var driverId: Byte? = null
     var team: Byte? = null
     var time: Float? = null
-    var compound: UByte? = null
-    var era: UByte? = null
+    var compound: Byte? = null
+    var era: Byte? = null
     var sector1Time: Float? = null
     var sector2Time: Float? = null
     var sector3Time: Float? = null

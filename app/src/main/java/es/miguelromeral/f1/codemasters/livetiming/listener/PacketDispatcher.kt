@@ -5,6 +5,7 @@ import es.miguelromeral.f1.codemasters.livetiming.packets.PacketHeader
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketLapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
+import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
 import es.miguelromeral.f1.codemasters.livetiming.packets.shortFromPacket
 import timber.log.Timber
@@ -26,9 +27,7 @@ class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
                             )
                         )
                         PacketLapData.PACKET_ID -> {
-
                             //Timber.i("Lap Pa: ${content.contentToString()}")
-
                             session.newLapData2018(
                             PacketLapData.create(
                                 header,
@@ -37,6 +36,9 @@ class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
                         }
                         PacketParticipantData.PACKET_ID -> session.newParticipants2018(
                             PacketParticipantData.create(header, content)
+                        )
+                        PacketCarStatusData.PACKET_ID -> session.newCarStatus2018(
+                            PacketCarStatusData.create(header, content)
                         )
                         //PacketCarTelemetryData.PACKET_ID -> session.newTelemetry2018(PacketCarTelemetryData.create(header, content))
 

@@ -1,6 +1,7 @@
 package es.miguelromeral.f1.codemasters.livetiming.packets
 
 import android.content.res.Resources
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.Packet
@@ -73,6 +74,11 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
 
     }
 
+    fun getStandardEra() = when(era.toInt()){
+        0 -> Standard.ERA.MODERN_2018
+        1 -> Standard.ERA.CLASSIC_2018
+        else -> Standard.UNKNOWN
+    }
 
     companion object {
         const val PACKET_ID = 1

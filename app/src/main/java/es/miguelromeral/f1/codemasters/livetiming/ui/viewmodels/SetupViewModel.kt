@@ -28,20 +28,22 @@ class SetupViewModel(var session: Game) : ViewModel() {
     val updateRequired : LiveData<Boolean>
         get() = _updateRequired
 */
-    fun updateItems(list: List<Player>?): MutableList<String> {
+    fun updateItems(list: List<Player>?): Boolean {
         try {
             _list = list
             list?.let {
                 if(_names.value == null || _names.value?.size != list.size){
                     createItems(list)
+                    return true
+                }else {
+                    return false
                 }
-                return _names.value!!
             }
         }catch(e: Exception){
             Timber.i("Exception creating spinner items")
         }
         _names.postValue(mutableListOf())
-        return mutableListOf()
+        return false
     }
 
     private fun createItems(list: List<Player>): Boolean{
@@ -62,9 +64,11 @@ class SetupViewModel(var session: Game) : ViewModel() {
         }
     }
 
-    fun setSelectedItem(index: Int, name: String, player: Player){
+    fun setSelectedItem(index: Int, player: Player){
         _index = index
-        _selectedName.postValue(name)
+        names.value?.let {
+            _selectedName.postValue(it[index])
+        }
         _monitoring.postValue(player)
     }
 }

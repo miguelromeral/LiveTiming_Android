@@ -33,8 +33,6 @@ class StatusFragment : Fragment() {
         sharedViewModel = (activity as MainActivity).viewModel
         viewModel = (activity as MainActivity).setupViewModel
 
-        binding.viewModel = viewModel
-
         val lifecycleOwner = this
         binding.lifecycleOwner = lifecycleOwner
 
@@ -52,7 +50,16 @@ class StatusFragment : Fragment() {
 
 
         viewModel.monitoring.observe(this, Observer {
-            tvTestCarStatus.text = it?.carStatus?.value?.tyreCompound?.value?.toString() ?: "???"
+            binding.player = it
+
+
+            binding.tvTestCarStatus.text = it.carStatus.value?.ersHarvestedThisLapMGUK?.value?.toString() ?: "Nothing2"
+
+            it.carStatus.observe(this, Observer {
+                binding.tvTestCarStatus.text = it.ersHarvestedThisLapMGUK.value?.toString() ?: "Nothing"
+            })
+
+            //tvTestCarStatus.text = it?.carStatus?.value?.tyreCompound?.value?.toString() ?: "???"
         })
 
 

@@ -44,9 +44,26 @@
     <string name="track_texas_short">Texas (Short)</string>
     <string name="track_suzuka_short">Suzuka (Short)</string>
 
+    <!-- TYRES -->
+    <string name="tyre_hypersoft">HYPER SOFT</string>
+    <string name="tyre_ultrasoft">ULTRA SOFT</string>
+    <string name="tyre_supersoft">SUPER SOFT</string>
+    <string name="tyre_soft">SOFT</string>
+    <string name="tyre_medium">MEDIUM</string>
+    <string name="tyre_hard">HARD</string>
+    <string name="tyre_superhard">SUPER HARD</string>
+    <string name="tyre_inter">INTER</string>
+    <string name="tyre_wet">WET</string>
+
     <!-- GAME MODES -->
     <string name="game_mode_offline">Offline</string>
     <string name="game_mode_online">Online</string>
+
+    <!-- FUEL MIX -->
+    <string name="fuelmix_lean">Lean</string>
+    <string name="fuelmix_standard">Standard</string>
+    <string name="fuelmix_rich">Rich</string>
+    <string name="fuelmix_max">Max</string>
 
     <!-- SAFETY CAR STATUS -->
     <string name="safety_car_no">Track Clear</string>

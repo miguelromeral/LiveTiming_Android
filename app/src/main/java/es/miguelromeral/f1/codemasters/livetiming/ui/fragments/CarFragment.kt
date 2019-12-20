@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
+import classes.toplayer.Standard
 import com.google.android.material.tabs.TabLayout
 
 import es.miguelromeral.f1.codemasters.livetiming.R
@@ -53,25 +54,21 @@ class CarFragment : Fragment() {
         val tabs = binding.resultTabsCar as TabLayout
         tabs.setupWithViewPager(viewPager)
 
-        binding.viewModel = viewModel
-
         binding.lifecycleOwner = this
 
         sharedViewModel.currentSession.players.observe(this, Observer {
             val items = viewModel.updateItems(it)
-            if(items.isEmpty()){
-                binding.spPlayers.isEnabled = false
-                binding.spPlayers.adapter = null
-            }else {
+            if(items){
                 val spinnerAdapter = ArrayAdapter(
                     binding.spPlayers.context,
                     android.R.layout.simple_spinner_item,
-                    items
+                    viewModel.names.value!!
                 )
 
                 binding.spPlayers.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-                        viewModel?.setSelectedItem(i, items[i], it[i])
+                        viewModel?.setSelectedItem(i, it[i])
+                        binding.spPlayers.setBackgroundResource(Standard.TEAMS.getTeamColor(it[i].participant.value?.teamId?.value?.toInt()))
                     }
                     override fun onNothingSelected(adapterView: AdapterView<*>) {
                         //viewModel?.setSelectedItem()
