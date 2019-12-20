@@ -53,6 +53,15 @@ fun TextView.setTrack(track: Int?){
     text = context.getString(Standard.TRACKS.getTrackName(track))
 }
 
+@BindingAdapter("speed")
+fun TextView.setSpeed(speed: Short?){
+    speed?.let{
+        text = "$speed km/h"
+        return
+    }
+    text = "-"
+}
+
 
 @BindingAdapter("weather")
 fun ImageView.setWeatherIcon(weather: Int?){
@@ -81,6 +90,8 @@ fun TextView.setTimeMinutesSeconds(time: Int?){
     text = "-.--"
 }
 
+
+
 @BindingAdapter("temperature")
 fun TextView.setTemperature(temperature: String?){
     temperature?.let{
@@ -88,6 +99,15 @@ fun TextView.setTemperature(temperature: String?){
         return
     }
     text = "--"
+}
+
+@BindingAdapter("gear")
+fun TextView.setGear(gear: Int?){
+    gear?.let{
+        text = gear.toString()
+        return
+    }
+    text = "-"
 }
 
 /////////////////////////////////

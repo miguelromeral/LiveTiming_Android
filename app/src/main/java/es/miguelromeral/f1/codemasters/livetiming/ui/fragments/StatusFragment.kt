@@ -36,30 +36,9 @@ class StatusFragment : Fragment() {
         val lifecycleOwner = this
         binding.lifecycleOwner = lifecycleOwner
 
-/*
-        viewModel.updateRequired.observe(this, Observer {update ->
-            if(update){
-                val player = viewModel.monitoring.value
-                player?.let {
-                    tvTestCarStatus.text = it.carStatus?.value?.tyreCompound?.value?.toString()
-                    return@Observer
-                }
-                tvTestCarStatus.text = "----"
-            }
-        })*/
-
 
         viewModel.monitoring.observe(this, Observer {
             binding.player = it
-
-
-            binding.tvTestCarStatus.text = it.carStatus.value?.ersHarvestedThisLapMGUK?.value?.toString() ?: "Nothing2"
-
-            it.carStatus.observe(this, Observer {
-                binding.tvTestCarStatus.text = it.ersHarvestedThisLapMGUK.value?.toString() ?: "Nothing"
-            })
-
-            //tvTestCarStatus.text = it?.carStatus?.value?.tyreCompound?.value?.toString() ?: "???"
         })
 
 

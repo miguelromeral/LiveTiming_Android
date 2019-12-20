@@ -8,8 +8,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.SetupViewModel" />
+            name="player"
+            type="es.miguelromeral.f1.codemasters.livetiming.classes.Player" />
     </data>
 
 
@@ -18,11 +18,50 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/tvTestTelemetry"
+            android:id="@+id/tvGear"
+            style="@style/text_temperature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="280dp" />
+            tools:text="8"
+            app:gear="@{player.telemetry.gear.intValue()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tvSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGear"
+            app:layout_constraintStart_toStartOf="@+id/tvGear"
+            app:layout_constraintTop_toBottomOf="@+id/tvGear"
+            app:speed="@{player.telemetry.speed}"
+            tools:text="320 km/h" />
+
+        <ProgressBar
+            android:id="@+id/pbThrottle"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="@{player.telemetry.throttle.intValue()}"
+            android:progressTint="@color/test"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Throttle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

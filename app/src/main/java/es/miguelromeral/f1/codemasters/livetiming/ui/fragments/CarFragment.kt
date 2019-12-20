@@ -34,6 +34,8 @@ class CarFragment : Fragment() {
     private lateinit var sharedViewModel: GameViewModel
     private lateinit var viewModel: SetupViewModel
 
+    private var initialized = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         retainInstance = true
@@ -58,7 +60,7 @@ class CarFragment : Fragment() {
 
         sharedViewModel.currentSession.players.observe(this, Observer {
             val items = viewModel.updateItems(it)
-            if(items){
+            if(items || !initialized){
                 val spinnerAdapter = ArrayAdapter(
                     binding.spPlayers.context,
                     android.R.layout.simple_spinner_item,
@@ -77,6 +79,7 @@ class CarFragment : Fragment() {
 
                 binding.spPlayers.adapter = spinnerAdapter
                 binding.spPlayers.isEnabled = true
+                initialized = true
             }
         })
 
@@ -91,6 +94,10 @@ class CarFragment : Fragment() {
         viewPager.adapter = adapter
     }
 
+    override fun onStop() {
+        super.onStop()
+        initialized = false
+    }
 
 
     companion object {

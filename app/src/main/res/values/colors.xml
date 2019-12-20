@@ -11,6 +11,8 @@
     <color name="fullWhite">#FFF</color>
     <color name="fullGray">#9C9C9C</color>
     <color name="fullBlack">#000</color>
+    <color name="fullYellow">#FF0</color>
+    <color name="test">#F0F</color>
 
     <color name="backgroundSection">#DDD</color>
     <color name="backgroundSectionTitle">#BBB</color>

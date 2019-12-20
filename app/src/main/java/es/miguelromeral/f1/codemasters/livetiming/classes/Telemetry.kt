@@ -11,7 +11,7 @@ class Telemetry {
     var format = Format.UNKNOWN
 
     var speed = MutableLiveData<Short>(0)
-    var throttle = MutableLiveData<UByte>(0u)
+    var throttle = MutableLiveData<Byte>(0)
     var steer = MutableLiveData<Byte>(0)
     var brake = MutableLiveData<UByte>(0u)
     var clutch = MutableLiveData<UByte>(0u)
@@ -29,7 +29,7 @@ class Telemetry {
     fun updateFrom2018(info: CarTelemetryData){
         format = Format.F1_2018
         speed.postValue(info.speed)
-        throttle.postValue(info.throttle)
+        throttle.postValue(info.throttle.toByte())
         steer.postValue(info.steer)
         brake.postValue(info.brake)
         clutch.postValue(info.clutch)

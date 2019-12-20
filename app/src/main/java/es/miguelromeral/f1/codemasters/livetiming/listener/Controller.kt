@@ -66,6 +66,9 @@ class Controller(val port: Int = DEFAULT_PORT) {
             })
             p._telemetry.postValue(Telemetry().apply {
                 engineTemperature.postValue(i.toShort())
+                gear.postValue((i % 9).toByte())
+                throttle.postValue((10 + i * 4).toByte())
+                speed.postValue((100 + i * 12).toShort())
             })
             ml.add(p)
             i++

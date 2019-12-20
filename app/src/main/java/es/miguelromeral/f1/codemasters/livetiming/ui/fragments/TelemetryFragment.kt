@@ -27,18 +27,16 @@ class TelemetryFragment : Fragment() {
     ): View? {
 
         binding = androidx.databinding.DataBindingUtil.inflate(inflater, R.layout.fragment_telemetry, container, false)
+
         sharedViewModel = (activity as MainActivity).viewModel
         viewModel = (activity as MainActivity).setupViewModel
-
-        binding.viewModel = viewModel
 
         val lifecycleOwner = this
         binding.lifecycleOwner = lifecycleOwner
 
         viewModel.monitoring.observe(this, Observer {
-            tvTestTelemetry.text = it?.telemetry?.value?.engineTemperature?.value?.toString() ?: "?????"
+            binding.player = it
         })
-
 
         return binding.root
     }
