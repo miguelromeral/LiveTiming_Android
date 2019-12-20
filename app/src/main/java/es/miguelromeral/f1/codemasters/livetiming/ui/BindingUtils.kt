@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
+import androidx.preference.PreferenceManager
 import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.standard.Format
@@ -56,10 +57,27 @@ fun TextView.setTrack(track: Int?){
 @BindingAdapter("speed")
 fun TextView.setSpeed(speed: Short?){
     speed?.let{
-        text = "$speed km/h"
+
+        val preference = PreferenceManager.getDefaultSharedPreferences(context)
+            .getString(context.getString(R.string.preference_key_speed_unit), context.getString(R.string.speed_unit_kmh))
+
+        when(preference){
+            context.getString(R.string.speed_unit_mph) ->
+                text = "${(speed * 0.621371).toShort()} mph"
+            else ->
+                text = "$speed km/h"
+        }
         return
     }
     text = "-"
+}
+
+
+
+fun getSpeed(speed: Short?, unit: String){
+    when(unit){
+
+    }
 }
 
 

@@ -30,5 +30,18 @@
     </PreferenceCategory>
 
 
+    <PreferenceCategory
+        android:title="Display Settings">
+
+        <DropDownPreference
+            android:key="@string/preference_key_speed_unit"
+            android:title="Speed Unit"
+            android:summary="%s"
+            android:entries="@array/speed_unit"
+            android:entryValues="@array/speed_unit"
+            android:defaultValue="@string/speed_unit_kmh"/>
+
+    </PreferenceCategory>
+
 
 </PreferenceScreen>

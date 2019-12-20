@@ -13,6 +13,10 @@
     <!-- PREFERENCES -->
     <string name="preference_key_udp_port">PREFERENCE_UDP_PORT</string>
     <string name="preference_key_update_interval">PREFERENCE_UPDATE_INTERVAL</string>
+    <string name="preference_key_speed_unit">PREFERENCE_SPEED_UNIT</string>
+
+    <string name="speed_unit_kmh">km/h</string>
+    <string name="speed_unit_mph">mph</string>
 
 
     <string name="unknown">TBD</string>

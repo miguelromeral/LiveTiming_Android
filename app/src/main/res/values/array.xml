@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <array name="speed_unit">
+        <item name="kmh">@string/speed_unit_kmh</item>
+        <item name="mph">@string/speed_unit_mph</item>
+    </array>
+    
+</resources>
