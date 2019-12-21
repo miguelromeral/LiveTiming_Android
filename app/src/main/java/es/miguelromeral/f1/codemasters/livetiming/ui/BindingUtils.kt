@@ -2,12 +2,14 @@ package es.miguelromeral.f1.codemasters.livetiming.ui
 
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import androidx.preference.PreferenceManager
 import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.R
+import es.miguelromeral.f1.codemasters.livetiming.classes.Telemetry
 import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
 
@@ -35,8 +37,13 @@ fun TextView.setTimeFormatted(time: Float?) {
 }
 
 @BindingAdapter("tyre", "format", requireAll = false)
-fun ImageView.setTyreImage(compound: Int?, format: Format){
+fun ImageView.setTyreImage(compound: Int?, format: Format?){
     setImageResource(Standard.TYRES.getTyreDrawable(compound))
+}
+
+@BindingAdapter("tyreName")
+fun TextView.setTyreName(compound: Int?){
+    text = context.getString(Standard.TYRES.getTyreName(compound))
 }
 
 @BindingAdapter("teamColor")
@@ -72,14 +79,28 @@ fun TextView.setSpeed(speed: Short?){
     text = "-"
 }
 
-
-
-fun getSpeed(speed: Short?, unit: String){
-    when(unit){
-
+@BindingAdapter("revs")
+fun ProgressBar.configureRevs(telemetry: Telemetry?){
+    telemetry?.let{
+        max = 15000
+        progress = telemetry.engineRPM.value?.toInt() ?: 0
+        return
     }
+    max = 1
+    progress = 0
 }
 
+@BindingAdapter("drsStatus")
+fun TextView.configureDRS(drs: Int?){
+    drs?.let{
+        setBackgroundResource(when(it){
+            1 -> R.color.fullGreen
+            else -> R.color.fullGray
+        })
+        return
+    }
+    setBackgroundResource(R.color.fullGray)
+}
 
 @BindingAdapter("weather")
 fun ImageView.setWeatherIcon(weather: Int?){
