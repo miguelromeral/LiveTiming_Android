@@ -41,6 +41,15 @@
             android:entryValues="@array/speed_unit"
             android:defaultValue="@string/speed_unit_kmh"/>
 
+
+        <DropDownPreference
+            android:key="@string/preference_key_temperature_unit"
+            android:title="Temperature Degrees Unit"
+            android:summary="%s"
+            android:entries="@array/temperature_unit"
+            android:entryValues="@array/temperature_unit"
+            android:defaultValue="@string/temperature_unit_c"/>
+
     </PreferenceCategory>
 
 

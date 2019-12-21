@@ -13,11 +13,36 @@ class Standard {
     companion object{
         const val UNKNOWN = -1
         const val UNKNOWN_TEXT = "TBD"
+
+        const val MAX_ERS_STORAGE = 4_000_000f
+        const val HALF_ERS_STORAGE = MAX_ERS_STORAGE / 2
+
+        const val MAX_RPM = 15_000
+
     }
 
     object AI {
         const val HUMAN = 0
         const val AI = 1
+    }
+
+    object WEATHER {
+        const val CLEAR = 0
+        const val LIGHT_CLOUD = 1
+        const val OVERCAST = 2
+        const val LIGHT_RAIN = 3
+        const val HEAVY_RAIN = 4
+        const val STORM = 5
+
+        fun getWeatherName(weather: Int?) : Int = when(weather){
+            CLEAR -> R.string.weather_clear
+            LIGHT_CLOUD -> R.string.weather_light_cloud
+            OVERCAST -> R.string.weather_overcast
+            LIGHT_RAIN -> R.string.weather_light_rain
+            HEAVY_RAIN -> R.string.weather_heavy_rain
+            STORM -> R.string.weather_storm
+            else -> R.string.unknown
+        }
     }
 
     object TYRES {

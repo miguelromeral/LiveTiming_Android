@@ -28,6 +28,7 @@ import classes.toplayer.Standard.TRACKS.SUZUKA
 import classes.toplayer.Standard.TRACKS.SUZUKA_SHORT
 import classes.toplayer.Standard.TRACKS.TEXAS
 import classes.toplayer.Standard.TRACKS.TEXAS_SHORT
+import classes.toplayer.Standard.WEATHER.LIGHT_CLOUD
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.Packet
@@ -106,6 +107,17 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
         else -> Standard.UNKNOWN
     }
 
+    fun getStandardWeather(): Int =
+        when (weather.toInt()) {
+            0 -> Standard.WEATHER.CLEAR
+            1 -> Standard.WEATHER.LIGHT_CLOUD
+            2 -> Standard.WEATHER.OVERCAST
+            3 -> Standard.WEATHER.LIGHT_RAIN
+            4 -> Standard.WEATHER.HEAVY_RAIN
+            5 -> Standard.WEATHER.STORM
+            else -> Standard.UNKNOWN
+        }
+
     fun getStandardTrackId(): Int = when(trackId.toInt()){
         0 -> MELBOURNE
         1 -> PAUL_RICARD
@@ -165,35 +177,6 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
                     )
                 }
             }
-            return "Unknown"
-        }
-
-        fun getEra(era: UByte):String {
-            MyApplication.getContext()?.resources?.let {
-                return it.getString(
-                    when (era.toInt()) {
-                        0 -> R.string.era_modern
-                        1 -> R.string.era_classic
-                        else -> R.string.unknown
-
-                    }
-                )
-            }
-            return "Unknown"
-        }
-
-        fun getWeather(weather: UByte):String {
-            MyApplication.getContext()?.resources?.let {
-                return it.getString(when (weather.toInt()) {
-                    0 -> R.string.weather_clear
-                    1 -> R.string.weather_light_cloud
-                    2 -> R.string.weather_overcast
-                    3 -> R.string.weather_light_rain
-                    4 -> R.string.weather_heavy_rain
-                    5 -> R.string.weather_storm
-                    else -> R.string.unknown
-                }
-            )}
             return "Unknown"
         }
 

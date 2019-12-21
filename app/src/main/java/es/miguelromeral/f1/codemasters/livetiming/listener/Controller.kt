@@ -30,7 +30,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
     fun DEBUG_addItems(){
         var mySession = Session().apply{
             format = Format.F1_2018
-            weather.postValue(3u)
+            weather.postValue(Standard.WEATHER.STORM.toByte())
             era.postValue(Standard.ERA.MODERN_2018.toByte())
             airTemperature.postValue(31)
             trackTemperature.postValue(53)

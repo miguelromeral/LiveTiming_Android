@@ -45,7 +45,7 @@
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintTop_toTopOf="@+id/textView2"
-            app:temperature="@{session.airTemperature.toString()}"
+            app:temperature="@{session.airTemperature.intValue()}"
             tools:text="30 ºC" />
 
         <TextView
@@ -66,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
-            app:temperature="@{session.trackTemperature.toString()}"
+            app:temperature="@{session.trackTemperature.intValue()}"
             tools:text="54 ºC" />
 
         <ImageView
@@ -80,14 +80,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitleWeather"
             app:srcCompat="@drawable/clear_day"
-            app:weather="@{session.weatherAsInt()}" />
+            app:weather="@{session.weather.intValue()}" />
 
         <TextView
             android:id="@+id/tvWeather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text="@{session.weather()}"
+            app:weatherName="@{session.weather.intValue()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"

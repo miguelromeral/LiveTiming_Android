@@ -25,9 +25,9 @@ fun setBackgroundByPosition(viewGroup: ViewGroup, position: UByte?){
                 /*if(position == 0)
                 R.color.colorPrimary
             else*/
-                    es.miguelromeral.f1.codemasters.livetiming.R.color.liveTimingListEven
+                    R.color.liveTimingListEven
                 else
-                    es.miguelromeral.f1.codemasters.livetiming.R.color.liveTimingListOdd
+                    R.color.liveTimingListOdd
             )
         )
     }
@@ -65,9 +65,8 @@ fun TextView.setTrack(track: Int?){
 
 @BindingAdapter("ersDeployedThisLap")
 fun ProgressBar.setERSDeployedLap(deployed: Float?){
-    max = 2000000
     deployed?.let{
-        progress = max - deployed.toInt()
+        progress = (Standard.HALF_ERS_STORAGE - deployed).toInt()
         return
     }
     progress = 0
@@ -82,19 +81,19 @@ fun TextView.setSpeed(speed: Short?){
 
         when(preference){
             context.getString(R.string.speed_unit_mph) ->
-                text = "${(speed * 0.621371).toShort()} mph"
+                text = context.getString(R.string.speed_mph, (speed * 0.621371).toShort())
             else ->
-                text = "$speed km/h"
+                text = context.getString(R.string.speed_kmh, speed)
         }
         return
     }
-    text = "-"
+    text = context.getString(R.string.speed_unknown)
 }
 
 @BindingAdapter("revs")
 fun ProgressBar.configureRevs(telemetry: Telemetry?){
     telemetry?.let{
-        max = 15000
+        max = Standard.MAX_RPM
         progress = telemetry.engineRPM.value?.toInt() ?: 0
         return
     }
@@ -106,7 +105,7 @@ fun ProgressBar.configureRevs(telemetry: Telemetry?){
 @BindingAdapter("revsCircle")
 fun CircularProgressBar.setRevsCircle(revs: Short?){
     revs?.let{
-        progress = revs.toFloat() % 15000
+        progress = revs.toFloat() % Standard.MAX_RPM
         return
     }
     progress = 0f
@@ -129,15 +128,30 @@ fun TextView.configureDRS(drs: Int?){
 fun ImageView.setWeatherIcon(weather: Int?){
     weather?.let{
         var resource = when(weather){
-            0 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.clear_day
-            1 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.light_cloud_day
-            2 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.overcast
-            3 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.light_rain
-            4 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.heavy_rain
-            5 -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.storm
-            else -> es.miguelromeral.f1.codemasters.livetiming.R.drawable.unknown
+            0 -> R.drawable.clear_day
+            1 -> R.drawable.light_cloud_day
+            2 -> R.drawable.overcast
+            3 -> R.drawable.light_rain
+            4 -> R.drawable.heavy_rain
+            5 -> R.drawable.storm
+            else -> R.drawable.unknown
         }
         setImageResource(resource)
+    }
+}
+
+@BindingAdapter("weatherName")
+fun TextView.setWeatherName(weather: Int?){
+    weather?.let{
+        text = context.getString(when(weather){
+            Standard.WEATHER.CLEAR -> R.string.weather_clear
+            Standard.WEATHER.LIGHT_CLOUD -> R.string.weather_light_cloud
+            Standard.WEATHER.OVERCAST -> R.string.weather_overcast
+            Standard.WEATHER.LIGHT_RAIN -> R.string.weather_light_rain
+            Standard.WEATHER.HEAVY_RAIN -> R.string.weather_heavy_rain
+            Standard.WEATHER.STORM -> R.string.weather_storm
+            else -> R.string.unknown
+        })
     }
 }
 
@@ -146,22 +160,33 @@ fun TextView.setTimeMinutesSeconds(time: Int?){
     time?.let{
         val minutes = time / 60
         val seconds = time % 60
-        text = String.format("%d:%02d", minutes, seconds)
+        //text = String.format("%d:%02d", minutes, seconds)
+        text = context.getString(R.string.time_minutes_seconds, minutes, seconds)
         return
     }
-    text = "-.--"
+    text = context.getString(R.string.time_minutes_seconds_undefined)
 }
 
 
 
 @BindingAdapter("temperature")
-fun TextView.setTemperature(temperature: String?){
+fun TextView.setTemperature(temperature: Int?){
     temperature?.let{
-        text = temperature + "ºC"
+        val preference = PreferenceManager.getDefaultSharedPreferences(context)
+            .getString(context.getString(R.string.preference_key_temperature_unit), context.getString(R.string.temperature_unit_c))
+
+        when(preference){
+            context.getString(R.string.temperature_unit_f) ->
+                text = context.getString(R.string.temperature_f, convertCentigradesToFarenheit(it))
+            else ->
+                text = context.getString(R.string.temperature_c, it)
+        }
         return
     }
     text = "--"
 }
+
+fun convertCentigradesToFarenheit(temperature: Int) = (temperature * 9 / 5) + 32
 
 @BindingAdapter("gear")
 fun TextView.setGear(gear: Int?){

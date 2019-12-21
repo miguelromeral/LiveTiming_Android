@@ -14,9 +14,13 @@
     <string name="preference_key_udp_port">PREFERENCE_UDP_PORT</string>
     <string name="preference_key_update_interval">PREFERENCE_UPDATE_INTERVAL</string>
     <string name="preference_key_speed_unit">PREFERENCE_SPEED_UNIT</string>
+    <string name="preference_key_temperature_unit">PREF_TEMP_UNIT</string>
 
     <string name="speed_unit_kmh">km/h</string>
     <string name="speed_unit_mph">mph</string>
+
+    <string name="temperature_unit_c">Celsius (ºC)</string>
+    <string name="temperature_unit_f">Farenheit (ºF)</string>
 
 
     <string name="unknown">TBD</string>
@@ -281,4 +285,18 @@
     <string name="nat_ukrainian">Ukrainian</string>
     <string name="nat_venezuelan">Venezuelan</string>
     <string name="nat_welsh">Welsh</string>
+
+
+    <!-- SIN CATALOGAR -->
+
+    <string name="speed_kmh">%1$d km/h</string>
+    <string name="speed_mph">%1$d mph</string>
+    <string name="speed_unknown">--</string>
+
+    <string name="time_minutes_seconds">%1$d:%2$02d</string>
+    <string name="time_minutes_seconds_undefined">-:--</string>
+
+    <string name="temperature_c">%1$d ºC</string>
+    <string name="temperature_f">%1$d ºF</string>
+
 </resources>

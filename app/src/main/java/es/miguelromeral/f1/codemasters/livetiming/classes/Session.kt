@@ -13,7 +13,7 @@ class Session {
     var format: Format = Format.UNKNOWN
 
     // Weather Info
-    var weather = MutableLiveData<UByte>(0u)
+    var weather = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var trackTemperature = MutableLiveData<Byte>(0)
     var airTemperature = MutableLiveData<Byte>(0)
 
@@ -46,7 +46,7 @@ class Session {
     @Synchronized
     fun updateFrom2018(info: SessionData){
         format = Format.F1_2018
-        weather.postValue(info.weather)
+        weather.postValue(info.getStandardWeather().toByte())
         trackTemperature.postValue(info.trackTemperature)
         airTemperature.postValue(info.airTemperature)
         totalLaps.postValue(info.totalLaps)
@@ -75,14 +75,6 @@ class Session {
         //totalLaps = info.total_laps.toUByte()
     }
 
-    fun weatherAsInt() = weather.value?.toInt()
-
-
-
-    fun weather(): String = when(format){
-            Format.F1_2018 -> SessionData.getWeather(weather.value!!)
-            else -> "Unknown"
-        }
 
     fun sessionType(): String = when(format){
         Format.F1_2018 -> SessionData.getSessionType(sessionType.value!!)
