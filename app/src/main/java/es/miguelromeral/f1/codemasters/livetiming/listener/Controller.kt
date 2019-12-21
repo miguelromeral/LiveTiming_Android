@@ -63,6 +63,9 @@ class Controller(val port: Int = DEFAULT_PORT) {
             p._carStatus.postValue(CarStatus().apply {
                 tyreCompound.postValue(i.toByte())
                 ersHarvestedThisLapMGUK.postValue(20000f + (25000f * i))
+                ersHarvestedThisLapMGUH.postValue(20000f + (25000f * i))
+                ersStoreEnergy.postValue(4000000f - (250000f * i))
+                ersDeployedThisLap.postValue(1000000f + (20000f * i))
             })
             p._telemetry.postValue(Telemetry().apply {
                 engineTemperature.postValue(i.toShort())

@@ -9,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.preference.PreferenceManager
 import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.R
+import es.miguelromeral.f1.codemasters.livetiming.classes.CarStatus
 import es.miguelromeral.f1.codemasters.livetiming.classes.Telemetry
 import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
@@ -59,6 +60,16 @@ fun TextView.setEra(era: Int?){
 @BindingAdapter("track")
 fun TextView.setTrack(track: Int?){
     text = context.getString(Standard.TRACKS.getTrackName(track))
+}
+
+@BindingAdapter("ersDeployedThisLap")
+fun ProgressBar.setERSDeployedLap(deployed: Float?){
+    max = 2000000
+    deployed?.let{
+        progress = max - deployed.toInt()
+        return
+    }
+    progress = 0
 }
 
 @BindingAdapter("speed")
@@ -175,14 +186,29 @@ fun TextView.setLenght(length: Int?){
     text = "- m."
 }
 
-@BindingAdapter("test")
-fun TextView.setTest(value: Int?){
+@BindingAdapter("ersPercentage")
+fun TextView.setERSPercentage(value: Float?){
     value?.let{
-        text = value.toString()
+        text = "${((value / 4000000f) * 100).toInt()} %"
         return
     }
-    text = "---"
+    text = "-- %"
 }
+
+
+@BindingAdapter("ersTotalHarvested")
+fun ProgressBar.setERSHarvested(status: CarStatus?){
+    status?.let{
+        val sum = (it.ersHarvestedThisLapMGUH.value!! + it.ersHarvestedThisLapMGUK.value!!)
+        progress = sum.toInt()
+        return
+    }
+    progress = 0
+}
+
+
+
+
 
 
 fun floatToTimeFormatted(inf : Float?, long: Boolean = false): String? {

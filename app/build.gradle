@@ -62,4 +62,5 @@ dependencies {
 
     // Preferences
     implementation "androidx.preference:preference:1.0.0-rc02"
+
 }
