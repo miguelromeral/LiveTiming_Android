@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import androidx.preference.PreferenceManager
 import classes.toplayer.Standard
+import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.classes.CarStatus
 import es.miguelromeral.f1.codemasters.livetiming.classes.Telemetry
@@ -100,6 +101,17 @@ fun ProgressBar.configureRevs(telemetry: Telemetry?){
     max = 1
     progress = 0
 }
+
+
+@BindingAdapter("revsCircle")
+fun CircularProgressBar.setRevsCircle(revs: Short?){
+    revs?.let{
+        progress = revs.toFloat() % 15000
+        return
+    }
+    progress = 0f
+}
+
 
 @BindingAdapter("drsStatus")
 fun TextView.configureDRS(drs: Int?){

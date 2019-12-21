@@ -239,6 +239,27 @@
             app:srcCompat="@drawable/tyre_unknown"
             app:tyre="@{player.carStatus.tyreCompound.intValue()}" />
 
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_width="150dp"
+            android:layout_height="163dp"
+            app:cpb_background_progressbar_color="@android:color/transparent"
+            app:cpb_background_progressbar_width="0dp"
+            app:cpb_progress="15000"
+            app:cpb_progress_direction="to_right"
+
+
+            app:cpb_progress_max="20000"
+            app:cpb_progressbar_color_end="@color/rededYellow"
+            app:cpb_progressbar_color_start="@color/fullYellow"
+            app:cpb_progressbar_width="10dp"
+            app:cpb_round_border="true"
+            app:cpb_start_angle="225"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSpeed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:revsCircle="@{player.telemetry.engineRPM}" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

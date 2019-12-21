@@ -91,6 +91,9 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 it._currentLap.value?.currentLapTime?.postValue(tmp)
                 it._currentLap.value?.sector1Time?.postValue(12.3f)
                 it._currentLap.value?.sector2Time?.postValue(23.4f)
+
+                val tmp2 = it._telemetry.value?.engineRPM?.value?.plus(75)
+                it._telemetry.value?.engineRPM?.postValue(tmp2!!.toShort())
             }
 
             /*var ses = session._sessionData.value

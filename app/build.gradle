@@ -63,4 +63,7 @@ dependencies {
     // Preferences
     implementation "androidx.preference:preference:1.0.0-rc02"
 
+    // Circle Progress Bar
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+
 }
