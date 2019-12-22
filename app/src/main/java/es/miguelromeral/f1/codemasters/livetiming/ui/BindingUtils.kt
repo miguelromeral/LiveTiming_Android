@@ -67,7 +67,7 @@ fun TextView.setTrack(track: Int?){
 @BindingAdapter("ersDeployedThisLap")
 fun ProgressBar.setERSDeployedLap(deployed: Float?){
     deployed?.let{
-        progress = (Standard.HALF_ERS_STORAGE - deployed).toInt()
+        progress = (Standard.MAX_ERS_STORAGE - deployed).toInt()
         return
     }
     progress = 0

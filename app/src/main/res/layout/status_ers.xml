@@ -40,7 +40,7 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:weightSum="2"
@@ -50,7 +50,7 @@
                 <ProgressBar
                     android:id="@+id/pbTotalERS"
                     style="@android:style/Widget.Material.ProgressBar.Horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100sp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="68dp"
@@ -61,6 +61,30 @@
                     android:progressTint="@color/tyre_cyan"
                     tools:progress="1000000" />
 
+                <ProgressBar
+                    android:id="@+id/pbDeployedERS"
+                    style="@android:style/Widget.Material.ProgressBar.Horizontal"
+                    android:layout_width="100sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/fullBlack"
+                    android:max="4000000"
+                    android:progressTint="@color/fullWhite"
+                    app:ersDeployedThisLap="@{player.carStatus.ersDeployedThisLap}"
+                    tools:progress="1000000" />
+
+                <ProgressBar
+                    android:id="@+id/pbHarvested"
+                    style="@android:style/Widget.Material.ProgressBar.Horizontal"
+                    android:layout_width="100sp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/fullBlack"
+                    android:max="4000000"
+                    android:progressTint="@color/fullYellow"
+                    app:ersTotalHarvested="@{player.carStatus}"
+                    tools:progress="1000000" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,29 +92,6 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
 
-                    <ProgressBar
-                        android:id="@+id/pbDeployedERS"
-                        style="@android:style/Widget.Material.ProgressBar.Horizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/fullBlack"
-                        android:max="2000000"
-                        android:progressTint="@color/fullWhite"
-                        app:ersDeployedThisLap="@{player.carStatus.ersDeployedThisLap}"
-                        tools:progress="1000000" />
-
-                    <ProgressBar
-                        android:id="@+id/pbHarvested"
-                        style="@android:style/Widget.Material.ProgressBar.Horizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@color/fullBlack"
-                        android:max="2000000"
-                        android:progressTint="@color/fullYellow"
-                        app:ersTotalHarvested="@{player.carStatus}"
-                        tools:progress="1000000" />
                 </LinearLayout>
             </LinearLayout>
 
