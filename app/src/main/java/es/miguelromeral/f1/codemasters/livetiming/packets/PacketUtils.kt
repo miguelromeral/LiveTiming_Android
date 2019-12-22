@@ -61,3 +61,4 @@ fun createFloatArray(content: ByteArray, begining: Int, iteration: Int = 0, endl
     return listOf(floatFromPacket(content.sliceArray(start until end))) + createFloatArray(content, begining, iteration + 1, endloop)
 }
 
+

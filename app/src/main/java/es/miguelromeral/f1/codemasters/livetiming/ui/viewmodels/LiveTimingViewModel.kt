@@ -7,7 +7,7 @@ import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.ui.fragments.LiveTimingFragment
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
-import es.miguelromeral.f1.codemasters.livetiming.ui.runnables.MyRunnable
+import es.miguelromeral.f1.codemasters.livetiming.ui.runnables.SectorsUpdater
 import kotlinx.coroutines.*
 import timber.log.Timber
 
@@ -92,7 +92,7 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                     sortItemList()
 
                                     for (c in sessionItems.indices) {
-                                        MyRunnable(
+                                        SectorsUpdater(
                                             myHandlerThread,
                                             myItems,
                                             session,

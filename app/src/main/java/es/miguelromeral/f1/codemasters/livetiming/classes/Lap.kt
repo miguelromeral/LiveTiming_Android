@@ -1,15 +1,15 @@
 package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.MutableLiveData
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.LapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
-import es.miguelromeral.f1.codemasters.livetiming.standard.Format
+import java.text.Format
 
 @ExperimentalUnsignedTypes
 class Lap {
 
-    var format: Format =
-        Format.UNKNOWN
+    var format = Standard.UNKNOWN
 
     var lastLapTime = MutableLiveData<Float>(0f)
     var currentLapTime = MutableLiveData<Float>(0f)
@@ -38,7 +38,7 @@ class Lap {
 
     fun updateFrom2018(info: LapData){
         synchronized(this) {
-            format = Format.F1_2018
+            format = Standard.FORMAT.F18
             lastLapTime.postValue(info.lastLapTime)
             currentLapTime.postValue(info.currentLapTime)
             bestLapTime.postValue(info.bestLapTime)
@@ -83,7 +83,7 @@ class Lap {
 
     fun updateFrom2017(info: CarUDPData){
         synchronized(this){
-            format = Format.F1_2017
+            format = Standard.FORMAT.F17
             lastLapTime.postValue(info.lastLapTime)
             currentLapTime.postValue(info.currentLapTime)
             bestLapTime.postValue(info.bestLapTime)

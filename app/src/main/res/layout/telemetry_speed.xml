@@ -14,8 +14,8 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
 
         <TextView
@@ -35,58 +35,36 @@
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/circularProgressBar"
-            android:layout_width="150sp"
-            android:layout_height="150sp"
-            app:cpb_background_progressbar_color="@color/fullBlack"
-            app:cpb_background_progressbar_width="25sp"
-
-            app:cpb_progress="120"
-            app:cpb_progress_direction="to_right"
-            app:cpb_progress_max="420"
-            app:cpb_progressbar_color="@color/tyre_cyan"
-            app:cpb_progressbar_width="15sp"
-            app:cpb_round_border="false"
-            app:cpb_start_angle="205"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:speed_circle="@{player.telemetry.speed}" />
+            app:speed_circle="@{player.telemetry.speed}"
+            style="@style/pb_circle_outter"
+            app:cpb_progressbar_color="@color/tyre_cyan"/>
 
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/cpbThrottle"
             throttle_circle="@{player.telemetry.throttle.shortValue()}"
-            android:layout_width="120sp"
-            android:layout_height="120sp"
-            app:cpb_background_progressbar_color="@color/fullBlack"
-            app:cpb_background_progressbar_width="18sp"
-            app:cpb_progress="100"
-            app:cpb_progress_direction="to_right"
-            app:cpb_progress_max="200"
+            app:cpb_progress_max="205"
             app:cpb_progressbar_color="@color/fullGreen"
-            app:cpb_progressbar_width="10sp"
-            app:cpb_round_border="false"
-            app:cpb_start_angle="205"
             app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
             app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-            app:layout_constraintTop_toTopOf="@+id/circularProgressBar" />
+            app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+            style="@style/pb_circle_inner" />
 
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/cpbBrake"
+            style="@style/pb_circle_inner"
+
             throttle_circle="@{player.telemetry.brake.shortValue()}"
-            android:layout_width="120sp"
-            android:layout_height="120sp"
             app:cpb_background_progressbar_color="@android:color/transparent"
-            app:cpb_background_progressbar_width="18sp"
-            app:cpb_progress="100"
             app:cpb_progress_direction="to_left"
             app:cpb_progress_max="280"
             app:cpb_progressbar_color="@color/fullRed"
-            app:cpb_progressbar_width="10dp"
-            app:cpb_round_border="false"
             app:cpb_start_angle="154"
             app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
@@ -96,19 +74,17 @@
 
         <TextView
             android:id="@+id/tvSpeedIndicator0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
             app:layout_constraintTop_toBottomOf="@+id/cpbThrottle"
             app:speed_indicator="@{0}"
-            tools:text="0" />
+            tools:text="0"
+            style="@style/text_speed_indicator" />
 
         <TextView
             android:id="@+id/tvSpeedIndicator1"
             speed_indicator="@{60}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text_speed_indicator"
             app:layout_constraintBottom_toBottomOf="@+id/cpbThrottle"
             app:layout_constraintEnd_toStartOf="@+id/circularProgressBar"
             app:layout_constraintTop_toTopOf="@+id/cpbThrottle"
@@ -118,9 +94,7 @@
         <TextView
             android:id="@+id/tvSpeedIndicator2"
             speed_indicator="@{120}"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
+            style="@style/text_speed_indicator"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toStartOf="@+id/cpbThrottle"
@@ -130,8 +104,7 @@
         <TextView
             android:id="@+id/tvSpeedIndicator3"
             speed_indicator="@{180}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text_speed_indicator"
             app:layout_constraintBottom_toTopOf="@+id/circularProgressBar"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
             app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
@@ -140,8 +113,7 @@
         <TextView
             android:id="@+id/tvSpeedIndicator4"
             speed_indicator="@{240}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text_speed_indicator"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             app:layout_constraintStart_toEndOf="@+id/cpbThrottle"
@@ -151,8 +123,7 @@
         <TextView
             android:id="@+id/tvSpeedIndicator5"
             speed_indicator="@{300}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text_speed_indicator"
             app:layout_constraintBottom_toBottomOf="@+id/cpbThrottle"
             app:layout_constraintStart_toEndOf="@+id/circularProgressBar"
             app:layout_constraintTop_toTopOf="@+id/cpbThrottle"
@@ -162,8 +133,7 @@
         <TextView
             android:id="@+id/tvSpeedIndicator6"
             speed_indicator="@{360}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/text_speed_indicator"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
             app:layout_constraintTop_toBottomOf="@+id/cpbThrottle"
@@ -172,17 +142,12 @@
 
         <TextView
             android:id="@+id/tvSpeed"
-            android:layout_width="40sp"
-            android:layout_height="wrap_content"
-            android:singleLine="false"
-            android:textAlignment="center"
-            android:textColor="@color/fullWhite"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
             app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
             app:speed="@{player.telemetry.speed}"
-            tools:text="320 km/h" />
+            tools:text="320 km/h"
+            style="@style/text_speed_live" />
 
         <TextView
             android:id="@+id/tvRevs"
@@ -198,8 +163,6 @@
         <TextView
             android:id="@+id/tvGear"
             style="@style/text_gear"
-            android:textSize="42sp"
-            android:textStyle="bold"
             app:gear="@{player.telemetry.gear.intValue()}"
             app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"

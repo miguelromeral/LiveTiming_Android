@@ -6,11 +6,11 @@ import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.ParticipantData
-import es.miguelromeral.f1.codemasters.livetiming.standard.Format
+import java.text.Format
 
 class Participant {
 
-    var format = Format.UNKNOWN
+    var format = Standard.UNKNOWN
 
     var aiControlled = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
     var driverId = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
@@ -24,7 +24,7 @@ class Participant {
 
     @Synchronized
     fun updateFrom2018(info: ParticipantData, era: Byte? = null){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         aiControlled.postValue(info.getStandardAIControlled().toByte())
         driverId.postValue(info.getStandardDriverId().toByte())
         teamId.postValue(Standard.TEAMS.getStandardName2018(info.teamId).toByte())
@@ -38,7 +38,7 @@ class Participant {
 
     @Synchronized
     fun updateFrom2017(info: CarUDPData, era: Byte? = null){
-        format = Format.F1_2017
+        format = Standard.FORMAT.F17
         driverId.postValue(info.getStandardDriverId(era).toByte())
         teamId.postValue(Standard.TEAMS.getStandardTeamName2017(info.teamId, era).toByte())
         name.postValue(null)

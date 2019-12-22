@@ -39,7 +39,7 @@
                 android:tint="@color/teamMcLaren"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
-                app:safetyCarStatus="@{session.safetycarStatusAsInt()}"
+                app:safetyCarStatus="@{session.safetyCarStatus.intValue()}"
                 app:srcCompat="@drawable/safety_car" />
 
 
@@ -47,7 +47,7 @@
                 android:id="@+id/tvSafetyCar"
                 android:layout_width="wrap_content"
                 android:layout_height="19dp"
-                android:text="@{session.safetyCarStatus()}"
+                app:safetyCarStatusName="@{session.safetyCarStatus.intValue()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivSafetyCar"
                 tools:text="@string/safety_car_vsc" />
@@ -116,7 +116,7 @@
                 style="@style/text_highligted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{session.sessionType()}"
+                app:sessionName="@{session.sessionType.intValue()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvTitleSession"
                 tools:text="P1" />

@@ -1,14 +1,12 @@
 package es.miguelromeral.f1.codemasters.livetiming.listener
 
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.classes.Game
-import es.miguelromeral.f1.codemasters.livetiming.packets.PacketHeader
-import es.miguelromeral.f1.codemasters.livetiming.packets.PacketLapData
-import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
+import es.miguelromeral.f1.codemasters.livetiming.packets.*
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
-import es.miguelromeral.f1.codemasters.livetiming.packets.shortFromPacket
 import timber.log.Timber
 
 class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
@@ -16,8 +14,8 @@ class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
     override fun run() {
         android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND)
         try {
-        when(shortFromPacket(content.sliceArray(0..1)).toInt()){
-                Controller.FORMAT_2018 -> {
+        when(Controller.getFormat(content)){
+                Standard.FORMAT.F18 -> {
                     val header = PacketHeader.create(content)
                     //Timber.i("Testing - New packet received | ID: "+ header.id)
                     when (header.id.toInt()) {
@@ -45,15 +43,14 @@ class PacketDispatcher(val content: ByteArray, var session: Game) : Runnable {
                             session.newTelemetry2018(
                                 PacketCarTelemetryData.create(header, content)
                             )
-                        //PacketCarTelemetryData.PACKET_ID -> session.newTelemetry2018(PacketCarTelemetryData.create(header, content))
-
-                        //EventData.PACKET_ID -> EventData(content)
+                        EventData.PACKET_ID ->
+                            session.newEventData2018(EventData.create(header, content))
 
                         else ->
                             Timber.i("Packet not identified by its ID")
                     }
                 }
-                Controller.FORMAT_2019 -> {
+                Standard.FORMAT.F19 -> {
 
                 }
 

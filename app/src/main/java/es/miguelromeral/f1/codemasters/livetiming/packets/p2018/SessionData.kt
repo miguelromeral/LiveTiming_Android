@@ -118,6 +118,13 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
             else -> Standard.UNKNOWN
         }
 
+    fun getStandardSafetyCarStatus(): Int = when(safetyCarStatus?.toInt()){
+        0 -> Standard.SAFETY_CAR.CLEAR
+        1 -> Standard.SAFETY_CAR.SC
+        2 -> Standard.SAFETY_CAR.VSC
+        else -> Standard.UNKNOWN
+    }
+
     fun getStandardTrackId(): Int = when(trackId.toInt()){
         0 -> MELBOURNE
         1 -> PAUL_RICARD
@@ -144,6 +151,23 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
         22 -> SILVERSTONE_SHORT
         23 -> TEXAS_SHORT
         24 -> SUZUKA_SHORT
+        else -> Standard.UNKNOWN
+    }
+
+
+    fun getStandardSessionType(): Int = when(sessionType.toInt()){
+        1 -> Standard.SESSION.P1
+        2 -> Standard.SESSION.P2
+        3 -> Standard.SESSION.P3
+        4 -> Standard.SESSION.SP
+        5 -> Standard.SESSION.Q1
+        6 -> Standard.SESSION.Q2
+        7 -> Standard.SESSION.Q3
+        8 -> Standard.SESSION.SQ
+        9 -> Standard.SESSION.OQ
+        10 -> Standard.SESSION.RACE
+        11 -> Standard.SESSION.RACE2
+        12 -> Standard.SESSION.TT
         else -> Standard.UNKNOWN
     }
 
@@ -179,6 +203,8 @@ class SessionData private constructor(header: PacketHeader, content: ByteArray) 
             }
             return "Unknown"
         }
+
+
 
         fun getSessionType(session: UByte):String {
             MyApplication.getContext()?.resources?.let {

@@ -1,14 +1,15 @@
 package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.MutableLiveData
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarTelemetryData
-import es.miguelromeral.f1.codemasters.livetiming.standard.Format
+import java.text.Format
 
 
 @ExperimentalUnsignedTypes
 class Telemetry {
 
-    var format = Format.UNKNOWN
+    var format = Standard.UNKNOWN
 
     var speed = MutableLiveData<Short>(0)
     var throttle = MutableLiveData<Byte>(0)
@@ -27,7 +28,7 @@ class Telemetry {
 
     @Synchronized
     fun updateFrom2018(info: CarTelemetryData){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         speed.postValue(info.speed)
         throttle.postValue(info.throttle.toByte())
         steer.postValue(info.steer)

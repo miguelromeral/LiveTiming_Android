@@ -4,10 +4,10 @@ import es.miguelromeral.f1.codemasters.livetiming.classes.Game
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.viewmodels.MyHandlerThread
 
-class MyRunnable (private var myHandlerThread: MyHandlerThread,
-                  private var items: List<ItemLiveTiming>,
-                  private var session: Game,
-                  private var position: Int
+class SectorsUpdater (private var myHandlerThread: MyHandlerThread,
+                      private var items: List<ItemLiveTiming>,
+                      private var session: Game,
+                      private var position: Int
 ) : Runnable {
 
     override fun run(){

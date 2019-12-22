@@ -2,18 +2,20 @@ package es.miguelromeral.f1.codemasters.livetiming.classes
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import classes.toplayer.Standard
+import es.miguelromeral.f1.codemasters.livetiming.packets.EventData
 import es.miguelromeral.f1.codemasters.livetiming.packets.PacketLapData
 import es.miguelromeral.f1.codemasters.livetiming.packets.SessionData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
-import es.miguelromeral.f1.codemasters.livetiming.standard.Format
+import java.text.Format
 
 class Game {
 
     var frameId = MutableLiveData(0)
-    var format = Format.UNKNOWN
+    var format = Standard.UNKNOWN
 
     /*private*/ var _sessionData: MutableLiveData<Session> = MutableLiveData(
         Session()
@@ -26,18 +28,6 @@ class Game {
             = MutableLiveData<MutableList<Player>>()
     val players : LiveData<MutableList<Player>>
         get() = _players
-
-    /*fun newPacket(){
-        _packetsCount.value = packetsCount.value?.plus(1)
-        _sessionData = MutableLiveData<SessionData?>()
-        Timber.i("Testing - Added new packet")
-    }*/
-
-
-    /*fun newEventData(event: EventData){
-        newPacket()
-        _eventData.value = event
-    }*/
 
 
     fun getPlayerByNameOrID(name: String?, id: Byte?): Player?{
@@ -64,7 +54,7 @@ class Game {
 
     @Synchronized
     fun newSessionData2018(session: SessionData){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         frameId.postValue(session.header.frameIdentifier)
         sessionData.value?.let{
             _sessionData.postValue(it.apply {
@@ -75,7 +65,7 @@ class Game {
 
     @Synchronized
     fun newLapData2018(lapdata: PacketLapData){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         frameId.postValue(lapdata.header.frameIdentifier)
         players.value?.let {
             if (it.size != 0) {
@@ -91,7 +81,7 @@ class Game {
 
     @Synchronized
     fun newCarStatus2018(info: PacketCarStatusData){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         frameId.postValue(info.header.frameIdentifier)
         players.value?.let {
             if (it.size != 0) {
@@ -107,7 +97,7 @@ class Game {
 
     @Synchronized
     fun newParticipants2018(info: PacketParticipantData){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         frameId.postValue(info.header.frameIdentifier)
         var list = getPlayersOrNew(info.numCars.toInt())
 
@@ -122,7 +112,7 @@ class Game {
 
     @Synchronized
     fun newTelemetry2018(info: PacketCarTelemetryData){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         frameId.postValue(info.header.frameIdentifier)
         players.value?.let{
             if(it.isNotEmpty()){
@@ -133,9 +123,19 @@ class Game {
         }
     }
 
+    @Synchronized
+    fun newEventData2018(info: EventData){
+        format = Standard.FORMAT.F18
+        frameId.postValue(info.header.frameIdentifier)
+        if(info.getStandardEventCode() == Standard.EVENT.END){
+            _sessionData.postValue(Session())
+            _players.postValue(mutableListOf<Player>())
+        }
+    }
+
 
     fun newData2017(info: Packet2017){
-        format = Format.F1_2017
+        format = Standard.FORMAT.F17
         synchronized(_sessionData) {
             _sessionData.value?.let {
                 it.updateFrom2017(info)

@@ -1,6 +1,7 @@
 package classes.toplayer
 
 import android.content.Context
+import android.os.Build.VERSION_CODES.P
 import classes.toplayer.Standard.Companion.UNKNOWN_TEXT
 import es.miguelromeral.f1.codemasters.livetiming.MyApplication
 import es.miguelromeral.f1.codemasters.livetiming.R
@@ -32,6 +33,64 @@ class Standard {
             8 -> R.string.gear_8
             else -> R.string.gear_undefined
         }
+    }
+
+    object FORMAT {
+        const val F17 = 0
+        const val F18 = 1
+        const val F19 = 2
+        const val F20 = 3
+
+
+    }
+
+    object SAFETY_CAR {
+        const val CLEAR = 0
+        const val SC = 1
+        const val VSC = 2
+
+        fun getSafetyCarStatusName(status: Int?): Int = when(status){
+            CLEAR -> R.string.safety_car_no
+            SC -> R.string.safety_car_sc
+            VSC -> R.string.safety_car_vsc
+            else -> R.string.unknown
+        }
+    }
+
+    object SESSION {
+        const val P1 = 0
+        const val P2 = 1
+        const val P3 = 2
+        const val SP = 3 // SHORT PRACTICE
+        const val Q1 = 4
+        const val Q2 = 5
+        const val Q3 = 6
+        const val SQ = 7 // SHORT QUALY
+        const val OQ = 8// OUT Q1
+        const val RACE = 9
+        const val RACE2 = 10
+        const val TT = 11
+
+        fun getSessionName(session: Int?): Int = when(session?.toInt()){
+            P1 -> R.string.session_p1
+            P2 -> R.string.session_p2
+            P3 -> R.string.session_p3
+            SP -> R.string.session_short_p
+            Q1 -> R.string.session_q1
+            Q2 -> R.string.session_q2
+            Q3 -> R.string.session_q3
+            SQ -> R.string.session_short_q
+            OQ -> R.string.session_out_q
+            RACE -> R.string.session_r
+            RACE2 -> R.string.session_r2
+            TT -> R.string.session_time_trial
+            else -> R.string.unknown
+        }
+    }
+
+    object EVENT {
+        const val START = 0
+        const val END = 1
     }
 
     object AI {

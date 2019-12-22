@@ -12,99 +12,105 @@
     </data>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/root_item_live_timing"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:background="@color/liveTimingListOdd">
-
-    <TextView
-        android:id="@+id/tvPos"
-        style="@style/liveTimingTextView"
-        android:text="@{item.position.toString()}"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        tools:text="14"/>
-
-    <ImageView
-        android:id="@+id/ivColor"
-        style="@style/row_team_color"
-
-        app:teamColor="@{item.teamAsInt}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvPos"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/color_icon"
-        tools:tint="@color/teamMcLaren" />
-
-    <TextView
-        android:id="@+id/tvName"
-        style="@style/liveTimingTextView"
-        android:text="@{item.name}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivColor"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="ALO" />
-
-    <TextView
-        android:id="@+id/tvCurrentTime"
-        style="@style/liveTimingTextView"
-        app:timeFormatted="@{item.time}"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ivCompound"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="1:23.4" />
-
-    <ImageView
-        android:id="@+id/ivCompound"
-        app:tyre="@{item.compoundAsInt}"
-        app:format="@{item.format}"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="4dp"
-
-        app:srcCompat="@drawable/tyre_yellow"
-        style="@style/image_tyre_row" />
-
-    <TextView
-        android:id="@+id/tvSector1Time"
-        style="@style/liveTimingTextView"
-        app:timeFormatted="@{item.sector1Time}"
-
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_item_live_timing"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvName"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="27.1" />
+        tools:background="@color/liveTimingListOdd">
 
-    <TextView
-        android:id="@+id/tvSector2Time"
-        style="@style/liveTimingTextView"
-        app:timeFormatted="@{item.sector2Time}"
+        <TextView
+            android:id="@+id/tvPos"
+            style="@style/liveTimingTextView"
+            android:text="@{item.position.toString()}"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvSector1Time"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="32.0" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
 
-    <TextView
-        android:id="@+id/tvSector3Time"
-        style="@style/liveTimingTextView"
-        app:timeFormatted="@{item.sector3Time}"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvSector2Time"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="19.7" />
+            tools:text="14" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ivColor"
+            style="@style/row_team_color"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvPos"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/color_icon"
+            app:teamColor="@{item.teamAsInt}"
+            tools:tint="@color/teamMcLaren" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/liveTimingTextView"
+            android:text="@{item.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivColor"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="ALO" />
+
+        <TextView
+            android:id="@+id/tvCurrentTime"
+            style="@style/liveTimingTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivCompound"
+            app:layout_constraintTop_toTopOf="parent"
+            app:timeFormatted="@{item.time}"
+            tools:text="1:23.4" />
+
+        <ImageView
+            android:id="@+id/ivCompound"
+            style="@style/image_tyre_row"
+            android:layout_marginEnd="4dp"
+
+            app:format="@{item.format}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:srcCompat="@drawable/tyre_yellow"
+            app:tyre="@{item.compound.intValue()}" />
+
+        <TextView
+            android:id="@+id/tvSector3Time"
+            style="@style/liveTimingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvSector2Time"
+            app:layout_constraintTop_toTopOf="parent"
+            app:timeFormatted="@{item.sector3Time}"
+            tools:text="19.7" />
+
+        <TextView
+            android:id="@+id/tvSector2Time"
+            style="@style/liveTimingTextView"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvSector1Time"
+            app:layout_constraintTop_toTopOf="parent"
+            app:timeFormatted="@{item.sector2Time}"
+            tools:text="32.0" />
+
+        <TextView
+            android:id="@+id/tvSector1Time"
+            style="@style/liveTimingTextView"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:timeFormatted="@{item.sector1Time}"
+            tools:layout_editor_absoluteX="124dp"
+            tools:text="27.1" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

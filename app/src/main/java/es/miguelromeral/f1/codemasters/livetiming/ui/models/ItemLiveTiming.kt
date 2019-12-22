@@ -1,10 +1,11 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.models
 
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.classes.CarStatus
 import es.miguelromeral.f1.codemasters.livetiming.classes.Lap
 import es.miguelromeral.f1.codemasters.livetiming.classes.Participant
 import es.miguelromeral.f1.codemasters.livetiming.classes.Session
-import es.miguelromeral.f1.codemasters.livetiming.standard.Format
+import java.text.Format
 
 
 class ItemLiveTiming private constructor()
@@ -20,7 +21,7 @@ class ItemLiveTiming private constructor()
     var sector1Time: Float? = null
     var sector2Time: Float? = null
     var sector3Time: Float? = null
-    var format: Format = Format.UNKNOWN
+    var format = Standard.UNKNOWN
 
     fun getTeamAsInt() = team?.toInt()
     fun getCompoundAsInt() = compound?.toInt()

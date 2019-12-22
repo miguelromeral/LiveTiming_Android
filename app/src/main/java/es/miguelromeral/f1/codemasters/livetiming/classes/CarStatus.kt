@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
-import es.miguelromeral.f1.codemasters.livetiming.standard.Format
+import java.text.Format
 
 class CarStatus {
 
-    var format = Format.UNKNOWN
+    var format = Standard.UNKNOWN
 
     var tractionControl = MutableLiveData<UByte>(0u)
     var antiLockBrakes = MutableLiveData<UByte>(0u)
@@ -40,7 +40,7 @@ class CarStatus {
 
     @Synchronized
     fun updateFrom2018(info: CarStatusData){
-        format = Format.F1_2018
+        format = Standard.FORMAT.F18
         tractionControl.postValue(info.tractionControl)
         antiLockBrakes.postValue(info.antiLockBrakes)
         fuelMix.postValue(info.getStandardFuelMix().toByte())
@@ -71,7 +71,7 @@ class CarStatus {
 
     @Synchronized
     fun updateFrom2017(info: CarUDPData){
-        format = Format.F1_2017
+        format = Standard.FORMAT.F17
         tyreCompound.postValue(info.getStandardTyreCompound().toByte())
         pitLimiterStatus.postValue(info.inPits.toUByte())
     }
