@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.databinding.BindingAdapter
 import androidx.preference.PreferenceManager
@@ -13,7 +14,6 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.classes.CarStatus
 import es.miguelromeral.f1.codemasters.livetiming.classes.Telemetry
-import es.miguelromeral.f1.codemasters.livetiming.standard.Format
 
 
 @BindingAdapter("backgroundByPosition")
@@ -40,7 +40,7 @@ fun TextView.setTimeFormatted(time: Float?) {
 }
 
 @BindingAdapter("tyre", "format", requireAll = false)
-fun ImageView.setTyreImage(compound: Int?, format: Format?){
+fun ImageView.setTyreImage(compound: Int?, format: Int?){
     setImageResource(Standard.TYRES.getTyreDrawable(compound))
 }
 
@@ -211,20 +211,23 @@ fun TextView.setGear(gear: Int?){
     text = context.getString(Standard.getGear(gear))
 }
 
-/////////////////////////////////
 
-        //DOESN'T WORK YET
-
-/////////////////////////////////
 @BindingAdapter("safetyCarStatus")
 fun ImageView.setSafetyCarStatus(sc: Int?){
-    if(sc != null) {
-        if (sc in 1..2) {
-            setColorFilter(R.color.colorAccent)
-            return
-        }
+    when(sc) {
+        Standard.SAFETY_CAR.SC, Standard.SAFETY_CAR.VSC -> setColorFilter(ContextCompat.getColor(context, R.color.rededYellow))
+        else -> setColorFilter(ContextCompat.getColor(context, R.color.fullBlack))
     }
-    setColorFilter(R.color.colorAccent)
+}
+
+@BindingAdapter("sessionName")
+fun TextView.setSessionName(session: Int?){
+    text = context.getString(Standard.SESSION.getSessionName(session))
+}
+
+@BindingAdapter("safetyCarStatusName")
+fun TextView.setSafetyCarStatusName(status: Int?){
+    text = context.getString(Standard.SAFETY_CAR.getSafetyCarStatusName(status))
 }
 
 
