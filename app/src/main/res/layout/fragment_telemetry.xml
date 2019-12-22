@@ -29,49 +29,6 @@
             app:layout_constraintTop_toTopOf="parent"
             bind:player="@{player}" />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Throttle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-
-        <ProgressBar
-            android:id="@+id/pbThrottle"
-            style="@style/progress_bar"
-            android:max="100"
-            android:progressTint="@color/fullGreen"
-            android:progress="@{player.telemetry.throttle.intValue()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:progress="50" />
-
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Brakes"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pbThrottle" />
-
-        <ProgressBar
-            android:id="@+id/pbBrakes"
-            style="@style/progress_bar"
-            android:max="100"
-            android:progress="@{player.telemetry.brake.intValue()}"
-            android:progressTint="@color/fullRed"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            tools:progress="50" />
 
         <!--
 

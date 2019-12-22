@@ -1,5 +1,6 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui
 
+import android.content.Context
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -75,16 +76,7 @@ fun ProgressBar.setERSDeployedLap(deployed: Float?){
 @BindingAdapter("speed")
 fun TextView.setSpeed(speed: Short?){
     speed?.let{
-
-        val preference = PreferenceManager.getDefaultSharedPreferences(context)
-            .getString(context.getString(R.string.preference_key_speed_unit), context.getString(R.string.speed_unit_kmh))
-
-        when(preference){
-            context.getString(R.string.speed_unit_mph) ->
-                text = context.getString(R.string.speed_mph, (speed * 0.621371).toShort())
-            else ->
-                text = context.getString(R.string.speed_kmh, speed)
-        }
+        text = getSpeedValue(context, speed.toInt(), true)
         return
     }
     text = context.getString(R.string.speed_unknown)
@@ -102,6 +94,9 @@ fun ProgressBar.configureRevs(telemetry: Telemetry?){
 }
 
 
+
+
+
 @BindingAdapter("revsCircle")
 fun CircularProgressBar.setRevsCircle(revs: Short?){
     revs?.let{
@@ -110,6 +105,29 @@ fun CircularProgressBar.setRevsCircle(revs: Short?){
     }
     progress = 0f
 }
+
+
+@BindingAdapter("speed_circle")
+fun CircularProgressBar.setSpeedCircle(speed: Short?){
+    speed?.let{
+        progress = speed.toFloat() % 360
+        return
+    }
+    progress = 0f
+}
+
+@BindingAdapter("speed_indicator", "speed_show_unit", requireAll = false)
+fun TextView.setSpeedIndicator(speed: Int, showUnit: Boolean = false){
+    text = getSpeedValue(context, speed, showUnit)
+}
+
+
+@BindingAdapter("throttle_circle")
+fun CircularProgressBar.setThrottleCircle(throttle: Short?){
+    progress = throttle?.toFloat() ?: 0f
+}
+
+
 
 
 @BindingAdapter("drsStatus")
@@ -259,6 +277,28 @@ fun floatToTimeFormatted(inf : Float?, long: Boolean = false): String? {
     if(secs < 10 && mins != 0)
         string += "0"
     return string + "${secs}.$tent"
+}
+
+fun getSpeedValue(context: Context, speed: Int, showUnit: Boolean = false): String {
+
+    val preference = PreferenceManager.getDefaultSharedPreferences(context)
+        .getString(context.getString(R.string.preference_key_speed_unit), context.getString(R.string.speed_unit_kmh))
+
+    return when(preference){
+        context.getString(R.string.speed_unit_mph) -> {
+            val valor = (speed * 0.621371).toShort()
+            if (showUnit) {
+                context.getString(R.string.speed_mph, valor)
+            } else {
+                valor.toString()
+            }
+        }
+        else ->
+            if(showUnit)
+                context.getString(R.string.speed_kmh, speed)
+            else
+                speed.toString()
+    }
 }
 /*
 fun getTyreIcon(format: Format, era: UByte?, compound: UByte?): Int{

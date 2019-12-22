@@ -72,7 +72,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 gear.postValue((i % 9).toByte())
                 throttle.postValue((10 + i * 4).toByte())
                 speed.postValue((100 + i * 12).toShort())
-                brake.postValue(i.toByte())
+                brake.postValue((10 + i * 4).toByte())
                 engineRPM.postValue((5000 + (i * 200)).toShort())
                 drs.postValue((i % 2).toByte())
             })
@@ -94,6 +94,9 @@ class Controller(val port: Int = DEFAULT_PORT) {
 
                 val tmp2 = it._telemetry.value?.engineRPM?.value?.plus(75)
                 it._telemetry.value?.engineRPM?.postValue(tmp2!!.toShort())
+
+                val tmp3 = it._telemetry.value?.speed?.value?.plus(1)
+                //it._telemetry.value?.speed?.postValue(tmp3!!.toShort())
             }
 
             /*var ses = session._sessionData.value
