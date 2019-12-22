@@ -3,7 +3,8 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
 
     <data>
@@ -18,33 +19,15 @@
         android:layout_height="match_parent">
 
 
-
-        <TextView
-            android:id="@+id/tvGear"
-            style="@style/text_temperature"
+        <include
+            layout="@layout/telemetry_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:gear="@{player.telemetry.gear.intValue()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="8" />
-
-
-        <TextView
-            android:id="@+id/tvSpeed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/tvGear"
-            app:layout_constraintStart_toStartOf="@+id/tvGear"
-            app:layout_constraintTop_toBottomOf="@+id/tvGear"
-            app:speed="@{player.telemetry.speed}"
-            tools:text="320 km/h" />
-
-
-
+            bind:player="@{player}" />
 
         <TextView
             android:id="@+id/textView"
@@ -55,18 +38,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
+
         <ProgressBar
             android:id="@+id/pbThrottle"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/fullBlack"
-            android:fadeScrollbars="false"
-            android:focusableInTouchMode="false"
-            android:indeterminate="false"
+            style="@style/progress_bar"
             android:max="100"
-            android:progress="@{player.telemetry.throttle.intValue()}"
             android:progressTint="@color/fullGreen"
+            android:progress="@{player.telemetry.throttle.intValue()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,13 +63,7 @@
 
         <ProgressBar
             android:id="@+id/pbBrakes"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/fullBlack"
-            android:fadeScrollbars="false"
-            android:focusableInTouchMode="false"
-            android:indeterminate="false"
+            style="@style/progress_bar"
             android:max="100"
             android:progress="@{player.telemetry.brake.intValue()}"
             android:progressTint="@color/fullRed"
@@ -101,8 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:progress="50" />
 
-
-
+        <!--
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -185,13 +156,8 @@
 
             <ProgressBar
                 android:id="@+id/pbRevs"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@color/fullBlack"
-                android:fadeScrollbars="false"
-                android:focusableInTouchMode="false"
-                android:indeterminate="false"
+
+                style="@style/progress_bar"
                 android:progressTint="@color/fullYellow"
                 app:revs="@{player.telemetry}"
                 tools:max="15000"
@@ -200,20 +166,10 @@
 
         </LinearLayout>
 
+-->
 
 
 
-        <TextView
-            android:id="@+id/tvDRS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@color/fullGray"
-            android:text="DRS"
-            app:drsStatus="@{player.telemetry.drs.intValue()}"
-            app:layout_constraintBottom_toTopOf="@+id/tvGear"
-            app:layout_constraintEnd_toEndOf="@+id/tvGear"
-            app:layout_constraintStart_toStartOf="@+id/tvGear" />
 
 
 
@@ -239,27 +195,6 @@
             app:srcCompat="@drawable/tyre_unknown"
             app:tyre="@{player.carStatus.tyreCompound.intValue()}" />
 
-        <com.mikhaellopez.circularprogressbar.CircularProgressBar
-            android:id="@+id/circularProgressBar"
-            android:layout_width="150dp"
-            android:layout_height="163dp"
-            app:cpb_background_progressbar_color="@color/fullBlack"
-            app:cpb_background_progressbar_width="18sp"
-            app:cpb_progress="15000"
-            app:cpb_progress_direction="to_right"
-
-
-            app:cpb_progress_max="20000"
-            app:cpb_progressbar_color_end="@color/rededYellow"
-            app:cpb_progressbar_color_start="@color/fullYellow"
-            app:cpb_progressbar_width="10dp"
-            app:cpb_round_border="true"
-            app:cpb_start_angle="225"
-            app:layout_constraintBottom_toBottomOf="@+id/tvSpeed"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvDRS"
-            app:revsCircle="@{player.telemetry.engineRPM}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

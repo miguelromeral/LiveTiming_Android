@@ -51,7 +51,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="text_temperature">
+    <style name="text_highligted">
         <item name="android:textSize">28sp</item>
     </style>
 
@@ -67,5 +67,66 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">#00E46060</item>
     </style>
+
+    <style name="tablayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">@color/fullYellow</item>
+        <item name="tabGravity">center</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabSelectedTextColor">@color/fullYellow</item>
+        <item name="tabTextColor">@color/fullWhite</item>
+    </style>
+
+    <style name="viewpager">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="layout_behavior">@string/appbar_scrolling_view_behavior</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+
+    <style name="appbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+
+    </style>
+
+    <style name="spinner_select_driver">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/size_spinner</item>
+        <item name="android:dropDownWidth">match_parent</item>
+        <item name="android:scrollbarSize">4dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="recycler_view_live_timing">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="layoutManager">androidx.recyclerview.widget.LinearLayoutManager</item>
+    </style>
+
+    <style name="text_gear">
+        <item name="android:textSize">28sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="progress_bar" parent="android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@color/fullBlack</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:focusableInTouchMode">false</item>
+        <item name="android:indeterminate">false</item>
+        <item name="android:progressTint">@color/tyre_cyan</item>
+    </style>
+
 
 </resources>

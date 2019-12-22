@@ -19,6 +19,19 @@ class Standard {
 
         const val MAX_RPM = 15_000
 
+        fun getGear(gear: Int?): Int = when(gear){
+            -1 -> R.string.gear_rear
+            0 -> R.string.gear_n
+            1 -> R.string.gear_1
+            2 -> R.string.gear_2
+            3 -> R.string.gear_3
+            4 -> R.string.gear_4
+            5 -> R.string.gear_5
+            6 -> R.string.gear_6
+            7 -> R.string.gear_7
+            8 -> R.string.gear_8
+            else -> R.string.gear_undefined
+        }
     }
 
     object AI {

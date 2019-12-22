@@ -19,42 +19,23 @@
 
         <Spinner
             android:id="@+id/spPlayers"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_spinner"
-            android:dropDownWidth="match_parent"
-            android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@+id/appbar"
-            tools:listitem="Testing" />
+            tools:listitem="Testing"
+            style="@style/spinner_select_driver" />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            style="@style/appbar">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/result_tabs_car"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:textAlignment="center"
-                app:tabGravity="center"
-                app:tabIndicatorColor="@color/tyre_yellow"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/tyre_yellow"
-                app:tabTextColor="@color/fullWhite" />
+                style="@style/tablayout" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager_car"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/viewpager"
             app:layout_constraintTop_toBottomOf="@+id/spPlayers" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

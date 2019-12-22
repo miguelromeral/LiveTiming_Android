@@ -183,18 +183,14 @@ fun TextView.setTemperature(temperature: Int?){
         }
         return
     }
-    text = "--"
+    text = context.getString(R.string.temperature_undefined)
 }
 
 fun convertCentigradesToFarenheit(temperature: Int) = (temperature * 9 / 5) + 32
 
 @BindingAdapter("gear")
 fun TextView.setGear(gear: Int?){
-    gear?.let{
-        text = gear.toString()
-        return
-    }
-    text = "-"
+    text = context.getString(Standard.getGear(gear))
 }
 
 /////////////////////////////////
@@ -217,19 +213,20 @@ fun ImageView.setSafetyCarStatus(sc: Int?){
 @BindingAdapter("length")
 fun TextView.setLenght(length: Int?){
     length?.let{
-        text = "$it m."
+        text = context.getString(R.string.length_meters, it)
         return
     }
-    text = "- m."
+    text = context.getString(R.string.length_undefined)
 }
 
 @BindingAdapter("ersPercentage")
 fun TextView.setERSPercentage(value: Float?){
     value?.let{
-        text = "${((value / 4000000f) * 100).toInt()} %"
+        val tmp = ((value / 4000000f) * 100).toInt()
+        text = context.getString(R.string.percentage, tmp)
         return
     }
-    text = "-- %"
+    text = context.getString(R.string.percentage, 0)
 }
 
 

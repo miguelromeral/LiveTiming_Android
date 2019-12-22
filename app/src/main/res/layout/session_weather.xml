@@ -39,7 +39,7 @@
 
         <TextView
             android:id="@+id/tvAirTemperature"
-            style="@style/text_temperature"
+            style="@style/text_highligted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -59,7 +59,7 @@
 
         <TextView
             android:id="@+id/tvTrackTemperature2"
-            style="@style/text_temperature"
+            style="@style/text_highligted"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

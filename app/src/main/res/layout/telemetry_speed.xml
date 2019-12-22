@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable
+            name="player"
+            type="es.miguelromeral.f1.codemasters.livetiming.classes.Player"/>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp">
+
+
+        <TextView
+            android:id="@+id/tvGear"
+            style="@style/text_gear"
+            app:gear="@{player.telemetry.gear.intValue()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="8" />
+
+
+        <TextView
+            android:id="@+id/tvSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/tvGear"
+            app:layout_constraintStart_toStartOf="@+id/tvGear"
+            app:layout_constraintTop_toBottomOf="@+id/tvGear"
+            app:speed="@{player.telemetry.speed}"
+            tools:text="320 km/h" />
+
+
+        <TextView
+            android:id="@+id/tvDRS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@color/fullGray"
+            android:text="DRS"
+            app:drsStatus="@{player.telemetry.drs.intValue()}"
+            app:layout_constraintBottom_toTopOf="@+id/tvGear"
+            app:layout_constraintEnd_toEndOf="@+id/tvGear"
+            app:layout_constraintStart_toStartOf="@+id/tvGear" />
+
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:cpb_background_progressbar_color="@color/fullBlack"
+            app:cpb_background_progressbar_width="18sp"
+            app:cpb_progress="15000"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progress_max="17500"
+            app:cpb_progressbar_color_end="@color/rededYellow"
+            app:cpb_progressbar_color_start="@color/fullYellow"
+            app:cpb_progressbar_width="10dp"
+            app:cpb_round_border="false"
+            app:cpb_start_angle="205"
+            app:layout_constraintBottom_toBottomOf="@+id/tvSpeed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvDRS"
+            app:revsCircle="@{player.telemetry.engineRPM}" />
+
+        <TextView
+            android:id="@+id/tvSpeedIndicator0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSpeedIndicator1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="169dp" />
+
+        <TextView
+            android:id="@+id/tvSpeedIndicator2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            tools:layout_editor_absoluteX="34dp"
+            tools:layout_editor_absoluteY="72dp" />
+
+        <TextView
+            android:id="@+id/tvSpeedIndicator3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            tools:layout_editor_absoluteX="146dp"
+            tools:layout_editor_absoluteY="31dp" />
+
+        <TextView
+            android:id="@+id/tvSpeedIndicator4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            tools:layout_editor_absoluteX="263dp"
+            tools:layout_editor_absoluteY="72dp" />
+
+        <TextView
+            android:id="@+id/tvSpeedIndicator5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            tools:layout_editor_absoluteX="271dp"
+            tools:layout_editor_absoluteY="188dp" />
+
+        <TextView
+            android:id="@+id/tvSpeedIndicator6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

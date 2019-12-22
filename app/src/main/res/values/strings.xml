@@ -293,10 +293,28 @@
     <string name="speed_mph">%1$d mph</string>
     <string name="speed_unknown">--</string>
 
+    <string name="length_meters">%1$d m</string>
+    <string name="length_undefined">--</string>
+
+    <string name="percentage">%1$d %%</string>
+
     <string name="time_minutes_seconds">%1$d:%2$02d</string>
     <string name="time_minutes_seconds_undefined">-:--</string>
 
     <string name="temperature_c">%1$d ºC</string>
     <string name="temperature_f">%1$d ºF</string>
+    <string name="temperature_undefined">--</string>
+
+    <string name="gear_rear">R</string>
+    <string name="gear_n">N</string>
+    <string name="gear_undefined">-</string>
+    <string name="gear_1">1</string>
+    <string name="gear_2">2</string>
+    <string name="gear_3">3</string>
+    <string name="gear_4">4</string>
+    <string name="gear_5">5</string>
+    <string name="gear_6">6</string>
+    <string name="gear_7">7</string>
+    <string name="gear_8">8</string>
 
 </resources>

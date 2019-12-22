@@ -63,7 +63,7 @@
 
             <TextView
                 android:id="@+id/tvEra"
-                style="@style/text_temperature"
+                style="@style/text_highligted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:era="@{session.era.intValue()}"
@@ -74,7 +74,7 @@
 
             <TextView
                 android:id="@+id/tvSessionDuration"
-                style="@style/text_temperature"
+                style="@style/text_highligted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
 
             <TextView
                 android:id="@+id/tvSessionTimeLeft"
-                style="@style/text_temperature"
+                style="@style/text_highligted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +113,7 @@
 
             <TextView
                 android:id="@+id/tvSessionType"
-                style="@style/text_temperature"
+                style="@style/text_highligted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{session.sessionType()}"

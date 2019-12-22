@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/tvTotalERS"
-                style="@style/text_temperature"
+                style="@style/text_highligted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:ersPercentage="@{player.carStatus.ersStoreEnergy}"
