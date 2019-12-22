@@ -110,7 +110,7 @@ fun CircularProgressBar.setRevsCircle(revs: Short?){
 @BindingAdapter("speed_circle")
 fun CircularProgressBar.setSpeedCircle(speed: Short?){
     speed?.let{
-        progress = speed.toFloat() % 360
+        progress = speed.toFloat()
         return
     }
     progress = 0f

@@ -7,15 +7,15 @@ class PacketCarTelemetryData private constructor(header: PacketHeader, content: 
     val carTelemetryData = createTelemetryData(content, 0)
     val buttonStatus = intFromPacket(content.sliceArray(1060 until 1064))
 
-    fun createTelemetryData(content: ByteArray, begin: Int, iteration: Int = 0, end: Int = CarTelemetryData.MAX_CARS): List<CarTelemetryData>{
-        if(iteration >= end)
+    fun createTelemetryData(content: ByteArray, begin: Int, iteration: Int = 0, endloop: Int = CarTelemetryData.MAX_CARS): List<CarTelemetryData>{
+        if(iteration >= endloop)
             return emptyList()
 
-        val start = begin + (iteration * ParticipantData.SIZE)
-        val end = start + ParticipantData.SIZE
+        val start = begin + (iteration * CarTelemetryData.SIZE)
+        val end = start + CarTelemetryData.SIZE
 
         return listOf(CarTelemetryData.create(content.sliceArray(start until end))) +
-                createTelemetryData(content, begin, iteration + 1, end)
+                createTelemetryData(content, begin, iteration + 1, endloop)
     }
 
 
@@ -51,7 +51,7 @@ class CarTelemetryData private constructor(content: ByteArray){
         const val SIZE = 53
 
         fun create(content: ByteArray): CarTelemetryData {
-            return CarTelemetryData(content.sliceArray(PacketHeader.HEADER_SIZE until SIZE))
+            return CarTelemetryData(content.sliceArray(0 until SIZE))
         }
     }
 }

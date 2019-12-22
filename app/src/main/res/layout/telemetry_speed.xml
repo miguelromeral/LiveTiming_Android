@@ -19,74 +19,53 @@
 
 
         <TextView
-            android:id="@+id/tvGear"
-            style="@style/text_gear"
-            app:gear="@{player.telemetry.gear.intValue()}"
+            android:id="@+id/tvDRS"
+            android:layout_width="100sp"
+            android:layout_height="30sp"
+            android:layout_marginTop="8dp"
+            android:background="@color/fullGray"
+            android:foregroundGravity="bottom"
+            android:gravity="bottom"
+            android:text="DRS"
+            android:textAlignment="center"
+            app:drsStatus="@{player.telemetry.drs.intValue()}"
+            app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/cpbThrottle" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_width="150sp"
+            android:layout_height="150sp"
+            app:cpb_background_progressbar_color="@color/fullBlack"
+            app:cpb_background_progressbar_width="25sp"
+
+            app:cpb_progress="120"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progress_max="420"
+            app:cpb_progressbar_color="@color/tyre_cyan"
+            app:cpb_progressbar_width="15sp"
+            app:cpb_round_border="false"
+            app:cpb_start_angle="205"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="8" />
-
-
-        <TextView
-            android:id="@+id/tvRevs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{player.telemetry.engineRPM.toString()}"
-            app:layout_constraintBottom_toTopOf="@+id/tvSpeed"
-            app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
-            app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
-            app:layout_constraintTop_toBottomOf="@+id/tvGear"
-            tools:text="7500" />
-
-
-        <TextView
-            android:id="@+id/tvDRS"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="@color/fullGray"
-            android:text="DRS"
-            app:drsStatus="@{player.telemetry.drs.intValue()}"
-            app:layout_constraintBottom_toTopOf="@+id/tvGear"
-            app:layout_constraintEnd_toEndOf="@+id/tvGear"
-            app:layout_constraintStart_toStartOf="@+id/tvGear" />
-
-
-        <com.mikhaellopez.circularprogressbar.CircularProgressBar
-            android:id="@+id/circularProgressBar"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:cpb_background_progressbar_color="@color/fullBlack"
-            app:cpb_background_progressbar_width="18sp"
-
-            app:cpb_progress="240"
-            app:cpb_progress_direction="to_right"
-            app:cpb_progress_max="420"
-            app:cpb_progressbar_color="@color/tyre_cyan"
-            app:cpb_progressbar_width="10dp"
-            app:cpb_round_border="false"
-            app:cpb_start_angle="205"
-            app:layout_constraintBottom_toBottomOf="@+id/tvGear"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvDRS"
             app:speed_circle="@{player.telemetry.speed}" />
 
 
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/cpbThrottle"
             throttle_circle="@{player.telemetry.throttle.shortValue()}"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="120sp"
+            android:layout_height="120sp"
             app:cpb_background_progressbar_color="@color/fullBlack"
             app:cpb_background_progressbar_width="18sp"
             app:cpb_progress="100"
             app:cpb_progress_direction="to_right"
             app:cpb_progress_max="200"
             app:cpb_progressbar_color="@color/fullGreen"
-            app:cpb_progressbar_width="10dp"
+            app:cpb_progressbar_width="10sp"
             app:cpb_round_border="false"
             app:cpb_start_angle="205"
             app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
@@ -98,8 +77,8 @@
         <com.mikhaellopez.circularprogressbar.CircularProgressBar
             android:id="@+id/cpbBrake"
             throttle_circle="@{player.telemetry.brake.shortValue()}"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
+            android:layout_width="120sp"
+            android:layout_height="120sp"
             app:cpb_background_progressbar_color="@android:color/transparent"
             app:cpb_background_progressbar_width="18sp"
             app:cpb_progress="100"
@@ -120,8 +99,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
             app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+            app:layout_constraintTop_toBottomOf="@+id/cpbThrottle"
             app:speed_indicator="@{0}"
             tools:text="0" />
 
@@ -142,10 +121,10 @@
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvDRS"
             app:layout_constraintEnd_toStartOf="@+id/cpbThrottle"
+            app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
             tools:text="120" />
 
         <TextView
@@ -164,9 +143,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/tvDRS"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toEndOf="@+id/cpbThrottle"
+            app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
             tools:text="240" />
 
         <TextView
@@ -185,11 +164,10 @@
             speed_indicator="@{360}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+            app:layout_constraintTop_toBottomOf="@+id/cpbThrottle"
             tools:text="360" />
-
 
 
         <TextView
@@ -199,11 +177,35 @@
             android:singleLine="false"
             android:textAlignment="center"
             android:textColor="@color/fullWhite"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
             app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
             app:speed="@{player.telemetry.speed}"
             tools:text="320 km/h" />
+
+        <TextView
+            android:id="@+id/tvRevs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{player.telemetry.engineRPM.toString()}"
+            app:layout_constraintBottom_toTopOf="@+id/tvSpeed"
+            app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+            app:layout_constraintTop_toBottomOf="@+id/tvGear"
+            tools:text="7500" />
+
+        <TextView
+            android:id="@+id/tvGear"
+            style="@style/text_gear"
+            android:textSize="42sp"
+            android:textStyle="bold"
+            app:gear="@{player.telemetry.gear.intValue()}"
+            app:layout_constraintBottom_toBottomOf="@+id/circularProgressBar"
+            app:layout_constraintEnd_toEndOf="@+id/circularProgressBar"
+            app:layout_constraintStart_toStartOf="@+id/circularProgressBar"
+            app:layout_constraintTop_toTopOf="@+id/circularProgressBar"
+            tools:text="8" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

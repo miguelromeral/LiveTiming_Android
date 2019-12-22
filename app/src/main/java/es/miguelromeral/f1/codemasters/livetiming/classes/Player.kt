@@ -57,7 +57,9 @@ class Player {
 
     @Synchronized
     fun newTelemetry2018(info: CarTelemetryData){
-        _telemetry.value?.updateFrom2018(info)
+        var telem = getCarTelemetryOrNew()
+        telem.updateFrom2018(info)
+        _telemetry.postValue(telem)
     }
 
 
@@ -119,5 +121,13 @@ class Player {
             CarStatus()
         }else{
             carStatus.value!!
+        }
+
+
+    private fun getCarTelemetryOrNew() =
+        if(telemetry.value == null){
+            Telemetry()
+        }else{
+            telemetry.value!!
         }
 }
