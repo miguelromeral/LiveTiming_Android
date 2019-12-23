@@ -4,11 +4,30 @@ import androidx.lifecycle.MutableLiveData
 import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.CarUDPData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
+import es.miguelromeral.f1.codemasters.livetiming.standard.TYRES_POSITION
 import java.text.Format
 
 class CarStatus {
 
     var format = Standard.UNKNOWN
+
+    // ERS
+
+    var ersStoreEnergy = MutableLiveData<Float>(0f)
+    var ersDeployMode = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
+    var ersHarvestedThisLapMGUK = MutableLiveData<Float>(0f)
+    var ersHarvestedThisLapMGUH = MutableLiveData<Float>(0f)
+    var ersDeployedThisLap = MutableLiveData<Float>(0f)
+
+    // Damage
+
+    var frontLeftWingDamage = MutableLiveData<Byte>(0)
+    var frontRightWingDamage = MutableLiveData<Byte>(0)
+    var rearWingDamage = MutableLiveData<Byte>(0)
+    var tyresDamage = MutableLiveData<List<Byte>>(mutableListOf())
+    var engineDamage = MutableLiveData<UByte>(0u)
+    var gearBoxDamage = MutableLiveData<UByte>(0u)
+    var exhaustDamage = MutableLiveData<UByte>(0u)
 
     var tractionControl = MutableLiveData<UByte>(0u)
     var antiLockBrakes = MutableLiveData<UByte>(0u)
@@ -23,19 +42,9 @@ class CarStatus {
     var drsAllowed = MutableLiveData<UByte>(0u)
     var tyresWear = MutableLiveData<List<UByte>>(mutableListOf())
     var tyreCompound = MutableLiveData<Byte>(Standard.UNKNOWN.toByte())
-    var tyresDamage = MutableLiveData<List<UByte>>(mutableListOf())
-    var frontLeftWingDamage = MutableLiveData<UByte>(0u)
-    var frontRightWingDamage = MutableLiveData<UByte>(0u)
-    var rearWingDamage = MutableLiveData<UByte>(0u)
-    var engineDamage = MutableLiveData<UByte>(0u)
-    var gearBoxDamage = MutableLiveData<UByte>(0u)
-    var exhaustDamage = MutableLiveData<UByte>(0u)
+
     var vehicleFiaFlags = MutableLiveData<Byte>(0)
-    var ersStoreEnergy = MutableLiveData<Float>(0f)
-    var ersDeployMode = MutableLiveData<UByte>(0u)
-    var ersHarvestedThisLapMGUK = MutableLiveData<Float>(0f)
-    var ersHarvestedThisLapMGUH = MutableLiveData<Float>(0f)
-    var ersDeployedThisLap = MutableLiveData<Float>(0f)
+
 
 
     @Synchronized
@@ -54,16 +63,18 @@ class CarStatus {
         drsAllowed.postValue(info.drsAllowed)
         tyresWear.postValue(info.tyresWear)
         tyreCompound.postValue(info.getStandardTyreCompound().toByte())
-        tyresDamage.postValue(info.tyresDamage)
-        frontLeftWingDamage.postValue(info.frontLeftWingDamage)
-        frontRightWingDamage.postValue(info.frontRightWingDamage)
-        rearWingDamage.postValue(info.rearWingDamage)
+        tyresDamage.postValue(info.tyresDamage.map{
+            it.toByte()
+        })
+        frontLeftWingDamage.postValue(info.frontLeftWingDamage.toByte())
+        frontRightWingDamage.postValue(info.frontRightWingDamage.toByte())
+        rearWingDamage.postValue(info.rearWingDamage.toByte())
         engineDamage.postValue(info.engineDamage)
         gearBoxDamage.postValue(info.gearBoxDamage)
         exhaustDamage.postValue(info.exhaustDamage)
         vehicleFiaFlags.postValue(info.vehicleFiaFlags)
         ersStoreEnergy.postValue(info.ersStoreEnergy)
-        ersDeployMode.postValue(info.ersDeployMode)
+        ersDeployMode.postValue(info.ersDeployMode.toByte())
         ersHarvestedThisLapMGUK.postValue(info.ersHarvestedThisLapMGUK)
         ersHarvestedThisLapMGUH.postValue(info.ersHarvestedThisLapMGUH)
         ersDeployedThisLap.postValue(info.ersDeployedThisLap)
@@ -74,5 +85,17 @@ class CarStatus {
         format = Standard.FORMAT.F17
         tyreCompound.postValue(info.getStandardTyreCompound().toByte())
         pitLimiterStatus.postValue(info.inPits.toUByte())
+    }
+
+    fun getTyreDamage(position: Int): Byte = when(position){
+        TYRES_POSITION.RL, TYRES_POSITION.RR,
+        TYRES_POSITION.FL, TYRES_POSITION.FR ->
+        {
+             tyresDamage.value?.let{
+                it[position]
+             }
+            Standard.UNKNOWN.toByte()
+        }
+        else -> Standard.UNKNOWN.toByte()
     }
 }

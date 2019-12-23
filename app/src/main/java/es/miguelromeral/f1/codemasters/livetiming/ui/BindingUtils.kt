@@ -26,9 +26,9 @@ fun setBackgroundByPosition(viewGroup: ViewGroup, position: UByte?){
                 /*if(position == 0)
                 R.color.colorPrimary
             else*/
-                    R.color.liveTimingListEven
-                else
                     R.color.liveTimingListOdd
+                else
+                    R.color.liveTimingListEven
             )
         )
     }
@@ -248,6 +248,11 @@ fun TextView.setERSPercentage(value: Float?){
         return
     }
     text = context.getString(R.string.percentage, 0)
+}
+
+@BindingAdapter("percentage")
+fun TextView.setPercentageText(value: Int?){
+    text = context.getString(R.string.percentage, value ?: 0)
 }
 
 

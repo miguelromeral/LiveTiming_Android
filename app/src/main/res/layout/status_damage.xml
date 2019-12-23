@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <import type="java.util.List"/>
+        <import type="es.miguelromeral.f1.codemasters.livetiming.standard.TYRES_POSITION" />
+        <variable
+            name="player"
+            type="es.miguelromeral.f1.codemasters.livetiming.classes.Player" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tvDamageFL"
+            percentage="@{player.carStatus.tyresDamage[TYRES_POSITION.FL].intValue()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            tools:text="FL %" />
+
+
+        <TextView
+            android:id="@+id/tvDamageFR"
+            percentage="@{player.carStatus.tyresDamage[TYRES_POSITION.FR].intValue()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            tools:text="FR %" />
+
+        <TextView
+            android:id="@+id/tvDamageRL"
+            percentage="@{player.carStatus.tyresDamage[TYRES_POSITION.RL].intValue()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toStartOf="@+id/imageView2"
+            tools:text="RL %" />
+
+        <TextView
+            android:id="@+id/tvDamageRR"
+            percentage="@{player.carStatus.tyresDamage[TYRES_POSITION.RR].intValue()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            tools:text="RR %" />
+
+        <TextView
+            android:id="@+id/tvDamageRearWing"
+            percentage="@{player.carStatus.rearWingDamage.intValue()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            tools:text="Rear Wing %" />
+
+        <TextView
+            android:id="@+id/tvDamageFrontLeftWing"
+            percentage="@{player.carStatus.frontLeftWingDamage.intValue()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="@+id/tvDamageFL"
+            app:layout_constraintStart_toStartOf="@+id/tvDamageFL"
+            tools:text="Front Left %" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/fullBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/car_damage" />
+
+        <TextView
+            android:id="@+id/tvDamageFrontRightWing"
+            percentage="@{player.carStatus.frontRightWingDamage.intValue()}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="@+id/tvDamageFR"
+            app:layout_constraintStart_toStartOf="@+id/tvDamageFR"
+            tools:text="Front Right %" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

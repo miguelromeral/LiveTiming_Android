@@ -4,6 +4,17 @@
     <item android:gravity="center">
         <shape android:shape="oval">
             <size
+                android:width="@dimen/tyres_background_height"
+                android:height="@dimen/tyres_background_height" />
+            <stroke
+                android:width="@dimen/tyres_background_stroke"
+                android:color="@color/tyre_background" />
+        </shape>
+    </item>
+
+    <item android:gravity="center">
+        <shape android:shape="oval">
+            <size
                 android:width="@dimen/tyres_width_height"
                 android:height="@dimen/tyres_width_height" />
             <stroke
@@ -12,4 +23,16 @@
         </shape>
     </item>
 
+
+    <item>
+        <rotate
+            android:fromDegrees="@dimen/tyres_line_degrees"
+            android:toDegrees="@dimen/tyres_line_degrees">
+            <shape android:shape="line">
+                <stroke
+                    android:width="@dimen/tyres_line_degrees_stroke"
+                    android:color="@color/tyre_background" />
+            </shape>
+        </rotate>
+    </item>
 </layer-list>

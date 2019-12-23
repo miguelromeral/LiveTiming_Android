@@ -44,6 +44,7 @@ class Standard {
 
     }
 
+
     object SAFETY_CAR {
         const val CLEAR = 0
         const val SC = 1

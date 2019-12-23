@@ -66,6 +66,11 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 ersHarvestedThisLapMGUH.postValue(20000f + (25000f * i))
                 ersStoreEnergy.postValue(4000000f - (250000f * i))
                 ersDeployedThisLap.postValue(1000000f + (20000f * i))
+                ersDeployMode.postValue((i % 6).toByte())
+                frontLeftWingDamage.postValue(i.toByte())
+                frontRightWingDamage.postValue(i.toByte())
+                rearWingDamage.postValue(i.toByte())
+                tyresDamage.postValue(listOf(i.toByte(), i.toByte(), i.toByte(),i.toByte()))
             })
             p._telemetry.postValue(Telemetry().apply {
                 engineTemperature.postValue(i.toShort())

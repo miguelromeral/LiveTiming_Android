@@ -12,89 +12,96 @@
             type="es.miguelromeral.f1.codemasters.livetiming.classes.Player" />
     </data>
 
-    <FrameLayout
-        android:id="@+id/frame_ers"
-        style="@style/section_frame"
-        tools:showIn="@layout/fragment_status">
 
-        <androidx.constraintlayout.widget.ConstraintLayout style="@style/section_constraintlayout">
-
-            <TextView
-                android:id="@+id/tvTitleERS"
-                style="@style/title_section"
-                android:text="ERS"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="300sp"
+        android:minHeight="80sp">
 
 
-            <TextView
-                android:id="@+id/tvTotalERS"
-                style="@style/text_highligted"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:ersPercentage="@{player.carStatus.ersStoreEnergy}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitleERS"
-                tools:text="50 %" />
+        <TextView
+            android:id="@+id/tvTotalERS"
+            style="@style/text_highligted"
+            android:layout_width="80sp"
+            android:layout_height="40sp"
+            android:background="@color/fullBlack"
+            android:textAlignment="center"
+            android:textColor="@color/tyre_cyan"
+            android:textStyle="bold"
+            app:ersPercentage="@{player.carStatus.ersStoreEnergy}"
+            app:layout_constraintBottom_toBottomOf="@+id/pbDeployedERS"
+            app:layout_constraintEnd_toStartOf="@+id/pbHarvested"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/pbDeployedERS"
+            app:layout_constraintTop_toTopOf="@+id/pbDeployedERS"
+            tools:text="50 %" />
 
+        <TextView
+            android:id="@+id/tvERSMode"
+            style="@style/text_highligted"
+            android:layout_width="30sp"
+            android:layout_height="40sp"
+            android:background="@color/fullBlack"
+            android:textAlignment="center"
+            android:textColor="@color/tyre_cyan"
+            android:textStyle="bold"
+            android:text="@{player.carStatus.ersDeployMode.toString()}"
+            app:layout_constraintBottom_toTopOf="@+id/pbHarvested"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/pbTotalERS"
+            tools:text="5" />
 
-            <LinearLayout
-                android:layout_width="100sp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:weightSum="2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitleERS">
+        <ProgressBar
+            android:id="@+id/pbTotalERS"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="40sp"
+            android:layout_weight="1"
+            android:background="@color/fullBlack"
+            android:max="4000000"
+            android:progress="@{player.carStatus.ersStoreEnergy.intValue()}"
+            android:progressTint="@color/tyre_cyan"
+            app:layout_constraintBottom_toBottomOf="@+id/tvERSMode"
+            app:layout_constraintEnd_toStartOf="@+id/tvERSMode"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvERSMode"
+            tools:progress="1000000" />
 
-                <ProgressBar
-                    android:id="@+id/pbTotalERS"
-                    style="@android:style/Widget.Material.ProgressBar.Horizontal"
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="68dp"
-                    android:layout_weight="1"
-                    android:background="@color/fullBlack"
-                    android:max="4000000"
-                    android:progress="@{player.carStatus.ersStoreEnergy.intValue()}"
-                    android:progressTint="@color/tyre_cyan"
-                    tools:progress="1000000" />
+        <ProgressBar
+            android:id="@+id/pbDeployedERS"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="40sp"
+            android:layout_weight="1"
+            android:background="@color/fullBlack"
+            android:max="4000000"
+            android:progressTint="@color/fullWhite"
+            app:ersDeployedThisLap="@{player.carStatus.ersDeployedThisLap}"
+            app:layout_constraintEnd_toStartOf="@+id/tvTotalERS"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pbTotalERS"
+            tools:progress="1000000" />
 
-                <ProgressBar
-                    android:id="@+id/pbDeployedERS"
-                    style="@android:style/Widget.Material.ProgressBar.Horizontal"
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/fullBlack"
-                    android:max="4000000"
-                    android:progressTint="@color/fullWhite"
-                    app:ersDeployedThisLap="@{player.carStatus.ersDeployedThisLap}"
-                    tools:progress="1000000" />
+        <ProgressBar
+            android:id="@+id/pbHarvested"
+            style="@android:style/Widget.Material.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="40sp"
+            android:layout_weight="1"
+            android:background="@color/fullBlack"
+            android:max="4000000"
+            android:progressTint="@color/fullYellow"
+            app:ersTotalHarvested="@{player.carStatus}"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTotalERS"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvTotalERS"
+            app:layout_constraintTop_toTopOf="@+id/tvTotalERS"
+            tools:progress="1000000" />
 
-                <ProgressBar
-                    android:id="@+id/pbHarvested"
-                    style="@android:style/Widget.Material.ProgressBar.Horizontal"
-                    android:layout_width="100sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/fullBlack"
-                    android:max="4000000"
-                    android:progressTint="@color/fullYellow"
-                    app:ersTotalHarvested="@{player.carStatus}"
-                    tools:progress="1000000" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

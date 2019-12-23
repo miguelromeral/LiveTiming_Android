@@ -13,15 +13,19 @@
 
     <!-- Tyres Drawable -->
     <dimen name="tyres_width_height">100dp</dimen>
-    <dimen name="tyres_line_stroke">20dp</dimen>
+    <dimen name="tyres_line_stroke">18dp</dimen>
+    <dimen name="tyres_background_height">120dp</dimen>
+    <dimen name="tyres_background_stroke">60dp</dimen>
+    <dimen name="tyres_line_degrees">90</dimen>
+    <dimen name="tyres_line_degrees_stroke">19dp</dimen>
 
 
     <!-- Live Timing -->
-    <dimen name="lt_textSize">18sp</dimen>
+    <dimen name="lt_textSize">14sp</dimen>
     <dimen name="lt_margin">4sp</dimen>
-    <dimen name="lt_team_height">16sp</dimen>
-    <dimen name="lt_team_width">8sp</dimen>
-    <dimen name="lt_tyre_icon">20sp</dimen>
+    <dimen name="lt_team_height">14sp</dimen>
+    <dimen name="lt_team_width">10sp</dimen>
+    <dimen name="lt_tyre_icon">18sp</dimen>
 
     <!-- Sections -->
     <dimen name="section_title_size">18sp</dimen>
