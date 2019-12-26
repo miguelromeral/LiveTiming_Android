@@ -21,6 +21,10 @@ class ItemLiveTiming private constructor()
     var sector1Time: Float? = null
     var sector2Time: Float? = null
     var sector3Time: Float? = null
+    var bestSector1Time: Float? = null
+    var bestSector2Time: Float? = null
+    var bestSector3Time: Float? = null
+    var pitStatus: Byte? = null
     var format = Standard.UNKNOWN
 
     fun getTeamAsInt() = team?.toInt()
@@ -40,9 +44,13 @@ class ItemLiveTiming private constructor()
                 lap?.let{
                     position = it.carPosition.value
                     time = it.currentLapTime?.value
+                    pitStatus = it.pitStatus.value
                     sector1Time = it.lastSector1Time
                     sector2Time = it.lastSector2Time
                     sector3Time = it.lastSector3Time
+                    bestSector1Time = it.bestSector1Time
+                    bestSector2Time = it.bestSector2Time
+                    bestSector3Time = it.bestSector3Time
                 }
                 session?.let{
                     era = it.era.value

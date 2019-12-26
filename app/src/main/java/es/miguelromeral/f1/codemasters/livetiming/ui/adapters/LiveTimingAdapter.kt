@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.databinding.ItemLiveTimingBinding
+import es.miguelromeral.f1.codemasters.livetiming.standard.PIT_STATUS
 import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.setBackgroundByPosition
@@ -40,7 +41,7 @@ class LiveTimingAdapter :
         when(holder){
             is ViewHolder -> {
                 val item = getItem(position) as DataItemLiveTiming.Content
-                holder.bind(item.data, position)
+                holder.bind(item.data)
             }
         }
 
@@ -84,10 +85,19 @@ class LiveTimingAdapter :
     class ViewHolder private constructor(val binding: ItemLiveTimingBinding) :
         RecyclerView.ViewHolder(binding.root){
 
-        fun bind(itemLiveTiming: ItemLiveTiming, position: Int){
-
+        fun bind(itemLiveTiming: ItemLiveTiming){
             setBackgroundByPosition(binding.rootItemLiveTiming, itemLiveTiming.position)
             binding.item = itemLiveTiming
+            binding.tvCurrentTime.text = if(itemLiveTiming.pitStatus?.toInt() == PIT_STATUS.NONE) floatToTimeFormatted(itemLiveTiming.time) else ""
+
+            itemLiveTiming?.let{
+                binding.tvSector2Time.setTextColor(binding.tvSector2Time.context.getColor(if(it.sector2Time == it.bestSector2Time){
+                    R.color.fullGreen
+                }else{
+                    R.color.fullWhite
+                }))
+            }
+
             binding.executePendingBindings()
         }
 
@@ -129,6 +139,7 @@ class LiveTimingDiffCallback : DiffUtil.ItemCallback<DataItemLiveTiming>(){
     }
 
 }
+
 
 
 sealed class DataItemLiveTiming {

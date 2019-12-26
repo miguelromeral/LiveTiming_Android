@@ -29,8 +29,13 @@ class SectorsUpdater (private var myHandlerThread: MyHandlerThread,
                 synchronized(it) {
                     item.position = it.carPosition?.value
                     item.time = it.currentLapTime?.value
-                    item.sector1Time = it.sector1Time?.value
-                    item.sector2Time = it.sector2Time?.value
+                    item.pitStatus = it.pitStatus?.value
+                    item.sector1Time = it.lastSector1Time
+                    item.sector2Time = it.lastSector2Time
+                    item.sector3Time = it.lastSector3Time
+                    item.bestSector1Time = it.bestSector1Time
+                    item.bestSector2Time = it.bestSector2Time
+                    item.bestSector3Time = it.bestSector3Time
                 }
             }
             player.carStatus.value?.let{

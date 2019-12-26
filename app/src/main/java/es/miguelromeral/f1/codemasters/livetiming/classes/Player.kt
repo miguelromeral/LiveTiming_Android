@@ -8,7 +8,7 @@ import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.CarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.ParticipantData
 
-class Player {
+class Player (val game: Game){
 
 
     /*private*/ var _currentLap = MutableLiveData<Lap>()

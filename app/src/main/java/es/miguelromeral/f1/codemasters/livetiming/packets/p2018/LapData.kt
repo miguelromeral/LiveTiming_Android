@@ -1,7 +1,10 @@
 package es.miguelromeral.f1.codemasters.livetiming.packets
 
+import android.text.style.TabStopSpan
+import classes.toplayer.Standard
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.Packet
-import timber.log.Timber
+import es.miguelromeral.f1.codemasters.livetiming.standard.PIT_STATUS
+import es.miguelromeral.f1.codemasters.livetiming.standard.SECTORS
 
 @kotlin.ExperimentalUnsignedTypes
 class PacketLapData private constructor(header: PacketHeader, content: ByteArray) : Packet(header) {
@@ -53,7 +56,7 @@ class LapData internal constructor(content: ByteArray)
     var safetyCarDelta: Float
     var carPosition: UByte
     var currentLapNum: UByte
-    var pitStatus: UByte
+    private var pitStatus: UByte
     var sector: UByte
     var currentLapInvalid: UByte
     var penalties: UByte
@@ -79,6 +82,20 @@ class LapData internal constructor(content: ByteArray)
         gridPosition = content[38].toUByte()
         driverStatus = content[39].toUByte()
         resultStatus = content[40].toUByte()
+    }
+
+    fun getStandardSector(): Int = when(sector.toInt()){
+        0 -> SECTORS.SECTOR_1
+        1 -> SECTORS.SECTOR_2
+        2 -> SECTORS.SECTOR_3
+        else -> Standard.UNKNOWN
+    }
+
+    fun getStandardPitStatus(): Int = when(pitStatus.toInt()){
+        0 -> PIT_STATUS.NONE
+        1 -> PIT_STATUS.PITTING
+        2 -> PIT_STATUS.IN_PIT_AREA
+        else -> Standard.UNKNOWN
     }
 
     companion object{

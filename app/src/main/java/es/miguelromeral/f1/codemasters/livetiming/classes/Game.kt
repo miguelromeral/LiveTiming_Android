@@ -10,6 +10,7 @@ import es.miguelromeral.f1.codemasters.livetiming.packets.p2017.Packet2017
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarStatusData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketCarTelemetryData
 import es.miguelromeral.f1.codemasters.livetiming.packets.p2018.PacketParticipantData
+import timber.log.Timber
 import java.text.Format
 
 class Game {
@@ -28,6 +29,39 @@ class Game {
             = MutableLiveData<MutableList<Player>>()
     val players : LiveData<MutableList<Player>>
         get() = _players
+
+    var bestSector1Time: Float? = null
+    var bestSector2Time: Float? = null
+    var bestSector3Time: Float? = null
+
+
+    @Synchronized
+    fun newSectorTime(sector: Int, value: Float){
+        when(sector){
+            1 -> {
+                bestSector1Time = updateSectorValues(value, bestSector1Time)
+            }
+            2 -> {
+                bestSector2Time = updateSectorValues(value, bestSector2Time)
+            }
+            3 -> {
+                bestSector3Time = updateSectorValues(value, bestSector3Time)
+            }
+        }
+    }
+
+    @Synchronized
+    fun bestLapTime(): Float? {
+        var list = mutableListOf<Float>()
+        players.value?.map{
+            it.currentLap.value?.bestLapTime?.value?.let{ best ->
+                if(best != INIT_BEST_TIME){
+                    list.add(best)
+                }
+            }
+        }
+        return list.min()
+    }
 
 
     fun getPlayerByNameOrID(name: String?, id: Byte?): Player?{
@@ -125,12 +159,17 @@ class Game {
 
     @Synchronized
     fun newEventData2018(info: EventData){
+        Timber.i("Reseting Session")
         format = Standard.FORMAT.F18
         frameId.postValue(info.header.frameIdentifier)
         if(info.getStandardEventCode() == Standard.EVENT.END){
-            _sessionData.postValue(Session())
-            _players.postValue(mutableListOf<Player>())
+            resetingGame()
         }
+    }
+
+    private fun resetingGame(){
+        _sessionData.postValue(Session())
+        _players.postValue(mutableListOf<Player>())
     }
 
 
@@ -167,9 +206,29 @@ class Game {
         var c = 0
         val list: MutableList<Player> = mutableListOf<Player>()
         while (c < count) {
-            list.add(Player())
+            list.add(Player(this))
             c++
         }
         return list
+    }
+
+
+    companion object {
+
+        const val INIT_BEST_TIME = 0f
+
+        fun updateSectorValues(lastSector: Float?, bestSector: Float?): Float?{
+            lastSector?.let {
+                if(bestSector == null || lastSector < it){
+                    Timber.i("Lap Checking --> UPDATED")
+                    return it
+                }else{
+                    Timber.i("Lap Checking --> Not updated")
+                    return bestSector
+                }
+            }
+            Timber.i("Lap Checking --> Not updated")
+            return null
+        }
     }
 }

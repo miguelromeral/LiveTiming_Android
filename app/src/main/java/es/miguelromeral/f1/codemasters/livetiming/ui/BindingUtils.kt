@@ -13,7 +13,9 @@ import classes.toplayer.Standard
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 import es.miguelromeral.f1.codemasters.livetiming.R
 import es.miguelromeral.f1.codemasters.livetiming.classes.CarStatus
+import es.miguelromeral.f1.codemasters.livetiming.classes.Player
 import es.miguelromeral.f1.codemasters.livetiming.classes.Telemetry
+import es.miguelromeral.f1.codemasters.livetiming.standard.PIT_STATUS
 
 
 @BindingAdapter("backgroundByPosition")
@@ -267,8 +269,20 @@ fun ProgressBar.setERSHarvested(status: CarStatus?){
 }
 
 
+@BindingAdapter("colorPitStatus")
+fun TextView.setColorPitStatus(pitStatus: Int?){
+    setTextColor(context.getColor(when(pitStatus){
+        PIT_STATUS.NONE -> R.color.fullWhite
+        else -> R.color.liveTimingBoxes
+    }))
+}
 
 
+
+@BindingAdapter("sector1Time")
+fun TextView.setSector1Time(player: Player){
+
+}
 
 
 fun floatToTimeFormatted(inf : Float?, long: Boolean = false): String? {
