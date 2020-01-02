@@ -43,6 +43,11 @@ class SectorsUpdater (private var myHandlerThread: MyHandlerThread,
                     item.compound = it.tyreCompound?.value
                 }
             }
+            session?.let{
+                item.bestSessionSector1Time = it.bestSector1Time
+                item.bestSessionSector2Time = it.bestSector2Time
+                item.bestSessionSector3Time = it.bestSector3Time
+            }
 
             myHandlerThread.sendOrder(item)
 

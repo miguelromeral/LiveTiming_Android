@@ -285,6 +285,23 @@ fun TextView.setSector1Time(player: Player){
 }
 
 
+fun setColorBySector(current: Float?, best: Float?, record: Float?): Int {
+    if(current != null) {
+        record?.let {
+            if (current <= it) {
+                return R.color.fullPurple
+            }
+        }
+        best?.let {
+            if (current <= it) {
+                return R.color.fullGreen
+            }
+        }
+    }
+    return R.color.fullWhite
+}
+
+
 fun floatToTimeFormatted(inf : Float?, long: Boolean = false): String? {
     if(inf == null)
         return ""

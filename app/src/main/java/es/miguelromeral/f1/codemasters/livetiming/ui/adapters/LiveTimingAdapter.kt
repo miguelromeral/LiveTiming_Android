@@ -13,6 +13,7 @@ import es.miguelromeral.f1.codemasters.livetiming.standard.PIT_STATUS
 import es.miguelromeral.f1.codemasters.livetiming.ui.floatToTimeFormatted
 import es.miguelromeral.f1.codemasters.livetiming.ui.models.ItemLiveTiming
 import es.miguelromeral.f1.codemasters.livetiming.ui.setBackgroundByPosition
+import es.miguelromeral.f1.codemasters.livetiming.ui.setColorBySector
 import es.miguelromeral.f1.codemasters.livetiming.ui.setColorByTeam
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -90,12 +91,19 @@ class LiveTimingAdapter :
             binding.item = itemLiveTiming
             binding.tvCurrentTime.text = if(itemLiveTiming.pitStatus?.toInt() == PIT_STATUS.NONE) floatToTimeFormatted(itemLiveTiming.time) else ""
 
-            itemLiveTiming?.let{
-                binding.tvSector2Time.setTextColor(binding.tvSector2Time.context.getColor(if(it.sector2Time == it.bestSector2Time){
-                    R.color.fullGreen
-                }else{
-                    R.color.fullWhite
-                }))
+            itemLiveTiming?.let{item ->
+
+
+
+                binding.tvSector1Time?.let{
+                    it.setTextColor(it.context.getColor(setColorBySector(item.sector1Time, item.bestSector1Time, item.bestSessionSector1Time)))
+                }
+                binding.tvSector2Time?.let{
+                    it.setTextColor(it.context.getColor(setColorBySector(item.sector2Time, item.bestSector2Time, item.bestSessionSector2Time)))
+                }
+                binding.tvSector3Time?.let{
+                    it.setTextColor(it.context.getColor(setColorBySector(item.sector3Time, item.bestSector3Time, item.bestSessionSector3Time)))
+                }
             }
 
             binding.executePendingBindings()

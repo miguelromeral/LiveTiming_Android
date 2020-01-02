@@ -10,7 +10,7 @@ import timber.log.Timber
 import java.text.Format
 
 @ExperimentalUnsignedTypes
-class Lap {
+class Lap( val game: Game) {
 
     var format = Standard.UNKNOWN
 
@@ -34,9 +34,9 @@ class Lap {
 
     var lastSector: Byte? = null
 
-    var _lastSector1Time: Float? = null
-    var _lastSector2Time: Float? = null
-    var _lastSector3Time: Float? = null
+    private var _lastSector1Time: Float? = null
+    private var _lastSector2Time: Float? = null
+    private var _lastSector3Time: Float? = null
 
     var lastSector1Time: Float?
         get() = _lastSector1Time
@@ -60,9 +60,34 @@ class Lap {
             bestSector3Time = Game.updateSectorValues(value, bestSector3Time)
         }
 
-    var bestSector1Time: Float? = null
-    var bestSector2Time: Float? = null
-    var bestSector3Time: Float? = null
+    private var _bestSector1Time: Float? = null
+    private var _bestSector2Time: Float? = null
+    private var _bestSector3Time: Float? = null
+
+    var bestSector1Time: Float?
+        get() = _bestSector1Time
+        set(value){
+            Timber.i("Updated Best Sector 1 of player")
+            _bestSector1Time = value
+            game.bestSector1Time = value
+        }
+
+    var bestSector2Time: Float?
+        get() = _bestSector2Time
+        set(value){
+            Timber.i("Updated Best Sector 2 of player")
+            _bestSector2Time = value
+            game.bestSector2Time = value
+        }
+
+    var bestSector3Time: Float?
+        get() = _bestSector3Time
+        set(value){
+            Timber.i("Updated Best Sector 3 of player")
+            _bestSector3Time = value
+            game.bestSector3Time = value
+        }
+
 
 
 

@@ -24,7 +24,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
 
     private lateinit var session : Game
 
-    private val DEBUG_count = 20
+    private val DEBUG_count = 1
 
 
     fun DEBUG_addItems(){
@@ -44,6 +44,11 @@ class Controller(val port: Int = DEFAULT_PORT) {
         }
         session._sessionData.postValue(mySession)
 
+        session.let{
+            it.bestSector1Time = 10.1f
+            it.bestSector1Time = 10.2f
+            it.bestSector1Time = 10.3f
+        }
 
         var ml = mutableListOf<Player>()
 
@@ -56,10 +61,15 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 teamId.postValue(i.toByte())
                 format = Standard.FORMAT.F18
             })
-            p._currentLap.postValue(Lap().apply {
+            p._currentLap.postValue(Lap(session).apply {
                 carPosition.postValue(i.plus(1).toUByte())
                 currentLapTime.postValue(0f)
                 pitStatus.postValue((i % 4).toByte())
+
+                lastSector1Time = 9.3f
+                lastSector2Time = 15.4f
+                bestSector3Time = 30.0f
+                lastSector3Time = 40.0f
             })
             p._carStatus.postValue(CarStatus().apply {
                 tyreCompound.postValue(i.toByte())
@@ -86,6 +96,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
             i++
         }
         session._players.postValue(ml)
+        session
     }
 
     fun DEBUG_updateItems(){
@@ -116,7 +127,7 @@ class Controller(val port: Int = DEFAULT_PORT) {
     fun addCurrentSession(session: Game){
         this.session = session
         Timber.i("Listening on port $port")
-        //DEBUG_addItems()
+        DEBUG_addItems()
     }
 
     @ExperimentalUnsignedTypes
@@ -128,17 +139,17 @@ class Controller(val port: Int = DEFAULT_PORT) {
                 while(true) {
 
                     // TESTING
-                    //delay(100L)
-                    //DEBUG_updateItems()
+                    delay(100L)
+                    DEBUG_updateItems()
                     // END OF TESTING
 
-
+/*
                     buffer = ByteArray(MAX_BUFFER)
                     val packet = DatagramPacket(buffer, buffer.size)
                     socket.receive(packet)
                     //Timber.i("Raw Packet: ${packet.data.contentToString()}")
                     newPacket(packet.data)
-
+*/
 
 
 

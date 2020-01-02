@@ -71,7 +71,8 @@ class LiveTimingViewModel (var session: Game) : ViewModel() {
                                         participant = p.participant.value,
                                         lap = p.currentLap.value,
                                         carStatus = p.carStatus.value,
-                                        session = session.sessionData.value)
+                                        session = session.sessionData.value,
+                                        game = session)
                                 )
                             }
                             sortItemList(newList)

@@ -1,10 +1,7 @@
 package es.miguelromeral.f1.codemasters.livetiming.ui.models
 
 import classes.toplayer.Standard
-import es.miguelromeral.f1.codemasters.livetiming.classes.CarStatus
-import es.miguelromeral.f1.codemasters.livetiming.classes.Lap
-import es.miguelromeral.f1.codemasters.livetiming.classes.Participant
-import es.miguelromeral.f1.codemasters.livetiming.classes.Session
+import es.miguelromeral.f1.codemasters.livetiming.classes.*
 import java.text.Format
 
 
@@ -24,6 +21,9 @@ class ItemLiveTiming private constructor()
     var bestSector1Time: Float? = null
     var bestSector2Time: Float? = null
     var bestSector3Time: Float? = null
+    var bestSessionSector1Time: Float? = null
+    var bestSessionSector2Time: Float? = null
+    var bestSessionSector3Time: Float? = null
     var pitStatus: Byte? = null
     var format = Standard.UNKNOWN
 
@@ -32,7 +32,7 @@ class ItemLiveTiming private constructor()
     fun getEraAsInt() = era?.toInt()
 
     companion object{
-        fun create(participant: Participant?, lap: Lap?, carStatus: CarStatus?, session: Session?): ItemLiveTiming{
+        fun create(participant: Participant?, lap: Lap?, carStatus: CarStatus?, session: Session?, game: Game?): ItemLiveTiming{
             return ItemLiveTiming().apply {
                 participant?.let{
                     name = it.shortName()
@@ -57,6 +57,11 @@ class ItemLiveTiming private constructor()
                 }
                 carStatus?.let{
                     compound = it.tyreCompound.value
+                }
+                game?.let{
+                    bestSessionSector1Time = it.bestSector1Time
+                    bestSessionSector2Time = it.bestSector2Time
+                    bestSessionSector3Time = it.bestSector3Time
                 }
             }
         }

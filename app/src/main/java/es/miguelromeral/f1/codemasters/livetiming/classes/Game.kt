@@ -30,9 +30,29 @@ class Game {
     val players : LiveData<MutableList<Player>>
         get() = _players
 
-    var bestSector1Time: Float? = null
-    var bestSector2Time: Float? = null
-    var bestSector3Time: Float? = null
+    private var _bestSector1Time: Float? = null
+    private var _bestSector2Time: Float? = null
+    private var _bestSector3Time: Float? = null
+
+
+    var bestSector1Time: Float?
+        get() = _bestSector1Time
+        set(value){
+            Timber.i("Checking for best Sector 1 in session")
+            _bestSector1Time = updateSectorValues(value, bestSector1Time)
+        }
+    var bestSector2Time: Float?
+        get() = _bestSector1Time
+        set(value){
+            Timber.i("Checking for best Sector 2 in session")
+            _bestSector2Time = updateSectorValues(value, bestSector2Time)
+        }
+    var bestSector3Time: Float?
+        get() = _bestSector1Time
+        set(value){
+            Timber.i("Checking for best Sector 3 in session")
+            _bestSector3Time = updateSectorValues(value, bestSector3Time)
+        }
 
 
     @Synchronized
